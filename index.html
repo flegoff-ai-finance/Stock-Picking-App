@@ -34,7 +34,7 @@
 <div class="list-row"><div><b>03 · Simuler les opérations</b><div class="company">Validation manuelle, frais et journal des décisions</div></div><span class="pill">À venir</span></div>
 </div></section>
 <section id="strategies" class="hidden"><div class="section-head"><h3>Comparatif des stratégies</h3><span>Pondérations initiales du cahier des charges</span></div><div class="card table-wrap"><table class="table"><thead><tr><th>Facteur</th><th>Growth Quant.</th><th>Growth Quality</th><th>Growth Momentum</th></tr></thead><tbody><tr><td>Croissance</td><td>30 %</td><td>25 %</td><td>25 %</td></tr><tr><td>Qualité / rentabilité</td><td>15 %</td><td>25 %</td><td>10 %</td></tr><tr><td>Cash-flow / bilan</td><td>10 %</td><td>20 %</td><td>5 %</td></tr><tr><td>Momentum prix</td><td>20 %</td><td>10 %</td><td>30 %</td></tr><tr><td>Révisions bénéfices</td><td>15 %</td><td>10 %</td><td>20 %</td></tr><tr><td>Valorisation</td><td>10 %</td><td>10 %</td><td>10 %</td></tr></tbody></table></div><div class="notice">Ces pondérations sont des hypothèses de départ à tester, pas des paramètres optimisés ni des performances observées.</div></section>
-<section id="universe" class="hidden"><div class="section-head"><h3>Univers initial</h3><span>7 sociétés · échantillon de collecte</span></div><div class="card table-wrap"><table class="table"><thead><tr><th>Société</th><th>Ticker</th><th>Historique testé</th><th>Statut PEA</th></tr></thead><tbody><tr><td>VIEL & Cie</td><td>VIL.PA</td><td>5 ans</td><td>À revalider</td></tr><tr><td>Euronext</td><td>ENX.PA</td><td>5 ans</td><td>À confirmer courtier</td></tr><tr><td>Rexel</td><td>RXL.PA</td><td>5 ans</td><td>À revalider</td></tr><tr><td>GTT</td><td>GTT.PA</td><td>5 ans</td><td>À confirmer</td></tr><tr><td>SPIE</td><td>SPIE.PA</td><td>5 ans</td><td>À revalider</td></tr><tr><td>Exosens</td><td>EXENS.PA</td><td>Depuis juin 2024</td><td>À revalider</td></tr><tr><td>Planisware</td><td>PLNW.PA</td><td>Depuis avril 2024</td><td>À revalider</td></tr></tbody></table></div><p class="small muted">La récupération des historiques de cours a réussi pour les 7 titres. Cela ne valide ni l'éligibilité PEA ni la qualité des fondamentaux. L'univers sera élargi après validation des sources.</p></section>
+<section id="universe" class="hidden"><div class="section-head"><h3>Univers initial</h3><span id="marketDataDate">Chargement des dernières données…</span></div><div class="card table-wrap"><table class="table"><thead><tr><th>Société</th><th>Cours</th><th>Perf. 12-1m</th><th>Perf. 6m</th><th>Vol. 1 an</th><th>Momentum /100</th><th>PEA</th></tr></thead><tbody id="marketDataBody"><tr><td colspan="7">Chargement des données…</td></tr></tbody></table></div><p class="small muted">Score momentum = rang relatif sur la seule base de ces 7 titres, à partir de la performance ajustée sur 12-1 mois. Ce n'est ni un score Growth fondamental ni un Top 10 du marché. Les cours sont ceux de la dernière collecte ; l'éligibilité PEA de chaque ISIN reste à vérifier avant toute opération.</p></section>
 <section id="portfolios" class="hidden"><div class="section-head"><h3>Portefeuilles virtuels</h3><span>Capital initial paramétré</span></div><div class="grid"><div class="card"><span class="tag">01 · QUANTITATIVE</span><h3>Growth Quantitative</h3><div class="metric">10 000 €</div><div class="metric-sub">100 % liquidités · aucune position</div></div><div class="card"><span class="tag">02 · QUALITY</span><h3>Growth Quality</h3><div class="metric">10 000 €</div><div class="metric-sub">100 % liquidités · aucune position</div></div><div class="card"><span class="tag">03 · MOMENTUM</span><h3>Growth Momentum</h3><div class="metric">10 000 €</div><div class="metric-sub">100 % liquidités · aucune position</div></div></div><div class="notice">Les portefeuilles sont initialisés à 10 000 € chacun. Les opérations resteront bloquées tant que les cours, l'éligibilité PEA et les signaux ne seront pas validés pour les propositions automatiques. Tu peux toutefois enregistrer ici des opérations fictives pour tester le suivi : aucun ordre réel ne sera envoyé.</div>
 <div class="section-head"><h3>Journal des opérations virtuelles</h3><span>Stocké localement sur cet appareil</span></div>
 <div class="card">
@@ -110,6 +110,24 @@ document.getElementById('addTrade').addEventListener('click',()=>{
  computePortfolios();
 });
 computePortfolios();
+
+async function loadTechnicalData(){
+ const body=document.getElementById('marketDataBody'),stamp=document.getElementById('marketDataDate');
+ if(!body)return;
+ try{
+  const response=await fetch('./data/technical_screener.json',{cache:'no-store'});
+  if(!response.ok)throw new Error('HTTP '+response.status);
+  const data=await response.json();
+  const pct=v=>v===null||v===undefined?'—':(v>0?'+':'')+Number(v).toFixed(1)+' %';
+  const euro=v=>new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR'}).format(v);
+  body.innerHTML=data.instruments.map(x=>'<tr><td>'+safe(x.name)+'</td><td>'+euro(x.last_close)+'</td><td>'+pct(x.return_12_1m_pct)+'</td><td>'+pct(x.return_6m_pct)+'</td><td>'+pct(x.volatility_1y_pct)+'</td><td>'+(x.momentum_score===null?'—':Number(x.momentum_score).toFixed(1))+'</td><td><span class="pill">À vérifier</span></td></tr>').join('');
+  stamp.textContent=data.data_ok_count+'/'+data.universe_count+' titres · données du '+new Date(data.generated_at_utc).toLocaleString('fr-FR');
+ }catch(err){
+  body.innerHTML='<tr><td colspan="7">Données non disponibles. Vérifie la connexion internet.</td></tr>';
+  stamp.textContent='Données indisponibles';
+ }
+}
+loadTechnicalData();
 
 if('serviceWorker' in navigator && location.protocol.startsWith('http'))window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
 </script></body></html>
