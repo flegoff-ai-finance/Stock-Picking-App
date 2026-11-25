@@ -35,12 +35,80 @@
 </div></section>
 <section id="strategies" class="hidden"><div class="section-head"><h3>Comparatif des stratégies</h3><span>Pondérations initiales du cahier des charges</span></div><div class="card table-wrap"><table class="table"><thead><tr><th>Facteur</th><th>Growth Quant.</th><th>Growth Quality</th><th>Growth Momentum</th></tr></thead><tbody><tr><td>Croissance</td><td>30 %</td><td>25 %</td><td>25 %</td></tr><tr><td>Qualité / rentabilité</td><td>15 %</td><td>25 %</td><td>10 %</td></tr><tr><td>Cash-flow / bilan</td><td>10 %</td><td>20 %</td><td>5 %</td></tr><tr><td>Momentum prix</td><td>20 %</td><td>10 %</td><td>30 %</td></tr><tr><td>Révisions bénéfices</td><td>15 %</td><td>10 %</td><td>20 %</td></tr><tr><td>Valorisation</td><td>10 %</td><td>10 %</td><td>10 %</td></tr></tbody></table></div><div class="notice">Ces pondérations sont des hypothèses de départ à tester, pas des paramètres optimisés ni des performances observées.</div></section>
 <section id="universe" class="hidden"><div class="section-head"><h3>Univers initial</h3><span>7 sociétés · échantillon de collecte</span></div><div class="card table-wrap"><table class="table"><thead><tr><th>Société</th><th>Ticker</th><th>Historique testé</th><th>Statut PEA</th></tr></thead><tbody><tr><td>VIEL & Cie</td><td>VIL.PA</td><td>5 ans</td><td>À revalider</td></tr><tr><td>Euronext</td><td>ENX.PA</td><td>5 ans</td><td>À confirmer courtier</td></tr><tr><td>Rexel</td><td>RXL.PA</td><td>5 ans</td><td>À revalider</td></tr><tr><td>GTT</td><td>GTT.PA</td><td>5 ans</td><td>À confirmer</td></tr><tr><td>SPIE</td><td>SPIE.PA</td><td>5 ans</td><td>À revalider</td></tr><tr><td>Exosens</td><td>EXENS.PA</td><td>Depuis juin 2024</td><td>À revalider</td></tr><tr><td>Planisware</td><td>PLNW.PA</td><td>Depuis avril 2024</td><td>À revalider</td></tr></tbody></table></div><p class="small muted">La récupération des historiques de cours a réussi pour les 7 titres. Cela ne valide ni l'éligibilité PEA ni la qualité des fondamentaux. L'univers sera élargi après validation des sources.</p></section>
-<section id="portfolios" class="hidden"><div class="section-head"><h3>Portefeuilles virtuels</h3><span>Capital initial paramétré</span></div><div class="grid"><div class="card"><span class="tag">01 · QUANTITATIVE</span><h3>Growth Quantitative</h3><div class="metric">10 000 €</div><div class="metric-sub">100 % liquidités · aucune position</div></div><div class="card"><span class="tag">02 · QUALITY</span><h3>Growth Quality</h3><div class="metric">10 000 €</div><div class="metric-sub">100 % liquidités · aucune position</div></div><div class="card"><span class="tag">03 · MOMENTUM</span><h3>Growth Momentum</h3><div class="metric">10 000 €</div><div class="metric-sub">100 % liquidités · aucune position</div></div></div><div class="notice">Les portefeuilles sont initialisés à 10 000 € chacun. Les opérations resteront bloquées tant que les cours, l'éligibilité PEA et les signaux ne seront pas validés.</div></section>
+<section id="portfolios" class="hidden"><div class="section-head"><h3>Portefeuilles virtuels</h3><span>Capital initial paramétré</span></div><div class="grid"><div class="card"><span class="tag">01 · QUANTITATIVE</span><h3>Growth Quantitative</h3><div class="metric">10 000 €</div><div class="metric-sub">100 % liquidités · aucune position</div></div><div class="card"><span class="tag">02 · QUALITY</span><h3>Growth Quality</h3><div class="metric">10 000 €</div><div class="metric-sub">100 % liquidités · aucune position</div></div><div class="card"><span class="tag">03 · MOMENTUM</span><h3>Growth Momentum</h3><div class="metric">10 000 €</div><div class="metric-sub">100 % liquidités · aucune position</div></div></div><div class="notice">Les portefeuilles sont initialisés à 10 000 € chacun. Les opérations resteront bloquées tant que les cours, l'éligibilité PEA et les signaux ne seront pas validés pour les propositions automatiques. Tu peux toutefois enregistrer ici des opérations fictives pour tester le suivi : aucun ordre réel ne sera envoyé.</div>
+<div class="section-head"><h3>Journal des opérations virtuelles</h3><span>Stocké localement sur cet appareil</span></div>
+<div class="card">
+<div class="grid">
+<div class="field"><label for="tradePortfolio">Portefeuille</label><select id="tradePortfolio"><option value="quant">Growth Quantitative</option><option value="quality">Growth Quality</option><option value="momentum">Growth Momentum</option></select></div>
+<div class="field"><label for="tradeSide">Opération</label><select id="tradeSide"><option value="buy">Achat virtuel</option><option value="sell">Vente virtuelle</option></select></div>
+<div class="field"><label for="tradeTicker">Ticker</label><input id="tradeTicker" maxlength="16" placeholder="Ex. RXL.PA"></div>
+<div class="field"><label for="tradeName">Société</label><input id="tradeName" maxlength="60" placeholder="Ex. Rexel"></div>
+<div class="field"><label for="tradeQty">Quantité</label><input id="tradeQty" type="number" min="0.0001" step="any" placeholder="10"></div>
+<div class="field"><label for="tradePrice">Prix unitaire (€)</label><input id="tradePrice" type="number" min="0.0001" step="any" placeholder="25.50"></div>
+</div>
+<button class="btn" id="addTrade">Enregistrer l'opération virtuelle</button>
+<p id="tradeMessage" class="small muted" aria-live="polite"></p>
+</div>
+<div class="section-head"><h3>Situation des portefeuilles</h3><span>Valorisation au dernier prix saisi pour chaque titre</span></div>
+<div class="grid" id="portfolioBalances"></div>
+<div class="section-head"><h3>Positions détenues</h3><span>Prix de référence = dernier prix saisi</span></div>
+<div class="card table-wrap"><table class="table"><thead><tr><th>Portefeuille</th><th>Société</th><th>Qté</th><th>PRU estimé</th><th>Dernier prix saisi</th><th>PV latente</th></tr></thead><tbody id="positionsBody"><tr><td colspan="6">Aucune position enregistrée.</td></tr></tbody></table></div>
+<div class="section-head"><h3>Historique</h3><span>Frais d'achat et de vente appliqués</span></div>
+<div class="card table-wrap"><table class="table"><thead><tr><th>Date</th><th>Portefeuille</th><th>Opération</th><th>Titre</th><th>Quantité</th><th>Prix</th><th>Frais</th></tr></thead><tbody id="tradesBody"><tr><td colspan="7">Aucune opération.</td></tr></tbody></table></div>
+</section>
 <section id="settings" class="hidden"><div class="section-head"><h3>Paramètres de simulation</h3><span>Enregistrés sur cet appareil</span></div><div class="card"><div class="field"><label for="fee">Frais par opération (%)</label><input id="fee" type="number" min="0" max="5" step=".05" value="0.5"></div><div class="field"><label for="stop">Stop-loss de référence (%)</label><input id="stop" type="number" min="1" max="80" step="1" value="20"></div><div class="field"><label for="capital">Capital initial par portefeuille (€)</label><input id="capital" type="number" min="1000" step="500" value="10000"></div><button class="btn" id="save">Enregistrer les paramètres</button><p id="saved" class="small muted" aria-live="polite"></p></div><div class="notice">Hypothèses actuelles : rééquilibrage hebdomadaire, liquidités maximales 10 %, benchmark MSCI World, validation manuelle de chaque opération. Aucun ordre réel chez Boursobank.</div></section>
 </main><footer class="foot"><span><strong>PEA LAB</strong> · Prototype privé</span><span>Build 0.1 · données en intégration</span></footer>
 <script>
 const tabs=[...document.querySelectorAll('[data-tab]')];tabs.forEach(b=>b.addEventListener('click',()=>{tabs.forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('main section').forEach(s=>s.classList.toggle('hidden',s.id!==b.dataset.tab));window.scrollTo({top:0,behavior:'smooth'});}));
 const ids=['fee','stop','capital'];try{const s=JSON.parse(localStorage.getItem('sppea-settings')||'{}');ids.forEach(id=>{if(s[id]!==undefined)document.getElementById(id).value=s[id]})}catch(e){}
 document.getElementById('save').addEventListener('click',()=>{const s={};ids.forEach(id=>s[id]=Number(document.getElementById(id).value));localStorage.setItem('sppea-settings',JSON.stringify(s));document.getElementById('saved').textContent='Paramètres enregistrés sur cet appareil.';});
+const portfolioNames={quant:'Growth Quantitative',quality:'Growth Quality',momentum:'Growth Momentum'};
+const tradeKey='sppea-trades-v1';
+const readTrades=()=>{try{return JSON.parse(localStorage.getItem(tradeKey)||'[]')}catch(e){return []}};
+const money=v=>new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR'}).format(v);
+function computePortfolios(){
+ const trades=readTrades(), states={};
+ Object.keys(portfolioNames).forEach(k=>states[k]={cash:10000,positions:{},realized:0});
+ trades.forEach(t=>{
+  const p=states[t.portfolio]; if(!p)return;
+  const pos=p.positions[t.ticker]||(p.positions[t.ticker]={name:t.name,qty:0,cost:0,last:t.price});
+  pos.name=t.name||pos.name; pos.last=t.price;
+  const gross=t.qty*t.price, fee=gross*t.fee/100;
+  if(t.side==='buy'){p.cash-=gross+fee;pos.qty+=t.qty;pos.cost+=gross+fee;}
+  else {const avg=pos.qty?pos.cost/pos.qty:0; p.cash+=gross-fee;p.realized+=(gross-fee)-avg*t.qty;pos.qty-=t.qty;pos.cost-=avg*t.qty;if(pos.qty<1e-8){pos.qty=0;pos.cost=0;}}
+ });
+ const balances=document.getElementById('portfolioBalances');
+ if(!balances)return;
+ balances.innerHTML=Object.entries(states).map(([k,p])=>{
+  const positions=Object.values(p.positions).filter(x=>x.qty>1e-8);
+  const value=positions.reduce((s,x)=>s+x.qty*x.last,0);
+  return '<div class="card"><span class="tag">'+portfolioNames[k]+'</span><div class="metric">'+money(p.cash+value)+'</div><div class="metric-sub">Liquidités '+money(p.cash)+' · Investi '+money(value)+'</div><div class="metric-sub">PV réalisée '+money(p.realized)+'</div></div>';
+ }).join('');
+ const body=document.getElementById('positionsBody');
+ const rows=[];
+ Object.entries(states).forEach(([k,p])=>Object.entries(p.positions).forEach(([ticker,x])=>{if(x.qty>1e-8){const pru=x.cost/x.qty;rows.push('<tr><td>'+portfolioNames[k]+'</td><td>'+x.name+' <span class="muted">('+ticker+')</span></td><td>'+x.qty.toFixed(4)+'</td><td>'+money(pru)+'</td><td>'+money(x.last)+'</td><td>'+money(x.qty*x.last-x.cost)+'</td></tr>')}}));
+ body.innerHTML=rows.length?rows.join(''):'<tr><td colspan="6">Aucune position enregistrée.</td></tr>';
+ const tb=document.getElementById('tradesBody');
+ tb.innerHTML=trades.length?trades.slice().reverse().map(t=>'<tr><td>'+new Date(t.date).toLocaleDateString('fr-FR')+'</td><td>'+portfolioNames[t.portfolio]+'</td><td>'+(t.side==='buy'?'Achat':'Vente')+'</td><td>'+t.name+' ('+t.ticker+')</td><td>'+t.qty+'</td><td>'+money(t.price)+'</td><td>'+money(t.qty*t.price*t.fee/100)+'</td></tr>').join(''):'<tr><td colspan="7">Aucune opération.</td></tr>';
+}
+document.getElementById('addTrade').addEventListener('click',()=>{
+ const portfolio=document.getElementById('tradePortfolio').value,side=document.getElementById('tradeSide').value;
+ const ticker=document.getElementById('tradeTicker').value.trim().toUpperCase(),name=document.getElementById('tradeName').value.trim()||ticker;
+ const qty=Number(document.getElementById('tradeQty').value),price=Number(document.getElementById('tradePrice').value);
+ const fee=Number(document.getElementById('fee').value),message=document.getElementById('tradeMessage');
+ if(!ticker||!(qty>0)||!(price>0)||!(fee>=0)){message.textContent='Renseigne un ticker, une quantité, un prix et des frais valides.';return;}
+ const trades=readTrades(),states={quant:{cash:10000,positions:{}},quality:{cash:10000,positions:{}},momentum:{cash:10000,positions:{}}};
+ trades.forEach(t=>{const p=states[t.portfolio],pos=p.positions[t.ticker]||(p.positions[t.ticker]={qty:0,cost:0});const gross=t.qty*t.price,fees=gross*t.fee/100;if(t.side==='buy'){p.cash-=gross+fees;pos.qty+=t.qty;pos.cost+=gross+fees}else{const avg=pos.qty?pos.cost/pos.qty:0;p.cash+=gross-fees;pos.qty-=t.qty;pos.cost-=avg*t.qty}});
+ const p=states[portfolio],pos=p.positions[ticker],gross=qty*price,fees=gross*fee/100;
+ if(side==='buy'&&gross+fees>p.cash+1e-8){message.textContent='Liquidités insuffisantes : '+money(p.cash)+'.';return;}
+ if(side==='sell'&&(!pos||qty>pos.qty+1e-8)){message.textContent='Quantité insuffisante en portefeuille pour cette vente.';return;}
+ trades.push({date:new Date().toISOString(),portfolio,side,ticker,name,qty,price,fee});
+ localStorage.setItem(tradeKey,JSON.stringify(trades));
+ message.textContent='Opération virtuelle enregistrée. Frais appliqués : '+money(fees)+'.';
+ ['tradeTicker','tradeName','tradeQty','tradePrice'].forEach(id=>document.getElementById(id).value='');
+ computePortfolios();
+});
+computePortfolios();
+
 if('serviceWorker' in navigator && location.protocol.startsWith('http'))window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
 </script></body></html>
