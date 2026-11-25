@@ -66,6 +66,7 @@ const portfolioNames={quant:'Growth Quantitative',quality:'Growth Quality',momen
 const tradeKey='sppea-trades-v1';
 const readTrades=()=>{try{return JSON.parse(localStorage.getItem(tradeKey)||'[]')}catch(e){return []}};
 const money=v=>new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR'}).format(v);
+const safe=v=>String(v??'').replace(/[&<>\"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',\"'\":'&#39;'}[ch]));
 function computePortfolios(){
  const trades=readTrades(), states={};
  Object.keys(portfolioNames).forEach(k=>states[k]={cash:10000,positions:{},realized:0});
@@ -86,7 +87,7 @@ function computePortfolios(){
  }).join('');
  const body=document.getElementById('positionsBody');
  const rows=[];
- Object.entries(states).forEach(([k,p])=>Object.entries(p.positions).forEach(([ticker,x])=>{if(x.qty>1e-8){const pru=x.cost/x.qty;rows.push('<tr><td>'+portfolioNames[k]+'</td><td>'+x.name+' <span class="muted">('+ticker+')</span></td><td>'+x.qty.toFixed(4)+'</td><td>'+money(pru)+'</td><td>'+money(x.last)+'</td><td>'+money(x.qty*x.last-x.cost)+'</td></tr>')}}));
+ Object.entries(states).forEach(([k,p])=>Object.entries(p.positions).forEach(([ticker,x])=>{if(x.qty>1e-8){const pru=x.cost/x.qty;rows.push('<tr><td>'+portfolioNames[k]+'</td><td>'+safe(x.name)+' <span class="muted">('+safe(ticker)+')</span></td><td>'+x.qty.toFixed(4)+'</td><td>'+money(pru)+'</td><td>'+money(x.last)+'</td><td>'+money(x.qty*x.last-x.cost-x.qty*x.last*Number(document.getElementById('fee').value)/100)+'</td></tr>')}}));
  body.innerHTML=rows.length?rows.join(''):'<tr><td colspan="6">Aucune position enregistrée.</td></tr>';
  const tb=document.getElementById('tradesBody');
  tb.innerHTML=trades.length?trades.slice().reverse().map(t=>'<tr><td>'+new Date(t.date).toLocaleDateString('fr-FR')+'</td><td>'+portfolioNames[t.portfolio]+'</td><td>'+(t.side==='buy'?'Achat':'Vente')+'</td><td>'+t.name+' ('+t.ticker+')</td><td>'+t.qty+'</td><td>'+money(t.price)+'</td><td>'+money(t.qty*t.price*t.fee/100)+'</td></tr>').join(''):'<tr><td colspan="7">Aucune opération.</td></tr>';
