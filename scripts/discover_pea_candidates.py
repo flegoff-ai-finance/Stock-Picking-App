@@ -23,7 +23,7 @@ SOURCES = {
     "eee": "https://www.prorealtime.com/fr/financial-instruments/actions-eee-eligibles-pea",
     "meqiri": "https://meqiri.com/fr/actions/eligibles-pea",
 }
-MEQIRI_TICKER_RE = re.compile(r"^(?P<name>.+?)\s+(?P<ticker>[A-Z0-9][A-Z0-9.\-]{0,20}\.(?:PA|DE|F|AS|MC|MI|BR|ST|CO|OL|HE|WA|VI|AT|IR|LS|PR|IS|BD|RO))$")
+MEQIRI_TICKER_RE = re.compile(r"^(?P<name>.+?)\s*(?P<ticker>[A-Z0-9][A-Z0-9.\-]{0,20}\.(?:PA|DE|F|AS|MC|MI|BR|ST|CO|OL|HE|WA|VI|AT|IR|LS|PR|IS|BD|RO))$")
 COUNTRY_CODES = {
     "France": "FR", "Allemagne": "DE", "Pays-Bas": "NL", "Grèce": "GR",
     "Suède": "SE", "Pologne": "PL", "Finlande": "FI", "Espagne": "ES",
