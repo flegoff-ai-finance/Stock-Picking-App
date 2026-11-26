@@ -14,15 +14,14 @@ Application de recherche et de simulation de trois portefeuilles PEA indépendan
 - Yahoo Finance via `yfinance` : cours ajustés, indicateurs techniques, états financiers disponibles et estimations de croissance BPA.
 - Banque centrale européenne : €STR quotidien pour le Sharpe excédentaire.
 - CAC 40 : proxy de marché pour la performance relative des titres pilotes cotés à Paris.
-- ProRealTime : découverte large des candidats France, Europe et EEE. MEQIRI : liste complémentaire préfiltrée selon les critères légaux annoncés, avec exclusions SIIC et indications de pays. Ces sources ne remplacent pas la confirmation du courtier ni notre contrôle documentaire.
+- Les sources de listes PEA ne sont pas aspirées automatiquement lorsqu'elles interdisent l'extraction. Le référentiel élargi doit provenir d'un export du courtier ou d'un fournisseur dûment licencié.
 
 ## Univers PEA — état du pilote
 
 - 7 titres pilotes actuellement admis dans l'univers de scoring.
-- 3 933 candidats détectés dans les répertoires de découverte.
-- 1 763 tickers Yahoo provisoires identifiés ; 500 candidats préfiltrés extraits des 1 304 affichés par MEQIRI ; aucun candidat nouvellement découvert n'est admis automatiquement.
-- Les nouveaux titres restent en attente jusqu'à vérification de l'ISIN, de la nature du titre, du siège UE/EEE, de l'assujettissement fiscal et des sources probantes.
-- La revue est tracée dans `data/pea_verification.csv` ; le contrôle est automatisé par `scripts/build_pea_registry.py`.
+- Aucun élargissement automatique de l'univers tant qu'une source de données autorisée et une preuve d'éligibilité suffisante ne sont pas disponibles.
+- Le modèle d'import et de contrôle est dans `data/pea_verification.csv`. Le contrôle documentaire est automatisé par `scripts/build_pea_registry.py`.
+- Chaque nouvelle ligne doit documenter l'ISIN, le ticker, le siège UE/EEE, l'assujettissement fiscal, la nature d'action ordinaire, une source d'éligibilité PEA et une source émetteur. La vérification expire après 90 jours.
 
 ## Limites actuelles
 
@@ -31,11 +30,11 @@ Application de recherche et de simulation de trois portefeuilles PEA indépendan
 - Un diagnostic historique du signal Momentum est disponible sur les sept pilotes (snapshots mensuels, horizons 1/3/6 mois, frais aller-retour simulés sur le Top 2). Il reste exploratoire et ne valide pas les seuils de décision ni la construction des portefeuilles.
 - Growth et Growth Quality ne sont pas backtestés faute de fondamentaux historiques point-in-time.
 - Les portefeuilles sont virtuels : aucun ordre réel n'est transmis.
-- Les conditions d'accès et de redistribution des données de marché doivent être respectées avant tout usage public élargi.
+- Yahoo Finance via yfinance est une interface non officielle ; les droits d'usage et de redistribution doivent être confirmés avant tout usage public élargi.
 
 ## Workflows GitHub Actions
 
 - `Refresh Yahoo Finance market data` : actualisation en semaine.
-- `Discover PEA equity candidates` : actualisation hebdomadaire des candidats et audit des preuves.
 - `Backtest Growth Momentum signal` : diagnostic historique mensuel du classement Momentum.
+- `Validate PEA registry import` : audit manuel des fichiers d'import.
 - `Validate data pipeline` et `Validate selection JavaScript` : tests automatisés.
