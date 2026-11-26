@@ -13,7 +13,7 @@
 <div class="intro"><div class="eyebrow">Investment cockpit</div><h2>Décider mieux.<br>Mesurer chaque décision.</h2><p>Trois stratégies Growth quantitatives, trois portefeuilles virtuels et un suivi transparent des signaux.</p></div>
 <div class="notice"><strong>Mode prototype — filtre PEA actif.</strong> Les titres ne peuvent entrer dans l'univers exploitable par le moteur que si leur statut PEA est explicitement "eligible" et accompagné d'une date de vérification. Tout statut absent, inconnu ou non vérifié est exclu par défaut. Les scores Growth et les signaux d'achat/vente restent à construire.</div>
 <nav class="nav" aria-label="Navigation">
-<a href="#dashboard">Vue d'ensemble</a><a href="#strategies">Stratégies</a><a href="#quality-model">Growth Quality</a><a href="#universe">Univers</a><a href="#portfolios">Portefeuilles</a><a href="#settings">Paramètres</a>
+<a href="#dashboard">Vue d'ensemble</a><a href="#strategies">Stratégies</a><a href="#quality-model">Growth Quality</a><a href="#engines">Moteurs & classements</a><a href="#universe">Univers</a><a href="#portfolios">Portefeuilles</a><a href="#settings">Paramètres</a>
 </nav>
 <section id="dashboard">
 <div class="grid">
@@ -70,6 +70,28 @@
 <div class="card"><div class="muted small">Score Growth Quality</div><div class="metric">N/D</div><div class="metric-sub">Aucun score ne sera inventé ou extrapolé</div></div>
 </div>
 <div class="notice">Important : le Sharpe d'une action ne préjuge pas du Sharpe du portefeuille. Le risque du portefeuille devra être calculé séparément à partir des rendements agrégés, des pondérations, des liquidités et des corrélations entre positions. Les frais simulés de 0,5 % à l'achat et à la vente seront intégrés aux backtests.</div>
+</section>
+<section id="engines">
+<div class="section-head"><h3>Moteurs de sélection · Top 25 par stratégie</h3><span>Scoring v1 · univers PEA vérifié uniquement</span></div>
+<div class="notice"><strong>Règle de transparence :</strong> les scores sont calculés uniquement lorsque toutes les données nécessaires sont présentes. Les données manquantes ne sont ni estimées ni remplacées. Les classements restent vides tant que la couverture de données n'est pas suffisante.</div>
+<div class="grid" id="engineSummary">
+<div class="card"><span class="tag">01 · GROWTH</span><h3>PEG</h3><div class="metric">N/D</div><div class="metric-sub">En attente du PER prévisionnel et de la croissance BPA</div></div>
+<div class="card"><span class="tag">02 · QUALITY</span><h3>Growth Quality</h3><div class="metric">N/D</div><div class="metric-sub">En attente des fondamentaux et données de risque</div></div>
+<div class="card"><span class="tag">03 · MOMENTUM</span><h3>Growth Momentum</h3><div class="metric">N/D</div><div class="metric-sub">En attente des indicateurs techniques et benchmarks</div></div>
+</div>
+<div class="section-head"><h3>Classements calculés</h3><span>25 titres maximum par moteur</span></div>
+<div class="grid" id="engineRankings">
+<div class="card wide"><h3>Growth · PEG croissant</h3><div class="empty">Données de consensus et PER prévisionnel à connecter.</div></div>
+<div class="card wide"><h3>Growth Quality · score décroissant</h3><div class="empty">Données financières historiques à connecter.</div></div>
+<div class="card wide"><h3>Growth Momentum · score décroissant</h3><div class="empty">Moyennes mobiles et indices de référence à connecter.</div></div>
+</div>
+<div class="section-head"><h3>Champs attendus par moteur</h3><span>Contrat de données v1</span></div>
+<div class="card small">
+<b>Growth :</b> forward_pe, eps_growth_cagr_pct. Le PEG est calculé comme PER prévisionnel / croissance annuelle du BPA en % ; PEG positif uniquement, classement croissant.
+<div class="list-row"><span><b>Growth Quality :</b> CA CAGR 3 ans, résultat opérationnel CAGR 3 ans, marge opérationnelle, marge FCF, ROIC, dette nette / EBITDA, Sharpe 3 ans, drawdown maximal 3 ans.</span></div>
+<div class="list-row"><span><b>Growth Momentum :</b> performance 12-1 mois, performance 6 mois, cours vs MM200, MM50 vs MM200, Sharpe 3 ans, drawdown 1 an, volatilité 1 an, performance relative 6 mois à l'indice local.</span></div>
+<p class="muted">Les indicateurs de valorisation restent visibles dans les fiches titres, mais n'entrent pas dans le score Growth Quality.</p>
+</div>
 </section>
 <section id="universe"><div class="section-head"><h3>Univers initial</h3><span id="marketDataDate">Chargement des dernières données…</span></div><div class="card table-wrap"><table class="table"><thead><tr><th>Société</th><th>Cours</th><th>Perf. 12-1m</th><th>Perf. 6m</th><th>Vol. 1 an</th><th>Momentum /100</th><th>PEA</th></tr></thead><tbody id="marketDataBody"><tr><td colspan="7">Chargement des données…</td></tr></tbody></table></div><div class="notice" id="peaGateSummary">Filtre PEA : initialisation...</div><p class="small muted">Score momentum = rang relatif sur la seule base de ces 7 titres, à partir de la performance ajustée sur 12-1 mois. Ce n'est ni un score Growth fondamental ni un Top 10 du marché. Le filtre PEA contrôle le statut et la date de vérification ; il ne remplace pas le contrôle final chez le courtier.</p></section>
 <section id="portfolios"><div class="section-head"><h3>Portefeuilles virtuels</h3><span>Capital initial paramétré</span></div><div class="grid"><div class="card"><span class="tag">01 · QUANTITATIVE</span><h3>Growth Quantitative</h3><div class="metric">1 000 €</div><div class="metric-sub">100 % liquidités · aucune position</div></div><div class="card"><span class="tag">02 · QUALITY</span><h3>Growth Quality</h3><div class="metric">1 000 €</div><div class="metric-sub">100 % liquidités · aucune position</div></div><div class="card"><span class="tag">03 · MOMENTUM</span><h3>Growth Momentum</h3><div class="metric">1 000 €</div><div class="metric-sub">100 % liquidités · aucune position</div></div></div><div class="notice">Les portefeuilles sont initialisés à 1 000 € chacun. Les opérations resteront bloquées tant que les cours, l'éligibilité PEA et les signaux ne seront pas validés pour les propositions automatiques. Tu peux toutefois enregistrer ici des opérations fictives pour tester le suivi : aucun ordre réel ne sera envoyé.</div>
@@ -149,7 +171,24 @@ document.getElementById('addTrade').addEventListener('click',()=>{
 });
 computePortfolios();
 
-async function loadTechnicalData(){
+
+function renderScoringEngines(universe){
+ const summary=document.getElementById('engineSummary'),rankings=document.getElementById('engineRankings');
+ if(!summary||!rankings||!window.StockPickingEngines)return;
+ const result=window.StockPickingEngines.run(universe);
+ const cards=[
+  {label:'01 · GROWTH',title:'PEG',count:result.growth.available,detail:'PER prévisionnel / croissance BPA anticipée',rows:result.growth.ranked,kind:'peg'},
+  {label:'02 · QUALITY',title:'Growth Quality',count:result.quality.available,detail:'8 indicateurs fondamentaux et risque',rows:result.quality.ranked,kind:'score'},
+  {label:'03 · MOMENTUM',title:'Growth Momentum',count:result.momentum.available,detail:'8 indicateurs de tendance et risque',rows:result.momentum.ranked,kind:'score'}
+ ];
+ summary.innerHTML=cards.map(c=>'<div class="card"><span class="tag">'+c.label+'</span><h3>'+c.title+'</h3><div class="metric">'+c.count+' / '+result.universeCount+'</div><div class="metric-sub">Titres avec données complètes · '+c.detail+'</div></div>').join('');
+ rankings.innerHTML=cards.map(c=>{
+  const rows=c.rows.slice(0,25);
+  const table=rows.length?'<div class="table-wrap"><table class="table"><thead><tr><th>Rang</th><th>Société</th><th>ISIN</th><th>'+(c.kind==='peg'?'PEG':'Score /100')+'</th></tr></thead><tbody>'+rows.map((r,i)=>'<tr><td>'+(i+1)+'</td><td>'+safe(r.item.name)+'</td><td>'+safe(r.item.isin)+'</td><td>'+(c.kind==='peg'?Number(r.peg).toFixed(2):Number(r.score).toFixed(1))+'</td></tr>').join('')+'</tbody></table></div>':'<div class="empty"><b>Aucun titre classable pour le moment</b>'+result.universeCount+' titre(s) PEA vérifié(s), mais les données requises pour ce moteur ne sont pas encore disponibles. Aucun score artificiel n’est affiché.</div>';
+  return '<div class="card wide"><h3>'+c.title+'</h3><p class="small muted">'+c.detail+'</p>'+table+'</div>';
+ }).join('');
+}
+\nasync function loadTechnicalData(){
  const body=document.getElementById('marketDataBody'),stamp=document.getElementById('marketDataDate');
  if(!body)return;
  try{
@@ -170,7 +209,7 @@ async function loadTechnicalData(){
   stamp.textContent=data.data_ok_count+'/'+data.universe_count+' titres · données du '+new Date(data.generated_at_utc).toLocaleString('fr-FR');
  }catch(err){
   body.innerHTML='<tr><td colspan="7">Données non disponibles. Vérifie la connexion internet.</td></tr>';
-  stamp.textContent='Données indisponibles';
+  stamp.textContent='Données indisponibles';\n  renderScoringEngines([]);
  }
 }
 loadTechnicalData();
