@@ -1,6 +1,6 @@
 # PEA candidate discovery and eligibility controls
 
-The discovery job imports instrument names and trading codes from ProRealTime's public France, Europe and EEA PEA directories. It is a **candidate source only**, not a legal eligibility certificate.
+The discovery job imports instrument names and trading codes from ProRealTime's public France, Europe and EEA PEA directories, and a separate prequalified list from MEQIRI. MEQIRI states that its list applies Article L221-31 and BOFiP criteria, excludes SIIC and comparable real-estate companies, but also says that only the user's broker can finally confirm eligibility. Both sources remain **candidate sources only**, not a legal eligibility certificate.
 
 Every discovered record is created with:
 - `pea_status=pending_verification`
@@ -32,3 +32,5 @@ The discovery job creates `data/pea_candidates.json`. Candidate rows remain pend
 - reviewer and a verification date no older than 90 days.
 
 `scripts/build_pea_registry.py` validates every field and writes `data/pea_registry_audit.json`. It never promotes a candidate based only on a provisional Yahoo ticker or directory presence. The current seven pilot instruments remain in the existing technical dataset; new candidates are not fed into scoring until their evidence passes this gate.
+
+MEQIRI source: https://meqiri.com/fr/actions/eligibles-pea. Its published list includes issuer country hints derived from the ISIN country code. These hints and its ticker are stored as prequalification metadata only; they do not override the independent evidence gate.
