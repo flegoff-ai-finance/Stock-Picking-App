@@ -120,7 +120,7 @@ async function loadTechnicalData(){
   const data=await response.json();
   const pct=v=>v===null||v===undefined?'—':(v>0?'+':'')+Number(v).toFixed(1)+' %';
   const euro=v=>new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR'}).format(v);
-  body.innerHTML=data.instruments.map(x=>'<tr><td>'+safe(x.name)+'</td><td>'+euro(x.last_close)+'</td><td>'+pct(x.return_12_1m_pct)+'</td><td>'+pct(x.return_6m_pct)+'</td><td>'+pct(x.volatility_1y_pct)+'</td><td>'+(x.momentum_score===null?'—':Number(x.momentum_score).toFixed(1))+'</td><td><span class="pill">À vérifier</span></td></tr>').join('');
+  body.innerHTML=data.instruments.map(x=>'<tr><td>'+safe(x.name)+'</td><td>'+euro(x.last_close)+'</td><td>'+pct(x.return_12_1m_pct)+'</td><td>'+pct(x.return_6m_pct)+'</td><td>'+pct(x.volatility_1y_pct)+'</td><td>'+(x.momentum_score===null?'—':Number(x.momentum_score).toFixed(1))+'</td><td><span class="pill">'+(x.pea_status==='eligible'?'Éligible':'À vérifier')+'</span></td></tr>').join('');
   stamp.textContent=data.data_ok_count+'/'+data.universe_count+' titres · données du '+new Date(data.generated_at_utc).toLocaleString('fr-FR');
  }catch(err){
   body.innerHTML='<tr><td colspan="7">Données non disponibles. Vérifie la connexion internet.</td></tr>';
