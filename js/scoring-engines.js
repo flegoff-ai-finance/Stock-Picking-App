@@ -16,13 +16,13 @@
   };
   const average=xs=>xs.length?xs.reduce((a,b)=>a+b,0)/xs.length:null;
   const complete=(obj,keys)=>keys.every(k=>num(obj[k])!==null);
-  const scoreCohort=(items,extract,keys,directions)=>{
+  const scoreCohort=(items,extract,keys,directions,weights)=>{
     const raw=items.map(x=>({x,values:keys.map(k=>num(extract(x)[k]))}));
     const columns=keys.map((_,i)=>raw.map(r=>r.values[i]));
     return raw.map(r=>{
       if(r.values.some(v=>v===null))return {item:r.x,score:null,coverage:r.values.filter(v=>v!==null).length,components:[]};
       const components=r.values.map((v,i)=>pctRank(columns[i],v,directions[i]));
-      return {item:r.x,score:average(components),coverage:keys.length,components};
+      const totalWeight=weights.reduce((a,b)=>a+b,0);\n      const score=components.reduce((sum,v,i)=>sum+v*weights[i],0)/totalWeight;\n      return {item:r.x,score,coverage:keys.length,components};
     });
   };
   function growth(items){
@@ -34,7 +34,7 @@
   function quality(items){
     const keys=['revenue_cagr_3y_pct','operating_income_cagr_3y_pct','operating_margin_pct','fcf_margin_pct','roic_pct','net_debt_ebitda','sharpe_3y','max_drawdown_3y_pct'];
     const directions=[false,false,false,false,false,true,false,true];
-    const scored=scoreCohort(items,x=>x,keys,directions).map(r=>({item:r.item,score:r.score,coverage:r.coverage,components:r.components,reason:r.score===null?'Au moins un indicateur fondamental ou de risque manque':null}));
+    const scored=scoreCohort(items,x=>x,keys,directions,[15,15,15,15,15,10,10,5]).map(r=>({item:r.item,score:r.score,coverage:r.coverage,components:r.components,reason:r.score===null?'Au moins un indicateur fondamental ou de risque manque':null}));
     const ranked=scored.filter(r=>r.score!==null).sort((a,b)=>b.score-a.score);
     ranked.forEach((r,i)=>r.rank=i+1);
     return {name:'Growth Quality',rows:ranked.concat(scored.filter(r=>r.score===null)),ranked,available:ranked.length,required:items.length,top25:ranked.slice(0,25),indicators:keys};
@@ -42,7 +42,7 @@
   function momentum(items){
     const keys=['return_12_1m_pct','return_6m_pct','price_vs_sma200_pct','sma50_vs_sma200_pct','sharpe_3y','max_drawdown_1y_pct','volatility_1y_pct','relative_return_6m_pct'];
     const directions=[false,false,false,false,false,false,true,false];
-    const scored=scoreCohort(items,x=>x,keys,directions).map(r=>({item:r.item,score:r.score,coverage:r.coverage,components:r.components,reason:r.score===null?'Historique de cours, moyennes mobiles, benchmark ou risque incomplet':null}));
+    const scored=scoreCohort(items,x=>x,keys,directions,[25,15,15,10,10,10,5,10]).map(r=>({item:r.item,score:r.score,coverage:r.coverage,components:r.components,reason:r.score===null?'Historique de cours, moyennes mobiles, benchmark ou risque incomplet':null}));
     const ranked=scored.filter(r=>r.score!==null).sort((a,b)=>b.score-a.score);
     ranked.forEach((r,i)=>r.rank=i+1);
     return {name:'Growth Momentum',rows:ranked.concat(scored.filter(r=>r.score===null)),ranked,available:ranked.length,required:items.length,top25:ranked.slice(0,25),indicators:keys};
