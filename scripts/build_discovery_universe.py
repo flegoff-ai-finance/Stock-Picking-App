@@ -18,7 +18,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OUTPUT = ROOT / "data" / "discovery_universe.csv"
 SOURCE_REPO = "JerBouma/FinanceDatabase"
-MARKETS = ("PAR", "AMS", "BRU", "MIL", "BER", "STO", "CPH", "HEL", "OSL", "LIS", "VIE", "ATH")
+MARKETS = ("PAR", "AMS", "BRU", "MIL", "GER", "STO", "CPH", "HEL", "OSL", "LIS", "VIE", "ATH", "PRA", "BUD", "WSE", "FRA", "HAM", "MUN", "BER")
+HOME_MARKET = {
+    "France": "PAR", "Netherlands": "AMS", "Belgium": "BRU", "Italy": "MIL",
+    "Germany": "GER", "Sweden": "STO", "Denmark": "CPH", "Finland": "HEL",
+    "Norway": "OSL", "Portugal": "LIS", "Austria": "VIE", "Greece": "ATH",
+    "Czech Republic": "PRA", "Hungary": "BUD", "Poland": "WSE",
+}
 COUNTRY_NAMES = {
     "Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus", "Czech Republic",
     "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary",
@@ -85,7 +91,7 @@ def build_candidates(rows_by_market: dict[str, list[dict]], source_commit: str,
                 "source": f"https://github.com/{SOURCE_REPO}/tree/{source_commit}/database/equities",
                 "source_commit": source_commit,
                 "retrieved_at_utc": retrieved_at,
-                "_priority": priority.get(market, 999),
+                "_priority": (0 if HOME_MARKET.get(country) == market else 1, priority.get(market, 999)),
             }
             previous = selected.get(isin)
             if previous is None or candidate["_priority"] < previous["_priority"]:
@@ -119,7 +125,7 @@ def build(output: Path = DEFAULT_OUTPUT, markets=MARKETS) -> int:
             rows_by_market[market] = list(csv.DictReader(io.StringIO(_get_text(url))))
         except Exception as exc:
             print(f"Skipping {market}: {exc}")
-    rows = build_candidates(rows_by_market, commit, retrieved_at)
+    if len(rows_by_market) < 6:\n        raise RuntimeError(f"Only {len(rows_by_market)} exchange files downloaded; refusing to overwrite the previous universe.")\n    rows = build_candidates(rows_by_market, commit, retrieved_at)
     output.parent.mkdir(parents=True, exist_ok=True)
     with output.open("w", encoding="utf-8", newline="") as stream:
         writer = csv.DictWriter(stream, fieldnames=FIELDNAMES)
