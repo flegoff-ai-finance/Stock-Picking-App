@@ -1,0 +1,50 @@
+name: Refresh European discovery universe
+
+on:
+  push:
+    branches: ["feat/**"]
+    paths:
+      - "scripts/build_discovery_universe.py"
+      - "tests/test_build_discovery_universe.py"
+      - ".github/workflows/refresh-discovery-universe.yml"
+  pull_request:
+    paths:
+      - "scripts/build_discovery_universe.py"
+      - "tests/test_build_discovery_universe.py"
+      - ".github/workflows/refresh-discovery-universe.yml"
+  workflow_dispatch:
+  schedule:
+    - cron: "35 5 * * 1"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: discovery-universe
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build discovery-only candidate universe
+        run: python scripts/build_discovery_universe.py
+      - name: Install test dependency
+        run: python -m pip install pytest
+      - name: Run discovery universe tests
+        run: python -m pytest -q tests/test_build_discovery_universe.py
+      - name: Commit refreshed candidate universe
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/discovery_universe.csv
+          if git diff --cached --quiet; then
+            echo "No discovery-universe changes."
+            exit 0
+          fi
+          git commit -m "Refresh European discovery universe"
+          git push

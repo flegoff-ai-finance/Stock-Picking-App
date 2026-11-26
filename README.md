@@ -19,8 +19,8 @@ Application de recherche et de simulation de trois portefeuilles PEA indépendan
 ## Univers PEA — état du pilote
 
 - 7 titres pilotes actuellement admis dans l'univers de scoring.
-- Aucun élargissement automatique de l'univers tant qu'une source de données autorisée et une preuve d'éligibilité suffisante ne sont pas disponibles.
-- Le modèle d'import et de contrôle est dans `data/pea_verification.csv`. Le contrôle documentaire est automatisé par `scripts/build_pea_registry.py`, puis `scripts/sync_pea_registry.py` ajoute uniquement les titres validés ; Yahoo les enrichit par lots de 50.
+- Un vivier de découverte de 2 943 candidats européens est maintenant généré depuis FinanceDatabase (référentiel MIT), sur 12 places de cotation. Ce vivier n'est pas assimilé à l'univers PEA éligible : seuls les titres passés par le contrôle documentaire peuvent rejoindre le scoring.
+- Le vivier exploratoire est dans `data/discovery_universe.csv` (rafraîchi chaque semaine). Sa méthode et ses limites sont documentées dans `DISCOVERY_UNIVERSE.md`. Il reste distinct du modèle d'import et de contrôle PEA dans `data/pea_verification.csv`. Le contrôle documentaire est automatisé par `scripts/build_pea_registry.py`, puis `scripts/sync_pea_registry.py` ajoute uniquement les titres validés ; Yahoo les enrichit par lots de 50.
 - Chaque nouvelle ligne doit documenter l'ISIN, le ticker, le siège UE/EEE, l'assujettissement fiscal, la nature d'action ordinaire, une source d'éligibilité PEA et une source émetteur. La vérification expire après 90 jours.
 
 ## Limites actuelles
