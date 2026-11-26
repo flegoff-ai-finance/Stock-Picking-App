@@ -342,6 +342,7 @@ def main():
     obsolete_notes = {
         "Yahoo one-year earnings growth is contextual only and is not substituted for the 3-5 year PEG input.",
         "Sharpe remains N/D without a dated EUR risk-free series; relative return remains N/D without verified benchmark mapping.",
+        "Relative return remains N/D without a verified local benchmark mapping.",
     }
     methodology["limitations"] = [note for note in limitations if note not in obsolete_notes]
     limitations = methodology["limitations"]
