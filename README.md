@@ -28,7 +28,8 @@ Application de recherche et de simulation de trois portefeuilles PEA indépendan
 
 - Growth reste N/D tant que les estimations de croissance BPA à cinq ans nécessaires au PEG ne sont pas disponibles.
 - Les classements Quality et Momentum reposent encore sur les sept titres pilotes ; ils ne sont pas représentatifs de tout le PEA.
-- Les seuils de décision ne sont pas encore validés par backtest.
+- Un diagnostic historique du signal Momentum est disponible sur les sept pilotes (snapshots mensuels, horizons 1/3/6 mois, frais aller-retour simulés sur le Top 2). Il reste exploratoire et ne valide pas les seuils de décision ni la construction des portefeuilles.
+- Growth et Growth Quality ne sont pas backtestés faute de fondamentaux historiques point-in-time.
 - Les portefeuilles sont virtuels : aucun ordre réel n'est transmis.
 - Les conditions d'accès et de redistribution des données de marché doivent être respectées avant tout usage public élargi.
 
@@ -36,4 +37,5 @@ Application de recherche et de simulation de trois portefeuilles PEA indépendan
 
 - `Refresh Yahoo Finance market data` : actualisation en semaine.
 - `Discover PEA equity candidates` : actualisation hebdomadaire des candidats et audit des preuves.
+- `Backtest Growth Momentum signal` : diagnostic historique mensuel du classement Momentum.
 - `Validate data pipeline` et `Validate selection JavaScript` : tests automatisés.
