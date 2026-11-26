@@ -58,7 +58,7 @@
     return Object.keys(specs).map(key=>{
       const first=screen(universe,key);
       const engine=key==='growth'?engines.growth(first.candidates):key==='quality'?engines.quality(first.candidates):engines.momentum(first.candidates);
-      const finalists=engine.ranked.slice(0,25).map(r=>({item:r.item,peg:r.peg??null,layer2_score:r.score??null,layer2_rank:r.rank??null}));
+      const finalists=engine.ranked.slice(0,25).map(r=>({item:r.item,peg:r.peg??null,layer2_score:r.score??null,layer2_rank:r.rank??null,layer2_coverage:r.coverage??null,layer2_coverage_weight_pct:r.coverageWeightPct??null}));
       const third=finalScore(finalists,key);
       const blockers={};
       (engine.rows||[]).filter(r=>r.reason).forEach(r=>{blockers[r.reason]=(blockers[r.reason]||0)+1;});
@@ -74,7 +74,7 @@
     if(!output.length){root.innerHTML='<div class="empty">Moteurs de sélection indisponibles.</div>';return;}
     root.innerHTML='<div class="notice"><strong>Pipeline interne :</strong> le premier filtre réduit l’univers à 150 candidats maximum par stratégie ; ses résultats détaillés restent masqués. Seuls les 25 dossiers les mieux classés et suffisamment documentés peuvent atteindre la couche finale. Les seuils 75/40 sont provisoires et non backtestés. Aucune donnée manquante n’est imputée.</div>'+
       output.map(o=>{
-        const secondRows=o.finalists.map((r,i)=>'<tr><td>'+(i+1)+'</td><td>'+esc(r.item.name)+'</td><td>'+(o.key==='growth'?fmt(r.peg):fmt(r.layer2_score))+'</td></tr>').join('');
+        const secondRows=o.finalists.map((r,i)=>'<tr><td>'+(i+1)+'</td><td>'+esc(r.item.name)+'</td><td>'+(o.key==='growth'?fmt(r.peg):fmt(r.layer2_score))+'</td><td>'+(r.layer2_coverage===null?'PEG':r.layer2_coverage+'/8 · '+fmt(r.layer2_coverage_weight_pct)+' %')+'</td></tr>').join('');
         const thirdRows=o.third.rows.slice(0,25).map(r=>'<tr><td>'+(r.finalRank??'—')+'</td><td>'+esc(r.item.name)+'</td><td>'+(r.score===null?'N/D':fmt(r.score))+'</td><td>'+fmt(r.coveragePct)+' %</td><td>'+r.decision+'</td></tr>').join('');
         const topTable=(head,body,empty)=>'<div class="table-wrap"><table class="table"><thead><tr>'+head+'</tr></thead><tbody>'+(body||'<tr><td colspan="5">'+empty+'</td></tr>')+'</tbody></table></div>';
         const blockerText=Object.entries(o.blockers).map(([reason,count])=>'<li>'+count+' titre(s) : '+esc(reason)+'</li>').join('');
@@ -84,11 +84,11 @@
         return '<div class="card wide" style="margin-top:14px"><div class="row"><h3>'+o.label+'</h3><span class="pill">'+o.finalists.length+' / 25 finalistes</span></div>'+
           '<div class="grid"><div><div class="small muted">Univers PEA vérifié</div><div class="metric">'+(o.engine.required??o.screened)+'</div><div class="metric-sub">Titres transmis au moteur</div></div><div><div class="small muted">Couche 2 · analyse stratégique</div><div class="metric">'+o.engine.available+' / '+o.screened+'</div><div class="metric-sub">Dossiers classables avec les indicateurs requis</div></div><div><div class="small muted">Couche 3 · score final</div><div class="metric">'+o.third.valid+' / '+o.finalists.length+'</div><div class="metric-sub">Scores suffisamment documentés</div></div></div>'+
           '<div class="section-head"><h3>Couche 2 · sélection stratégique</h3><span>Top 25 maximum</span></div>'+
-          (secondRows?topTable('<th>Rang</th><th>Société</th><th>'+(o.key==='growth'?'PEG':'Score stratégique /100')+'</th>',secondRows,'Aucun titre classable.'):layer2Empty)+
+          (secondRows?topTable('<th>Rang</th><th>Société</th><th>'+(o.key==='growth'?'PEG':'Score stratégique /100')+'</th><th>Couverture</th>',secondRows,'Aucun titre classable.'):layer2Empty)+
           (blockerText?'<div class="notice"><strong>Indicateurs bloquants :</strong><ul>'+blockerText+'</ul></div>':'')+
           '<div class="section-head"><h3>Couche 3 · score global et décision</h3><span>Achat ≥ 75 · Vente / éviter &lt; 40</span></div>'+
           topTable('<th>Rang</th><th>Société</th><th>Score /100</th><th>Poids couvert</th><th>Signal</th>',thirdRows,'Scores finaux non calculables avec les données actuelles.')+
-          '<p class="small muted">Entre 40 et 75 : conserver / surveiller. Les signaux restent indicatifs et ne déclenchent aucun ordre. Le score est relatif aux titres analysés dans ce panel, pas une probabilité de rendement.</p></div>';
+          '<p class="small muted">Les scores de couche 2 et 3 sont calculés si au moins 4 facteurs et 75 % du poids sont documentés ; les poids manquants sont renormalisés, sans imputation. Entre 40 et 75 : conserver / surveiller. Les signaux restent indicatifs et ne déclenchent aucun ordre. Le score est relatif aux titres analysés dans ce panel, pas une probabilité de rendement.</p></div>';
       }).join('');
   }
   window.StockPickingLayeredSelection={render,run:build};
