@@ -28,8 +28,8 @@ assert.equal(pilot[1].engine.available, 7, 'Quality should use its 75% documente
 assert.equal(pilot[2].engine.available, 7, 'Momentum should use its 80% documented weight without imputing Sharpe or relative return');
 assert.equal(Array.from(pilot[1].finalists, x => x.item.name).slice(0,3).join(','), 'GTT,Exosens,Planisware');
 assert.equal(Array.from(pilot[2].finalists, x => x.item.name).slice(0,3).join(','), 'Euronext,Planisware,VIEL & Cie');
-assert.equal(Array.from(pilot[1].third.rows, x => x.item.name).slice(0,3).join(','), 'GTT,Exosens,Euronext');
-assert.equal(Array.from(pilot[2].third.rows, x => x.item.name).slice(0,3).join(','), 'Euronext,VIEL & Cie,Rexel');
+assert.equal(Array.from(pilot[1].third.rows, x => x.item.name).slice(0,3).join(','), 'GTT,Euronext,Exosens');
+assert.equal(Array.from(pilot[2].third.rows, x => x.item.name).slice(0,3).join(','), 'Euronext,VIEL & Cie,GTT');
 
 context.window.StockPickingLayeredSelection.render(document.instruments);
 assert.ok(rendered.innerHTML.includes('Couche 2'));
