@@ -2,7 +2,7 @@ name: Refresh European discovery universe
 
 on:
   push:
-    branches: ["feat/**"]
+    branches: ["feat/**", "main"]
     paths:
       - "scripts/build_discovery_universe.py"
       - "tests/test_build_discovery_universe.py"
