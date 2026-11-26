@@ -9,6 +9,7 @@ from __future__ import annotations
 import json
 import math
 import os
+import re
 import statistics
 import sys
 import time
@@ -59,6 +60,8 @@ def first_number(obj: dict, *keys):
 
 
 def dated_rows(section):
+    if isinstance(section, list):
+        section = {str(item.get("date", index)): item for index, item in enumerate(section) if isinstance(item, dict)}
     if not isinstance(section, dict):
         return []
     rows = []
@@ -206,7 +209,7 @@ def fundamental_metrics(raw):
     equity = first_number(latest_balance, "totalStockholderEquity", "totalStockholdersEquity", "totalEquity")
     if debt is not None and equity is not None:
         invested = debt + equity - cash
-    roic = (ebit * (1 - (tax_rate if tax_rate is not None else 0.25)) / invested * 100) if ebit is not None and invested and invested > 0 else None
+    roic = (ebit * (1 - tax_rate) / invested * 100) if ebit is not None and tax_rate is not None and invested and invested > 0 else None
     return {
         "revenue_cagr_3y_pct": cagr(income_rows, ("totalRevenue", "totalRevenueReported", "revenue")),
         "operating_income_cagr_3y_pct": cagr(income_rows, ("operatingIncome", "ebit", "EBIT")),
@@ -236,7 +239,7 @@ def main():
     for item in instruments:
         try:
             checked = date.fromisoformat(str(item.get("pea_checked_at", "")))
-            valid_isin = len(str(item.get("isin", ""))) == 12
+            valid_isin = bool(re.fullmatch(r"[A-Z]{2}[A-Z0-9]{10}", str(item.get("isin", ""))))
             if item.get("pea_status") == "eligible" and valid_isin and 0 <= (today - checked).days <= 90:
                 eligible.append(item)
         except ValueError:
@@ -251,7 +254,8 @@ def main():
             fundamentals = request_json(f"fundamentals/{ticker}", {"filter": "General,Highlights,Valuation,Technicals,Earnings,Financials"})
             item.update(price_metrics(history))
             item.update(fundamental_metrics(fundamentals if isinstance(fundamentals, dict) else {}))
-            item["provider"] = "EODHD"\n            item["provider_data_status"] = "ok"
+            item["provider"] = "EODHD"
+            item["provider_data_status"] = "ok"
             item["provider_retrieved_at_utc"] = datetime.now(timezone.utc).isoformat()
         except Exception as exc:  # Keep the rest of the universe usable when one symbol fails.
             item["provider_data_status"] = "error"
