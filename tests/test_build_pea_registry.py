@@ -8,6 +8,7 @@ class PeaRegistryAuditTests(unittest.TestCase):
     def valid_review(self):
         return {
             "candidate_id": "abc123",
+            "name": "TotalEnergies",
             "isin": "FR0000120271",
             "ticker": "TOTF.PA",
             "issuer_country_iso2": "FR",
