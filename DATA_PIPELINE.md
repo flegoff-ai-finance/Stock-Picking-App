@@ -44,3 +44,15 @@ Do not assume Yahoo supplies a reliable 3–5 year EPS growth consensus for ever
 The EODHD script and manual GitHub Actions workflow are retained only as a possible fallback. The published All-in-One plan was previously identified at $99.99/month on monthly billing. Do not subscribe unless Yahoo coverage proves inadequate, a representative comparison demonstrates material value, and the cost is explicitly approved.
 
 This application is for research and virtual portfolio simulation only. It does not submit orders.
+
+
+## Analyst growth estimates and EUR risk-free rate
+
+The Yahoo ingestion also requests `get_growth_estimates(as_dict=True)`:
+- `+1y` populates the next-year EPS growth context field.
+- `+5y` populates the annualized five-year EPS growth field used by the classic PEG.
+- Missing Yahoo consensus values remain null; the generic `earningsGrowth` field is not substituted.
+
+For Sharpe, the pipeline downloads the ECB daily €STR series `EST.B.EU000A2X2A25.WT`, aligns the last known daily rate to each stock return date, converts the annualized percentage using ACT/360, and annualizes excess-return Sharpe with sqrt(252). If the ECB series is unavailable or coverage is insufficient, Sharpe remains null and the source error is recorded.
+
+Official series: https://data.ecb.europa.eu/data/datasets/EST/EST.B.EU000A2X2A25.WT
