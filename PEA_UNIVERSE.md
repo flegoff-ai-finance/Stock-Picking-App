@@ -2,7 +2,7 @@
 
 ## Current state
 
-The scored universe contains seven verified pilot securities. No larger universe is currently imported.
+The scored universe still contains seven verified pilot securities. A separate discovery-only feed (`data/discovery_universe.csv`) now contains European candidates from FinanceDatabase; it is not PEA-verified and is never synced to the scoring universe automatically.
 
 Automated collection from ProRealTime and MEQIRI has been removed after reviewing their published terms:
 - ProRealTime's terms prohibit extraction or reuse of its databases.
@@ -10,7 +10,7 @@ Automated collection from ProRealTime and MEQIRI has been removed after reviewin
 
 Those sources must not be used by the application's automated workflows. Individual pages may be consulted manually for a one-off research question, subject to their terms, but their lists and data must not be scraped or bulk-copied.
 
-## Approved path to expand the universe
+## Discovery feed (not PEA-approved)\n\n`data/discovery_universe.csv` is refreshed weekly from a pinned FinanceDatabase commit across selected EU/EEA exchanges. It is intended only to spot candidates for further review. A valid ISIN and an EU/EEA country field are discovery filters, not proof of PEA eligibility. See `DISCOVERY_UNIVERSE.md`.\n\n## Approved path to expand the universe
 
 The application accepts candidates from a broker export or a data provider whose licence permits the intended use. The import template is `data/pea_verification.csv`.
 
