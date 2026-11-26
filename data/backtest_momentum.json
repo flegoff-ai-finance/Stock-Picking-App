@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-11-26T13:48:32.696687+00:00",
+  "generated_at_utc": "2026-11-26T13:54:26.459313+00:00",
   "strategy": "Growth Momentum",
   "method": "Monthly point-in-time cross-sectional rank diagnostic; top 2 versus bottom 2; no fundamental factors.",
   "universe_count": 7,
