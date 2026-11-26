@@ -30,11 +30,11 @@ Le moteur stratégique est appliqué uniquement aux candidats retenus en couche 
 - Growth Quality : score pondéré existant, fondé sur croissance CA et EBIT, marges opérationnelle et FCF, ROIC, dette nette/EBITDA, Sharpe 3 ans et drawdown 3 ans.
 - Growth Momentum : score pondéré existant, fondé sur momentum 12-1, performance 6 mois, cours vs MM200, MM50 vs MM200, Sharpe 3 ans, drawdown 1 an, volatilité 1 an et performance relative à l'indice local.
 
-Seuls les 25 premiers titres classables sont transmis à la couche 3. Les moteurs stratégiques conservent leurs exigences de données complètes.
+Seuls les 25 premiers titres classables sont transmis à la couche 3. Les moteurs stratégiques n'imputent aucune donnée. Un score de couche 2 n'est calculé que si au moins quatre facteurs sont disponibles et si leur poids cumulé atteint 75 % du poids total ; les poids absents sont renormalisés sur les seuls facteurs documentés. La couverture en nombre de facteurs et en poids doit rester visible.
 
 ## Couche 3 — score global et décision
 
-Le score final est relatif au panel des finalistes de chaque stratégie. Chaque facteur disponible est transformé en rang percentile. Les poids disponibles sont renormalisés, sans inventer de valeur. Le score n'est calculé que si au moins quatre facteurs sont disponibles et si leur poids cumulé atteint au moins 75 %.
+Le score final est relatif au panel des finalistes de chaque stratégie. Chaque facteur disponible est transformé en rang percentile. Les poids disponibles sont renormalisés, sans inventer de valeur. Le score n'est calculé que si au moins quatre facteurs sont disponibles et si leur poids cumulé atteint au moins 75 %. La même règle minimale s'applique aux scores stratégiques de couche 2.
 
 | Stratégie | Facteurs finaux | Poids |
 |---|---|---:|
@@ -67,6 +67,6 @@ Les seuils sont des paramètres initiaux, pas des niveaux optimisés. Ils ne dé
 
 ## État actuel et limites
 
-Le registre de données contient encore sept titres pilotes. Il ne constitue pas un univers PEA exhaustif. La nouvelle architecture calcule des candidats uniquement sur les données présentes dans ce registre ; elle ne fabrique pas 150 lignes. L'étape suivante est d'élargir et de vérifier l'univers PEA, puis d'alimenter les champs par Yahoo Finance en priorité et de compléter / contrôler avec d'autres sources lorsque leurs conditions d'accès le permettent.
+Le registre de données contient encore sept titres pilotes. Il ne constitue pas un univers PEA exhaustif. Le premier filtre reste interne à l'application : ses noms et rangs ne sont pas affichés. Il calcule jusqu'à 150 candidats par stratégie uniquement parmi les titres vérifiés présents dans le registre ; il ne fabrique pas 150 lignes. L'étape suivante est d'élargir et de vérifier l'univers PEA, puis d'alimenter les champs par Yahoo Finance en priorité et de compléter / contrôler avec d'autres sources lorsque leurs conditions d'accès le permettent.
 
 Le score final affiché est une mesure de classement relative, pas une probabilité de hausse ni une garantie de performance. Les données de fournisseurs gratuits peuvent être retardées, incomplètes ou soumises à des restrictions d'usage et de redistribution.
