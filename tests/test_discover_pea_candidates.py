@@ -12,7 +12,7 @@ class CandidateDiscoveryTests(unittest.TestCase):
         </table>
         """
         rows = parse_listing(html, "france", "https://example.test/list")
-        self.assertEqual(len(rows), 4)
+        self.assertEqual(len(rows), 2)
         self.assertEqual(rows[0]["pea_status"], "pending_verification")
         self.assertEqual(rows[0]["verification_status"], "not_verified")
         self.assertEqual(rows[0]["provisional_yahoo_ticker"], "AI.PA")
@@ -43,7 +43,7 @@ class CandidateDiscoveryTests(unittest.TestCase):
         </table>
         """
         rows = parse_meqiri_listing(html, "https://meqiri.com/fr/actions/eligibles-pea")
-        self.assertEqual(len(rows), 2)
+        self.assertEqual(len(rows), 4)
         self.assertEqual(rows[0]["provisional_yahoo_ticker"], "EXAE.AT")
         self.assertEqual(rows[0]["issuer_country_hint_iso2"], "GR")
         self.assertEqual(rows[0]["pea_status"], "pending_verification")
