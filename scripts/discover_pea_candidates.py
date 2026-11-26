@@ -139,6 +139,8 @@ def main():
         "discovered_candidate_count": len(discovered),
         "verified_count": 0,
         "pending_verification_count": len(discovered),
+        "provisional_ticker_mapped_count": sum(1 for row in discovered.values() if row["provisional_yahoo_ticker"]),
+        "provisional_ticker_unmapped_count": sum(1 for row in discovered.values() if not row["provisional_yahoo_ticker"]),
         "important_notice": "Discovery only. Directory presence is not legal proof of PEA eligibility. All rows remain excluded from scoring until eligibility, instrument type, ISIN and tax conditions are independently verified.",
         "source_errors": errors,
         "candidates": sorted(discovered.values(), key=lambda x: (x["name"].casefold(), x["source_code"])),
