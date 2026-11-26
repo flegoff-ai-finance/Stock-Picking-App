@@ -6,7 +6,6 @@ on:
       - "data/pea_verification.csv"
       - "scripts/build_pea_registry.py"
       - "scripts/sync_pea_registry.py"
-      - "scripts/ingest_yahoo.py"
       - ".github/workflows/validate-pea-registry.yml"
   workflow_dispatch:
 
@@ -14,7 +13,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: validate-pea-registry
+  group: yahoo-data-pipeline
   cancel-in-progress: false
 
 jobs:
