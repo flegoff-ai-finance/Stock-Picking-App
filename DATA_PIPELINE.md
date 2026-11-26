@@ -18,7 +18,11 @@ Before automating collection or redistributing any provider data in a public web
 - The current registry `data/technical_screener.json` still contains seven pilot securities only. It is not the complete PEA universe.
 - The PEA status gate remains independent from market-data providers. A data vendor listing does not prove PEA eligibility.
 - The previous EODHD ingestion script remains in the repository as a dormant alternative. No subscription has been purchased and no API token is configured.
-- `scripts/ingest_yahoo.py` is the first Yahoo Finance adapter. It refreshes only the already verified registry entries, retrieves up to three years of adjusted daily prices, and attempts selected annual financial fields.\n- The Yahoo connector workflow runs on weekdays at 06:25 UTC and can also be started manually. It installs `yfinance` in the runner; no API key or paid subscription is required.\n- Yahoo `earningsGrowth` is deliberately not treated as a forward EPS growth estimate. The next-year and 3–5 year EPS growth fields remain N/D until a correctly defined estimate field is validated.\n- The connector has been added but live Yahoo retrieval and the first GitHub Actions run still need confirmation. The current registry remains seven pilot securities.
+- `scripts/ingest_yahoo.py` is the Yahoo Finance adapter. It refreshes only the seven already verified pilot securities, retrieves up to three years of adjusted daily prices, and attempts selected annual financial fields.
+- The Yahoo connector workflow runs on weekdays at 06:25 UTC and can also be started manually. Live retrieval has been confirmed for all seven pilots.
+- ECB €STR is now used for the excess-return Sharpe calculation; the CAC 40 is used as the current Paris-listed pilot benchmark for six-month relative performance.
+- Yahoo's explicit `+1y` and `+5y` analyst estimates populate the matching growth fields when present. The seven current pilots do not yet have a usable five-year consensus field, so the classic PEG remains N/D.
+- The current registry remains seven pilot securities; no broader PEA candidate source has been imported.
 
 ## Yahoo Finance pilot — intended scope
 
@@ -27,7 +31,7 @@ Use `yfinance` for:
 - selected annual financial statements to calculate revenue growth, operating margins and free-cash-flow margins;
 - forward P/E and available near-term analyst estimates, with explicit field-level availability checks.
 
-Do not assume Yahoo supplies a reliable 3–5 year EPS growth consensus for every European stock. The classic PEG remains N/D when that specific input is absent. A one-year estimate can be used in the broad first screening layer only; it must not be substituted into the PEG calculation.
+Do not assume Yahoo supplies a reliable 3–5 year EPS growth consensus for every European stock. The classic PEG remains N/D when that specific input is absent. A one-year estimate may be used only as its own short-horizon indicator; it must never be substituted into the PEG calculation.
 
 ## Data quality rules
 
@@ -58,3 +62,10 @@ For Sharpe, the pipeline downloads the ECB daily €STR series `EST.B.EU000A2X2A
 Official series: https://data.ecb.europa.eu/data/datasets/EST/EST.B.EU000A2X2A25.WT
 
 For the current Paris-listed pilot securities, six-month relative performance is calculated as the adjusted-price return minus the CAC 40 return over the same date window. This is a national-market proxy, not a size-matched benchmark. Other listing markets remain N/D until an explicit, verified local-index mapping is configured.
+
+
+## PEA universe and source permissions
+
+Automated scraping of ProRealTime and MEQIRI candidate directories has been removed after reviewing their published terms, which prohibit database extraction or automated retrieval/copying at scale. The project will expand the PEA universe only from a broker-provided export or a data provider whose licence permits the intended automated and public use.
+
+The current import template is `data/pea_verification.csv`. Every imported security must pass the evidence checks in `scripts/build_pea_registry.py` before it can enter the scoring universe.
