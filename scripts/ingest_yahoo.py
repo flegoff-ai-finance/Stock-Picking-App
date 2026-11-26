@@ -346,6 +346,8 @@ def main():
             item["provider"] = "Yahoo Finance (yfinance)"
             item["provider_data_status"] = "error"
             item["provider_error"] = str(exc)[:240]
+            item["provider_retrieved_at_utc"] = datetime.now(timezone.utc).isoformat()
+            item["market_data_last_updated_utc"] = item["provider_retrieved_at_utc"]
             errors.append({"ticker": item["ticker"], "error": str(exc)[:240]})
     document["generated_at_utc"] = datetime.now(timezone.utc).isoformat()
     document["data_provider"] = "Yahoo Finance (yfinance)"
