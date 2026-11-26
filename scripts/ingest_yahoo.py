@@ -339,6 +339,12 @@ def main():
     document["provider_errors"] = errors
     methodology = document.setdefault("methodology", {})
     limitations = methodology.setdefault("limitations", [])
+    obsolete_notes = {
+        "Yahoo one-year earnings growth is contextual only and is not substituted for the 3-5 year PEG input.",
+        "Sharpe remains N/D without a dated EUR risk-free series; relative return remains N/D without verified benchmark mapping.",
+    }
+    methodology["limitations"] = [note for note in limitations if note not in obsolete_notes]
+    limitations = methodology["limitations"]
     for note in [
         "Yahoo Finance via yfinance is an unofficial interface; coverage and fields vary by security.",
         "EPS growth estimates use Yahoo's explicit +1y and +5y consensus fields; +5y is the PEG growth input and is never substituted by earningsGrowth.",
