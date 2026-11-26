@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-11-26T13:50:40.834978+00:00",
-  "candidate_count": 3621,
+  "generated_at_utc": "2026-11-26T13:51:09.324017+00:00",
+  "candidate_count": 3928,
   "verified_count": 0,
-  "pending_count": 3621,
+  "pending_count": 3928,
   "verified_instruments": [],
   "pending_review": [
     {
@@ -147,6 +147,13 @@
       ]
     },
     {
+      "candidate_id": "efa0bb468403b319",
+      "name": "A.P. Møller - Mærsk",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "0f1199e4728c0a06",
       "name": "A.S.CREATION TAPETEN",
       "reason": [
@@ -217,6 +224,13 @@
       ]
     },
     {
+      "candidate_id": "0b5ede03d62a0d72",
+      "name": "AB Industrivärden (publ)",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "6bf24596c32c1428",
       "name": "AB SCIENCE",
       "reason": [
@@ -226,6 +240,13 @@
     {
       "candidate_id": "3097c5b4ff8ff502",
       "name": "AB VILKUSKIU PIEN. .29",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "838b5464d447cbc9",
+      "name": "AB Volvo",
       "reason": [
         "aucune revue documentée"
       ]
@@ -268,6 +289,13 @@
     {
       "candidate_id": "89826f9d3288716d",
       "name": "ABG SUNDAL COLLIER ASA [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "76f9938557db0e6e",
+      "name": "ABG Sundal Collier Holding",
       "reason": [
         "aucune revue documentée"
       ]
@@ -338,6 +366,13 @@
     {
       "candidate_id": "eb5c437024a14f8e",
       "name": "ABSOLICON SOLAR COLLEC. B",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "d75f970c1d4b663a",
+      "name": "AcadeMedia",
       "reason": [
         "aucune revue documentée"
       ]
@@ -609,6 +644,13 @@
       ]
     },
     {
+      "candidate_id": "1f38d7f48a5cf29b",
+      "name": "Addtech AB (publ.)",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "0c81ef871f850636",
       "name": "ADEC INNOVATIONS",
       "reason": [
@@ -833,6 +875,13 @@
       ]
     },
     {
+      "candidate_id": "ce571a21b628e75e",
+      "name": "AF Gruppen",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "c0cbf404e63bb77e",
       "name": "AF GRUPPEN ASA [Cboe]",
       "reason": [
@@ -980,6 +1029,13 @@
       ]
     },
     {
+      "candidate_id": "3714bafc6394e75c",
+      "name": "AIB Group",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "af581169d24f9744",
       "name": "AIFORIA TECHNOLOGIES",
       "reason": [
@@ -1057,6 +1113,13 @@
       ]
     },
     {
+      "candidate_id": "3800c3dc11de6090",
+      "name": "Aker",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "98f05aeef4182756",
       "name": "AKER ASA [Cboe]",
       "reason": [
@@ -1064,8 +1127,22 @@
       ]
     },
     {
+      "candidate_id": "a1cc2589984e51cb",
+      "name": "Aker BP",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "7338933658fc2ae0",
       "name": "AKER BP ASA [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "67ff95f6d79ef1a8",
+      "name": "Aker Solutions",
       "reason": [
         "aucune revue documentée"
       ]
@@ -1099,6 +1176,13 @@
       ]
     },
     {
+      "candidate_id": "0836886e4c30030c",
+      "name": "Aktieselskabet Schouw",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "15769d02fa666a61",
       "name": "AKTOR E0",
       "reason": [
@@ -1122,6 +1206,13 @@
     {
       "candidate_id": "8200febd8a8fb71a",
       "name": "AKZO NOBEL",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "f0a9c589d950e890",
+      "name": "AL Sydbank",
       "reason": [
         "aucune revue documentée"
       ]
@@ -1204,6 +1295,13 @@
       ]
     },
     {
+      "candidate_id": "4ed39858abd418f8",
+      "name": "Alfa Laval Corporate",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "5ed0c4c3c70c7fdc",
       "name": "ALFEN",
       "reason": [
@@ -1246,6 +1344,13 @@
       ]
     },
     {
+      "candidate_id": "ca73c2e64a8665d4",
+      "name": "Alior Bank",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "adb862482c36e89a",
       "name": "ALIOR BANK [Cboe]",
       "reason": [
@@ -1255,6 +1360,13 @@
     {
       "candidate_id": "092aefeeb349578c",
       "name": "ALK-ABELLO [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "86bf3e6a78ca1577",
+      "name": "ALK-Abelló",
       "reason": [
         "aucune revue documentée"
       ]
@@ -1309,6 +1421,13 @@
       ]
     },
     {
+      "candidate_id": "643ad8fac65615d9",
+      "name": "Allegro.eu",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "5d15476fe3c63247",
       "name": "ALLEGRO.EU [Cboe]",
       "reason": [
@@ -1351,6 +1470,13 @@
       ]
     },
     {
+      "candidate_id": "c0b0a39dbec43e62",
+      "name": "Allwyn",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "42ca90ca9351b915",
       "name": "ALM BRAND [Cboe]",
       "reason": [
@@ -1360,6 +1486,13 @@
     {
       "candidate_id": "89591801d2162071",
       "name": "ALM EQUITY",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "a971e317c1d7a505",
+      "name": "Alma Media",
       "reason": [
         "aucune revue documentée"
       ]
@@ -1395,6 +1528,13 @@
     {
       "candidate_id": "b2299774e6607212",
       "name": "ALPES (COMPAGNIE)",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "6a78d1eacd767d4c",
+      "name": "Alpha Bank",
       "reason": [
         "aucune revue documentée"
       ]
@@ -1568,6 +1708,13 @@
       ]
     },
     {
+      "candidate_id": "bb659e92edf321b0",
+      "name": "AMAG Austria Metall",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "b5d28e9e822fa44e",
       "name": "AMAG AUSTRIA METALL [Cboe]",
       "reason": [
@@ -1577,6 +1724,13 @@
     {
       "candidate_id": "e59ca05864e3996f",
       "name": "AMATHEON AGRI",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "3f315bfee71ae7c1",
+      "name": "Ambea",
       "reason": [
         "aucune revue documentée"
       ]
@@ -1598,6 +1752,13 @@
     {
       "candidate_id": "801697db6a88a5ca",
       "name": "AMBROMOBILIARE",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "e2e11536af33c61d",
+      "name": "Ambu",
       "reason": [
         "aucune revue documentée"
       ]
@@ -1694,6 +1855,13 @@
       ]
     },
     {
+      "candidate_id": "94ce54583161f68b",
+      "name": "Andritz",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "ce265bd0a452bca9",
       "name": "ANDRITZ [Cboe]",
       "reason": [
@@ -1710,6 +1878,13 @@
     {
       "candidate_id": "fc434daf4f73e307",
       "name": "ANIMA",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "824494d7254abe9c",
+      "name": "Anima Holding",
       "reason": [
         "aucune revue documentée"
       ]
@@ -1785,6 +1960,13 @@
       ]
     },
     {
+      "candidate_id": "af6b614374c1c4d9",
+      "name": "Apotea",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "39ae942905be03ef",
       "name": "APOTEA [Cboe]",
       "reason": [
@@ -1801,6 +1983,13 @@
     {
       "candidate_id": "4c78a75419b38062",
       "name": "AQ [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "fb2f73662d3b447d",
+      "name": "AQ Group",
       "reason": [
         "aucune revue documentée"
       ]
@@ -2009,6 +2198,13 @@
       ]
     },
     {
+      "candidate_id": "cbf54b41adfba682",
+      "name": "Arion banki hf.",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "34f09ef7505a7981",
       "name": "ARISTON",
       "reason": [
@@ -2142,6 +2338,13 @@
       ]
     },
     {
+      "candidate_id": "063c56ce11099bd1",
+      "name": "ASBISc Enterprises Plc",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "7f6d6ad7d1568258",
       "name": "ASCELIA PHARMA [Cboe]",
       "reason": [
@@ -2219,8 +2422,22 @@
       ]
     },
     {
+      "candidate_id": "7b40d05b6b8aec76",
+      "name": "ASSA ABLOY",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "0c16af242395020f",
       "name": "ASSA ABLOY [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "1b49d51c3317558d",
+      "name": "Asseco Business Solutions",
       "reason": [
         "aucune revue documentée"
       ]
@@ -2233,6 +2450,13 @@
       ]
     },
     {
+      "candidate_id": "6c41c039a9fa24aa",
+      "name": "Asseco Poland",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "a3e898ac1ee92282",
       "name": "ASSECO POLAND [Cboe]",
       "reason": [
@@ -2240,8 +2464,22 @@
       ]
     },
     {
+      "candidate_id": "99fb9bc9e80d9c7b",
+      "name": "Asseco South Eastern Europe",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "75b02454b3ad9f42",
       "name": "ASSECO STH EAST.EUR.ZY 10",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "d9814a2480903440",
+      "name": "Assicurazioni Generali",
       "reason": [
         "aucune revue documentée"
       ]
@@ -2331,8 +2569,22 @@
       ]
     },
     {
+      "candidate_id": "1453d0ed3f8fae40",
+      "name": "Athens International Airport S.",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "43e3670b828149e7",
       "name": "ATLANTIC GRUPA .",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "3e1df7771e07430b",
+      "name": "Atlas Copco",
       "reason": [
         "aucune revue documentée"
       ]
@@ -2562,6 +2814,13 @@
       ]
     },
     {
+      "candidate_id": "cd4621237ea19392",
+      "name": "Auto Partner",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "584efc78d00ddbd7",
       "name": "AUTO1",
       "reason": [
@@ -2571,6 +2830,13 @@
     {
       "candidate_id": "dce2dfdf48782c66",
       "name": "AUTOHELLAS T+T .08",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "88eb5fb814d55729",
+      "name": "Autoliv",
       "reason": [
         "aucune revue documentée"
       ]
@@ -2613,6 +2879,20 @@
     {
       "candidate_id": "51a9bb0c79959e62",
       "name": "AVANZA BANK [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "bdfe1ad8d7b8e15f",
+      "name": "Avanza Bank Holding",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "d4c8137d9c56d77a",
+      "name": "Avarda Bank",
       "reason": [
         "aucune revue documentée"
       ]
@@ -2751,6 +3031,13 @@
       ]
     },
     {
+      "candidate_id": "a851f0bed1053d96",
+      "name": "Azimut Holding",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "63246f7c8af45373",
       "name": "AZKOYEN",
       "reason": [
@@ -2814,6 +3101,13 @@
       ]
     },
     {
+      "candidate_id": "769ad46534793a36",
+      "name": "B2 Impact",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "2f9aa4633082a786",
       "name": "B2 IMPACT ASA [Cboe]",
       "reason": [
@@ -2844,6 +3138,13 @@
     {
       "candidate_id": "03ef27c0f2ed02c3",
       "name": "BACTIQUANT DK",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "3d4c5d9b1ca1d030",
+      "name": "Bahnhof",
       "reason": [
         "aucune revue documentée"
       ]
@@ -2912,6 +3213,13 @@
       ]
     },
     {
+      "candidate_id": "5144d35a24b9e4bd",
+      "name": "Banca Generali",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "23ef9b7afc880f23",
       "name": "BANCA IFIS",
       "reason": [
@@ -2921,6 +3229,20 @@
     {
       "candidate_id": "149dd15e4aea938f",
       "name": "BANCA MEDIOLANUM",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "5de14b9541da5ce4",
+      "name": "Banca Mediolanum",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "09ea70070efa9d78",
+      "name": "Banca Monte dei Paschi di Siena",
       "reason": [
         "aucune revue documentée"
       ]
@@ -2954,6 +3276,20 @@
       ]
     },
     {
+      "candidate_id": "a048b9191e4aef25",
+      "name": "Banco BPM",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "f54bb03643564497",
+      "name": "Banco di Desio e della Brianza",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "326f87b20a747379",
       "name": "BANG & OLUFSEN [Cboe]",
       "reason": [
@@ -2975,8 +3311,22 @@
       ]
     },
     {
+      "candidate_id": "e9e1e3a571d70bf0",
+      "name": "Bank Handlowy w Warszawie",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "f975aa3ed3fb2954",
       "name": "BANK HANDLOWY W WARSZAWIE [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "b6a343489c3861bf",
+      "name": "Bank Millennium",
       "reason": [
         "aucune revue documentée"
       ]
@@ -2991,6 +3341,13 @@
     {
       "candidate_id": "a209ca08bd855755",
       "name": "BANK OF IRELAND [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "3226689cb15af09f",
+      "name": "Bank Polska Kasa Opieki",
       "reason": [
         "aucune revue documentée"
       ]
@@ -3087,6 +3444,13 @@
       ]
     },
     {
+      "candidate_id": "71e6554a00eb75a0",
+      "name": "Bavarian Nordic",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "a35766463b9fcf02",
       "name": "BAVARIAN NORDIC [Cboe]",
       "reason": [
@@ -3096,6 +3460,13 @@
     {
       "candidate_id": "9c04813c796d2915",
       "name": "BAWAG [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "a25ee74db807bc17",
+      "name": "BAWAG Group",
       "reason": [
         "aucune revue documentée"
       ]
@@ -3206,6 +3577,13 @@
       ]
     },
     {
+      "candidate_id": "4788cfbe308a2b0d",
+      "name": "Beijer Alma",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "8c8e70de1f862efa",
       "name": "BEIJER ALMA [Cboe]",
       "reason": [
@@ -3243,6 +3621,13 @@
     {
       "candidate_id": "604ad863893cc625",
       "name": "BELYSSE",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "f19a78e2573f50ea",
+      "name": "Benefit Systems",
       "reason": [
         "aucune revue documentée"
       ]
@@ -3362,6 +3747,13 @@
     {
       "candidate_id": "d07a4b9c4cb15980",
       "name": "BETA SYST.SOFTW.",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "26d606603d5127bc",
+      "name": "Betsson",
       "reason": [
         "aucune revue documentée"
       ]
@@ -3563,6 +3955,13 @@
       ]
     },
     {
+      "candidate_id": "8e300d4358ca104a",
+      "name": "BioArctic",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "a2cce4a60236a242",
       "name": "BIOARCTIC [Cboe]",
       "reason": [
@@ -3593,6 +3992,13 @@
     {
       "candidate_id": "892a7204b0bb29fe",
       "name": "BIOFRONTERA",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "3695176dbb5db348",
+      "name": "BioGaia",
       "reason": [
         "aucune revue documentée"
       ]
@@ -3731,6 +4137,13 @@
       ]
     },
     {
+      "candidate_id": "837f89b72a88540b",
+      "name": "BKS Bank",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "40c77774a2dd5de7",
       "name": "BLACK PEARL ZY",
       "reason": [
@@ -3796,6 +4209,13 @@
     {
       "candidate_id": "6053704e90068746",
       "name": "BNP PARIBAS ACT.A",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "3cbabb4c48c1e179",
+      "name": "BNP Paribas Bank Polska",
       "reason": [
         "aucune revue documentée"
       ]
@@ -3878,8 +4298,22 @@
       ]
     },
     {
+      "candidate_id": "f5020ba9c6b79ada",
+      "name": "Bonesupport Holding",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "ecafad8d19fdf999",
       "name": "BONG [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "8bebd6759309a5b2",
+      "name": "Bonheur",
       "reason": [
         "aucune revue documentée"
       ]
@@ -3908,6 +4342,13 @@
     {
       "candidate_id": "90a1fbdd92bf1199",
       "name": "BOOSTHEAT",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "3a79394b24ef21a2",
+      "name": "Boozt",
       "reason": [
         "aucune revue documentée"
       ]
@@ -3997,6 +4438,13 @@
       ]
     },
     {
+      "candidate_id": "9aa88267f1d70d48",
+      "name": "Bouvet",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "ffe855fe2eb741a2",
       "name": "BOUVET ASA [Cboe]",
       "reason": [
@@ -4020,6 +4468,13 @@
     {
       "candidate_id": "b067b697b8a14141",
       "name": "BPER BANCA",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "31f1f0e76d43c55b",
+      "name": "BPER Banca",
       "reason": [
         "aucune revue documentée"
       ]
@@ -4062,6 +4517,13 @@
     {
       "candidate_id": "3e6472da6d4ee4fe",
       "name": "BRAVIDA [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "87229844c7d3af02",
+      "name": "Bravida Holding",
       "reason": [
         "aucune revue documentée"
       ]
@@ -4200,6 +4662,13 @@
       ]
     },
     {
+      "candidate_id": "bc306e229de3fce3",
+      "name": "BTS Group",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "031c683b326c76c8",
       "name": "BTV VIER LAENDER BANK",
       "reason": [
@@ -4221,8 +4690,22 @@
       ]
     },
     {
+      "candidate_id": "37750f6970ffd4bd",
+      "name": "Budimex",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "ae9af589e311ed9a",
       "name": "BUDIMEX [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "ba496021173691f3",
+      "name": "Bufab",
       "reason": [
         "aucune revue documentée"
       ]
@@ -4256,6 +4739,13 @@
       ]
     },
     {
+      "candidate_id": "7b6ea1afaa29d081",
+      "name": "Bure Equity",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "a399870da7442f06",
       "name": "BURE EQUITY [Cboe]",
       "reason": [
@@ -4279,6 +4769,13 @@
     {
       "candidate_id": "b44c455a3c700a36",
       "name": "BUZZI",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "bd0592f714312b7d",
+      "name": "Buzzi",
       "reason": [
         "aucune revue documentée"
       ]
@@ -4389,6 +4886,13 @@
       ]
     },
     {
+      "candidate_id": "e9d4c9c9b54404cb",
+      "name": "Cairn Homes",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "787a09785359a24a",
       "name": "CAIRO COMMUNICATION",
       "reason": [
@@ -4445,6 +4949,13 @@
       ]
     },
     {
+      "candidate_id": "7dbaa3e9b962a8f3",
+      "name": "Cambi",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "f69f506886934eab",
       "name": "CAMBI ASA NK",
       "reason": [
@@ -4475,6 +4986,13 @@
     {
       "candidate_id": "bb79aac1fbe42f2a",
       "name": "CAMPINE",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "dbff0929c1840312",
+      "name": "Camurus",
       "reason": [
         "aucune revue documentée"
       ]
@@ -4613,8 +5131,22 @@
       ]
     },
     {
+      "candidate_id": "1a683699dcbee1bb",
+      "name": "Carel Industries",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "fd939a60e5444cb5",
       "name": "CARL ZEISS MEDITEC",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "249da4b91a203f4b",
+      "name": "Carlsberg",
       "reason": [
         "aucune revue documentée"
       ]
@@ -4781,6 +5313,13 @@
       ]
     },
     {
+      "candidate_id": "fe2808952f82b566",
+      "name": "CD Projekt",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "85f68d6482cafbee",
       "name": "CD PROJEKT RED [Cboe]",
       "reason": [
@@ -4825,6 +5364,13 @@
     {
       "candidate_id": "bb9ff86340304bb0",
       "name": "CELL IMPACT",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "5f0ae64ecfd9f417",
+      "name": "CellaVision",
       "reason": [
         "aucune revue documentée"
       ]
@@ -4886,8 +5432,22 @@
       ]
     },
     {
+      "candidate_id": "a8a69de29b7859ca",
+      "name": "Cembre",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "192e51ecf6f344ef",
       "name": "CEMENTIR",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "f36a5f44ceb0a860",
+      "name": "Cementir Holding",
       "reason": [
         "aucune revue documentée"
       ]
@@ -5049,6 +5609,13 @@
     {
       "candidate_id": "c1ab3f4343310408",
       "name": "CHEFFELO [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "15b6598ec80c8eae",
+      "name": "ChemoMetec",
       "reason": [
         "aucune revue documentée"
       ]
@@ -5229,6 +5796,13 @@
       ]
     },
     {
+      "candidate_id": "6c0eef35d59763c9",
+      "name": "Clas Ohlson",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "433a47d4f79c6b83",
       "name": "CLAS OHLSON [Cboe]",
       "reason": [
@@ -5315,6 +5889,13 @@
     {
       "candidate_id": "86c026e04f8d3ce3",
       "name": "CLIQ DIGITAL",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "8540b46ecb4b04e2",
+      "name": "Cloetta",
       "reason": [
         "aucune revue documentée"
       ]
@@ -5481,6 +6062,13 @@
       ]
     },
     {
+      "candidate_id": "f99d117ab1d7fc7b",
+      "name": "Coloplast",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "769b6bdc35eed10c",
       "name": "COLOPLAST [Cboe]",
       "reason": [
@@ -5532,6 +6120,13 @@
     {
       "candidate_id": "f5eec94bae4d37c4",
       "name": "COMER INDUSTRIES",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "5739709b61df8b99",
+      "name": "Comer Industries",
       "reason": [
         "aucune revue documentée"
       ]
@@ -5901,6 +6496,13 @@
       ]
     },
     {
+      "candidate_id": "2507436c87558402",
+      "name": "Credito Emiliano",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "7fd1df12c7c48e33",
       "name": "CREEPY JAR ZY 1",
       "reason": [
@@ -6083,6 +6685,13 @@
       ]
     },
     {
+      "candidate_id": "a74f92df8673f127",
+      "name": "Cyber_Folks",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "e35f6da902752642",
       "name": "CYBEROO",
       "reason": [
@@ -6244,6 +6853,13 @@
       ]
     },
     {
+      "candidate_id": "d8c5a051a5432b74",
+      "name": "Danske Bank",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "5ec14508afa2e775",
       "name": "DANSKE BANK [Cboe]",
       "reason": [
@@ -6307,6 +6923,13 @@
       ]
     },
     {
+      "candidate_id": "54c1ef71fecc5ade",
+      "name": "Davide Campari-Milano",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "2e773ff8aa49adec",
       "name": "DAVION HEALTHCARE",
       "reason": [
@@ -6344,6 +6967,13 @@
     {
       "candidate_id": "b53bad03718b9061",
       "name": "DCI",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "e713d79ac1e792d0",
+      "name": "De'Longhi",
       "reason": [
         "aucune revue documentée"
       ]
@@ -6468,6 +7098,13 @@
       ]
     },
     {
+      "candidate_id": "a137300dff3449d1",
+      "name": "Demant",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "0208e252aa61a394",
       "name": "DEMANT [Cboe]",
       "reason": [
@@ -6568,6 +7205,13 @@
     {
       "candidate_id": "640ab94b71dc7363",
       "name": "DEUTZ",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "7ab058c7f03013e1",
+      "name": "Develia",
       "reason": [
         "aucune revue documentée"
       ]
@@ -6741,6 +7385,13 @@
       ]
     },
     {
+      "candidate_id": "7161e5926c577ec2",
+      "name": "Digital Network",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "75292190d6179baa",
       "name": "DIGITAL NETWORK ZY 1",
       "reason": [
@@ -6757,6 +7408,13 @@
     {
       "candidate_id": "7999ff203d41a2c3",
       "name": "DIGITOUCH",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "305c5c39de180a5c",
+      "name": "Dino Polska",
       "reason": [
         "aucune revue documentée"
       ]
@@ -6825,6 +7483,13 @@
       ]
     },
     {
+      "candidate_id": "dd8133a31e4f0dec",
+      "name": "Djurslands Bank",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "3c7d1652e36bcce8",
       "name": "DJURSLANDS BANK [Cboe]",
       "reason": [
@@ -6853,8 +7518,22 @@
       ]
     },
     {
+      "candidate_id": "a23d8e9d3cc5765f",
+      "name": "DNB Bank",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "253f13f487a448f6",
       "name": "DNB BANK ASA [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "8dbbebea53f2ffc8",
+      "name": "DNO",
       "reason": [
         "aucune revue documentée"
       ]
@@ -6869,6 +7548,13 @@
     {
       "candidate_id": "24c1601c48a5d973",
       "name": "DNXCORP",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "40c22cdcc1a9250a",
+      "name": "DO",
       "reason": [
         "aucune revue documentée"
       ]
@@ -6918,6 +7604,13 @@
     {
       "candidate_id": "f4aeaff308c2fe8a",
       "name": "DOLPHIN DRILL.A.S. NK",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "7904b8aa5d0ff949",
+      "name": "Dom Development",
       "reason": [
         "aucune revue documentée"
       ]
@@ -7142,6 +7835,13 @@
     {
       "candidate_id": "52ca4d32e46e6a79",
       "name": "DYNAVOX [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "c32dc0248c89eb04",
+      "name": "Dynavox Group",
       "reason": [
         "aucune revue documentée"
       ]
@@ -7490,6 +8190,13 @@
       ]
     },
     {
+      "candidate_id": "b19fbd8196191a1b",
+      "name": "EL.En.",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "48e222caa66cfd99",
       "name": "ELANDERS [Cboe]",
       "reason": [
@@ -7534,6 +8241,13 @@
     {
       "candidate_id": "5771ed4bc6bf436d",
       "name": "ELECTROLUX A SK",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "493f27c2c26c30c8",
+      "name": "Electrolux Professional",
       "reason": [
         "aucune revue documentée"
       ]
@@ -7791,6 +8505,13 @@
       ]
     },
     {
+      "candidate_id": "59bb505cc87d2368",
+      "name": "Embla Medical hf.",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "c5e72f814dc3f8aa",
       "name": "EMBRACER [Cboe]",
       "reason": [
@@ -7855,6 +8576,13 @@
     },
     {
       "candidate_id": "a266252de236b3ff",
+      "name": "ENAV",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "7b1fbf57d69838a3",
       "name": "ENAV",
       "reason": [
         "aucune revue documentée"
@@ -8183,6 +8911,13 @@
       ]
     },
     {
+      "candidate_id": "ed2bc56821fe01a7",
+      "name": "Epiroc",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "724cf0df51f77c7d",
       "name": "EPIROC A [Cboe]",
       "reason": [
@@ -8241,6 +8976,13 @@
     {
       "candidate_id": "09cf45cab3eb0ecb",
       "name": "EQUASENS",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "8019f7389230462f",
+      "name": "Equinor",
       "reason": [
         "aucune revue documentée"
       ]
@@ -8337,8 +9079,22 @@
       ]
     },
     {
+      "candidate_id": "66644f67d0de8a79",
+      "name": "Erste Bank Polska",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "161be6a9f69f85b7",
       "name": "ERSTE BANK POLSKA [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "3df05130bff2a90e",
+      "name": "Erste Group Bank",
       "reason": [
         "aucune revue documentée"
       ]
@@ -8395,6 +9151,13 @@
     {
       "candidate_id": "51272e4a6a5d0ac7",
       "name": "ESSILORLUXOTTICA",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "5816759c84ffcc10",
+      "name": "Essity",
       "reason": [
         "aucune revue documentée"
       ]
@@ -8458,6 +9221,13 @@
     {
       "candidate_id": "9fdc08a0d86ead84",
       "name": "EUROAPI",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "edf7cf2f7cd9dd83",
+      "name": "Eurobank",
       "reason": [
         "aucune revue documentée"
       ]
@@ -8561,6 +9331,13 @@
       ]
     },
     {
+      "candidate_id": "bffb376e88f81253",
+      "name": "Euronext Athens Holding",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "916b3435eebc4256",
       "name": "EUROPACORP",
       "reason": [
@@ -8652,6 +9429,13 @@
       ]
     },
     {
+      "candidate_id": "514b8a38bf70dce3",
+      "name": "Evli",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "e4c1e092c7fb04e3",
       "name": "EVLI [Cboe]",
       "reason": [
@@ -8659,8 +9443,22 @@
       ]
     },
     {
+      "candidate_id": "3e8e5826a2b73565",
+      "name": "EVN",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "7d6205fee5382fe1",
       "name": "EVN [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "779fe1ffead4a7b4",
+      "name": "Evolution",
       "reason": [
         "aucune revue documentée"
       ]
@@ -9002,6 +9800,13 @@
       ]
     },
     {
+      "candidate_id": "25ae294de867620a",
+      "name": "FBD Holdings",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "20e0bd724f602722",
       "name": "FC WERTMGMT COLL.GS33",
       "reason": [
@@ -9060,6 +9865,13 @@
     {
       "candidate_id": "6396349570d77b86",
       "name": "FERRARI",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "defd4151f6d47d9e",
+      "name": "Ferrari",
       "reason": [
         "aucune revue documentée"
       ]
@@ -9186,6 +9998,13 @@
     {
       "candidate_id": "99a3902da3bc9323",
       "name": "FINECOBANK",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "c4202419505d7432",
+      "name": "FinecoBank Banca Fineco",
       "reason": [
         "aucune revue documentée"
       ]
@@ -9394,6 +10213,13 @@
       ]
     },
     {
+      "candidate_id": "43660fa1aa26b1a4",
+      "name": "FM Mattsson Mora Group",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "39c3ffd0f2f11417",
       "name": "FNAC DARTY",
       "reason": [
@@ -9445,6 +10271,13 @@
     {
       "candidate_id": "a2f52ad0aae488bd",
       "name": "FOPE",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "2773345d6008c06e",
+      "name": "Fope",
       "reason": [
         "aucune revue documentée"
       ]
@@ -9632,6 +10465,13 @@
       ]
     },
     {
+      "candidate_id": "2fa987604030f43b",
+      "name": "Frequentis",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "9d78081e3ac723cc",
       "name": "FREQUENTIS [Cboe]",
       "reason": [
@@ -9690,6 +10530,13 @@
     {
       "candidate_id": "ab28f1f481acb1ac",
       "name": "FUCHS",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "fb4051d4e558280f",
+      "name": "Fuchs Petrolub",
       "reason": [
         "aucune revue documentée"
       ]
@@ -10003,6 +10850,13 @@
       ]
     },
     {
+      "candidate_id": "d3be31e846c479d4",
+      "name": "Genmab",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "05056178f698fde2",
       "name": "GENMAB [Cboe]",
       "reason": [
@@ -10164,6 +11018,13 @@
       ]
     },
     {
+      "candidate_id": "a8cff63b73348bd1",
+      "name": "Gielda Papierów Wartosciowych w Warszawie",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "d10a2310f94d4de6",
       "name": "GIGAS HOSTING",
       "reason": [
@@ -10215,6 +11076,13 @@
     {
       "candidate_id": "701cbdd78a295f5e",
       "name": "GIUNTI PSYCHOMETRICS",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "7f05a2c460121a9e",
+      "name": "Gjensidige Forsikring",
       "reason": [
         "aucune revue documentée"
       ]
@@ -10404,6 +11272,13 @@
     {
       "candidate_id": "f4882c8f9577e160",
       "name": "GPI",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "75d5c9a966e8b550",
+      "name": "Gr. Sarantis",
       "reason": [
         "aucune revue documentée"
       ]
@@ -10745,8 +11620,22 @@
       ]
     },
     {
+      "candidate_id": "5710e55e37cd9d23",
+      "name": "Grupa Kety",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "a43730eb9306b197",
       "name": "GRUPA KETY [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "8ddffe492a8b701d",
+      "name": "Grupa Pracuj",
       "reason": [
         "aucune revue documentée"
       ]
@@ -10850,6 +11739,13 @@
       ]
     },
     {
+      "candidate_id": "e59ec7d43d0b18e8",
+      "name": "H & M Hennes & Mauritz",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "c624dd6137eadd95",
       "name": "H & M HENNES & MAURITZ [Cboe]",
       "reason": [
@@ -10878,6 +11774,13 @@
       ]
     },
     {
+      "candidate_id": "519606bb1611d2d4",
+      "name": "H. Lundbeck",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "74f752ec59d9c01a",
       "name": "H100",
       "reason": [
@@ -10894,6 +11797,13 @@
     {
       "candidate_id": "6083639995cd6b0f",
       "name": "H2APEX SCA",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "b06d364fc72643f6",
+      "name": "Hacksaw",
       "reason": [
         "aucune revue documentée"
       ]
@@ -11144,8 +12054,22 @@
       ]
     },
     {
+      "candidate_id": "da620b9d28437ea0",
+      "name": "Hellenic Telecommunications Organization",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "37699a9cd2d77b34",
       "name": "HELLENIQ ENER. .18",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "4f775601748ae11a",
+      "name": "HELLENiQ ENERGY Holdings",
       "reason": [
         "aucune revue documentée"
       ]
@@ -11167,6 +12091,13 @@
     {
       "candidate_id": "5ad0029cb0444236",
       "name": "HEMNET [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "3b6ee24157a62c28",
+      "name": "Hemnet Group",
       "reason": [
         "aucune revue documentée"
       ]
@@ -11326,6 +12257,13 @@
       ]
     },
     {
+      "candidate_id": "ecff5f081d95cade",
+      "name": "HMS Networks",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "b747bd5fe446d1fa",
       "name": "HMS NETWORKS [Cboe]",
       "reason": [
@@ -11370,6 +12308,13 @@
     {
       "candidate_id": "7f43db01f51a38c1",
       "name": "HOFSETH BIOCARE ASA [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "f88a658d5f853729",
+      "name": "Hoist Finance",
       "reason": [
         "aucune revue documentée"
       ]
@@ -11636,6 +12581,13 @@
     {
       "candidate_id": "3d956be50e38e5bf",
       "name": "HYRICAN INFO.SYSTEME",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "b367c2a39543ffa8",
+      "name": "Höegh Autoliners",
       "reason": [
         "aucune revue documentée"
       ]
@@ -12117,6 +13069,13 @@
       ]
     },
     {
+      "candidate_id": "0c007e4e367e31dd",
+      "name": "Indutrade",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "8fcf1be1bef6cae6",
       "name": "INDUTRADE [Cboe]",
       "reason": [
@@ -12182,6 +13141,13 @@
     {
       "candidate_id": "f42857762eaf33fc",
       "name": "INFREA",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "184465e3b0966b39",
+      "name": "ING Bank Slaski",
       "reason": [
         "aucune revue documentée"
       ]
@@ -12411,6 +13377,13 @@
       ]
     },
     {
+      "candidate_id": "cbd97d9c6cc6268b",
+      "name": "Inter Cars",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "f7e429cfdcabb6b2",
       "name": "INTER CARS [Cboe]",
       "reason": [
@@ -12432,8 +13405,22 @@
       ]
     },
     {
+      "candidate_id": "885bb0f180ab909a",
+      "name": "Intercos",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "c3c7c24c0bfcec22",
       "name": "INTERNATIONAL CARE COMPANY",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "78ccca8c1fcdf0c2",
+      "name": "International Consolidated Airlines Group",
       "reason": [
         "aucune revue documentée"
       ]
@@ -12448,6 +13435,13 @@
     {
       "candidate_id": "eeb71c1efde4f601",
       "name": "INTERPUMP",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "9be945a793046390",
+      "name": "Interpump Group",
       "reason": [
         "aucune revue documentée"
       ]
@@ -12476,6 +13470,13 @@
     {
       "candidate_id": "3ccc09bb0a9be58f",
       "name": "INTESA SANPAOLO",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "0f251f652752dffd",
+      "name": "Intesa Sanpaolo",
       "reason": [
         "aucune revue documentée"
       ]
@@ -12551,6 +13552,13 @@
       ]
     },
     {
+      "candidate_id": "4b4ff7d29ea8ef1a",
+      "name": "Investment AB Öresund (publ)",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "95e401a1729d8815",
       "name": "INVESTMENT LATOUR [Cboe]",
       "reason": [
@@ -12560,6 +13568,13 @@
     {
       "candidate_id": "a95622a80b462df8",
       "name": "INVESTMENT ORESUND [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "c80d0d6c4a6f9e22",
+      "name": "Investor",
       "reason": [
         "aucune revue documentée"
       ]
@@ -12581,6 +13596,13 @@
     {
       "candidate_id": "6c4d56a60cbbcab7",
       "name": "INVIBES ADVERTSING",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "33a2d253a781cb5e",
+      "name": "Invisio",
       "reason": [
         "aucune revue documentée"
       ]
@@ -12649,6 +13671,13 @@
       ]
     },
     {
+      "candidate_id": "d7afee8e9ebadd50",
+      "name": "Irish Continental Group",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "e36bb6c1dde1c683",
       "name": "IRISITY",
       "reason": [
@@ -12679,6 +13708,13 @@
     {
       "candidate_id": "dda32c00b93e8f7d",
       "name": "ISPD",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "1398466dc3b9fea3",
+      "name": "ISS",
       "reason": [
         "aucune revue documentée"
       ]
@@ -12929,6 +13965,13 @@
       ]
     },
     {
+      "candidate_id": "e730ca110993ac52",
+      "name": "Jumbo",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "136cc009283a1269",
       "name": "JUMBO .88",
       "reason": [
@@ -12945,6 +13988,13 @@
     {
       "candidate_id": "bd9a5658010d9421",
       "name": "JUVENTUS FC",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "c5a0e326c4f3cc89",
+      "name": "Jyske Bank",
       "reason": [
         "aucune revue documentée"
       ]
@@ -13013,6 +14063,13 @@
       ]
     },
     {
+      "candidate_id": "6eb60d66ed87d6fc",
+      "name": "Kalmar",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "bba40eeee0254523",
       "name": "KALMAR [Cboe]",
       "reason": [
@@ -13029,6 +14086,13 @@
     {
       "candidate_id": "12c2bc2bb470303d",
       "name": "KAMBI [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "115de93a7cfe610d",
+      "name": "Kambi Group",
       "reason": [
         "aucune revue documentée"
       ]
@@ -13062,6 +14126,13 @@
       ]
     },
     {
+      "candidate_id": "c0c54fa2367e8bf7",
+      "name": "Karelia Tobacco",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "682fa9033959ddbf",
       "name": "KARNELL [Cboe]",
       "reason": [
@@ -13069,8 +14140,22 @@
       ]
     },
     {
+      "candidate_id": "2edeae8c46d55721",
+      "name": "Karnell Group AB ser. B",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "93560b21d4f6e56e",
       "name": "KARNOV [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "c9f24d7a4a3f5357",
+      "name": "Karnov Group",
       "reason": [
         "aucune revue documentée"
       ]
@@ -13181,6 +14266,13 @@
       ]
     },
     {
+      "candidate_id": "e8cfbd62168db5d4",
+      "name": "Kerry Group",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "a7a510d55d10db4b",
       "name": "KESKISUOMALAINEN [Cboe]",
       "reason": [
@@ -13237,6 +14329,13 @@
       ]
     },
     {
+      "candidate_id": "4c99c673f7f2d76f",
+      "name": "Kid",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "ecd1c6ef0b996827",
       "name": "KID ASA [Cboe]",
       "reason": [
@@ -13253,6 +14352,13 @@
     {
       "candidate_id": "02c684503620e2af",
       "name": "KINGFISH COMPANY",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "0e4e5ad6fad1e02d",
+      "name": "Kingspan Group",
       "reason": [
         "aucune revue documentée"
       ]
@@ -13323,6 +14429,13 @@
     {
       "candidate_id": "c9c04257428a967f",
       "name": "KLASSIK RADIO",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "e95dc0af34b46ef5",
+      "name": "Klaveness Combination Carriers",
       "reason": [
         "aucune revue documentée"
       ]
@@ -13440,6 +14553,13 @@
       ]
     },
     {
+      "candidate_id": "fef1f090870cf331",
+      "name": "KONE",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "2a6085e5106f68e2",
       "name": "KONE [Cboe]",
       "reason": [
@@ -13454,8 +14574,29 @@
       ]
     },
     {
+      "candidate_id": "8fcd2385f953b75a",
+      "name": "Konecranes Plc",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "b41273085cd942b2",
       "name": "KONGSBERG AUTOMOTIVE ASA [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "86c104f469ee994c",
+      "name": "Kongsberg Gruppen",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "b3578a871364654b",
+      "name": "Kongsberg Maritime",
       "reason": [
         "aucune revue documentée"
       ]
@@ -13524,8 +14665,22 @@
       ]
     },
     {
+      "candidate_id": "0b78215189759dcf",
+      "name": "Kri-Kri Milk Industry",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "0d93fae450d8fe67",
       "name": "KRKA D.D.",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "daf2e1f1d31c34c0",
+      "name": "Krka, d. d.",
       "reason": [
         "aucune revue documentée"
       ]
@@ -13547,6 +14702,13 @@
     {
       "candidate_id": "10e9bc875a009cdc",
       "name": "KRUK [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "95b6f809055dea7d",
+      "name": "KRUK Spólka Akcyjna",
       "reason": [
         "aucune revue documentée"
       ]
@@ -13596,6 +14758,13 @@
     {
       "candidate_id": "9ba593814010afc0",
       "name": "L E LUNDBERGFORETAGEN [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "cf5e087ddc970cf3",
+      "name": "L E Lundbergföretagen",
       "reason": [
         "aucune revue documentée"
       ]
@@ -13666,6 +14835,13 @@
     {
       "candidate_id": "c7a8622879f4e9d5",
       "name": "LAGERCRANTZ [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "4e181f1b58fe1e22",
+      "name": "Lagercrantz Group",
       "reason": [
         "aucune revue documentée"
       ]
@@ -13972,6 +15148,13 @@
       ]
     },
     {
+      "candidate_id": "dd9492c5c2b34eb1",
+      "name": "Lifco",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "b613cdd361120456",
       "name": "LIFCO [Cboe]",
       "reason": [
@@ -13988,6 +15171,13 @@
     {
       "candidate_id": "2a27e6a3471b28e5",
       "name": "LIGHTON",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "1a16c3af35da21da",
+      "name": "Lime Technologies",
       "reason": [
         "aucune revue documentée"
       ]
@@ -14196,6 +15386,13 @@
       ]
     },
     {
+      "candidate_id": "298bd29ad4d4d4aa",
+      "name": "Loomis",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "7c91f06504ad7b11",
       "name": "LOOMIS [Cboe]",
       "reason": [
@@ -14212,6 +15409,13 @@
     {
       "candidate_id": "2ffe3736ca620ad3",
       "name": "LOTTOMATICA",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "ef88b70781821535",
+      "name": "Lottomatica Group",
       "reason": [
         "aucune revue documentée"
       ]
@@ -14238,6 +15442,13 @@
       ]
     },
     {
+      "candidate_id": "7f5d8c6189bd5070",
+      "name": "LPP",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "12368e86d560ece1",
       "name": "LPP [Cboe]",
       "reason": [
@@ -14247,6 +15458,13 @@
     {
       "candidate_id": "fff46db15206f44b",
       "name": "LS TELCOM",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "ba8b02bcc5ffb96e",
+      "name": "Lubawa",
       "reason": [
         "aucune revue documentée"
       ]
@@ -14399,6 +15617,13 @@
       ]
     },
     {
+      "candidate_id": "cf1bd9f7db2e21c0",
+      "name": "Lån & Spar Bank",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "82a831a45d1400d4",
       "name": "M VEST WATER NK",
       "reason": [
@@ -14539,6 +15764,13 @@
       ]
     },
     {
+      "candidate_id": "543f8eeb9720e61c",
+      "name": "Maire Tecnimont",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "3f23b31154ec1b86",
       "name": "MAISON CLIO BLUE",
       "reason": [
@@ -14632,6 +15864,13 @@
     {
       "candidate_id": "05fcdff78de9705e",
       "name": "MARE NOSTRUM",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "d6e1d6563e855b0e",
+      "name": "Marimekko",
       "reason": [
         "aucune revue documentée"
       ]
@@ -14805,6 +16044,13 @@
       ]
     },
     {
+      "candidate_id": "9c03b7ce32871507",
+      "name": "mBank",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "545efa9dfea1ca5b",
       "name": "MBANK [Cboe]",
       "reason": [
@@ -14863,6 +16109,13 @@
     {
       "candidate_id": "3090b4379c3d0427",
       "name": "MEDAPP ZY",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "39700c1d3d3b4072",
+      "name": "MedCap",
       "reason": [
         "aucune revue documentée"
       ]
@@ -14945,8 +16198,22 @@
       ]
     },
     {
+      "candidate_id": "e8f8633f2164fcad",
+      "name": "Mediobanca Banca di Credito Finanziario",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "7dabadfe326a0f24",
       "name": "MEDIOS",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "b22b8f339a6a8227",
+      "name": "Medistim",
       "reason": [
         "aucune revue documentée"
       ]
@@ -15052,6 +16319,13 @@
     {
       "candidate_id": "da79e135a135c7f6",
       "name": "MENDUS [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "d88bbf1ac5ca89fc",
+      "name": "Mennica Polska",
       "reason": [
         "aucune revue documentée"
       ]
@@ -15337,6 +16611,13 @@
       ]
     },
     {
+      "candidate_id": "b197ec3466b6624f",
+      "name": "MilDef Group",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "30f8c1a75a9c45bf",
       "name": "MILIBOO",
       "reason": [
@@ -15388,6 +16669,13 @@
     {
       "candidate_id": "69bc8322eb0da2c2",
       "name": "MINT",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "361a6eec8d70999e",
+      "name": "MIPS",
       "reason": [
         "aucune revue documentée"
       ]
@@ -15477,6 +16765,13 @@
       ]
     },
     {
+      "candidate_id": "78d37644d5664cec",
+      "name": "Mo-BRUK",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "c5bcc839b6fee5c4",
       "name": "MO-BRUK ZY 10",
       "reason": [
@@ -15547,6 +16842,13 @@
       ]
     },
     {
+      "candidate_id": "b17f3b66f6eb3604",
+      "name": "MOL Hungarian Oil and Gas Plc",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "3696b02b4c435c74",
       "name": "MOLIERA2 ZY",
       "reason": [
@@ -15582,6 +16884,13 @@
       ]
     },
     {
+      "candidate_id": "52db3c3ef80cbf4d",
+      "name": "Momentum Group",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "df008580291e738c",
       "name": "MON COURTIER ENERG",
       "reason": [
@@ -15605,6 +16914,13 @@
     {
       "candidate_id": "00599658987b6f0e",
       "name": "MONCLER",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "0ac0b90b71aaa67a",
+      "name": "Moncler",
       "reason": [
         "aucune revue documentée"
       ]
@@ -15701,6 +17017,13 @@
       ]
     },
     {
+      "candidate_id": "41561281a5b0d84d",
+      "name": "Motor Oil (Hellas) Corinth Refineries",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "dd0cf5aa35ed9a62",
       "name": "MOULINVEST",
       "reason": [
@@ -15743,6 +17066,13 @@
       ]
     },
     {
+      "candidate_id": "9ffcd34b6b062481",
+      "name": "Mowi",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "50e6ea51420c5735",
       "name": "MOWI ASA [Cboe]",
       "reason": [
@@ -15752,6 +17082,13 @@
     {
       "candidate_id": "85b2ca33de9e5365",
       "name": "MPAY ZY",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "c68f13a552d91fe8",
+      "name": "MPC Container Ships",
       "reason": [
         "aucune revue documentée"
       ]
@@ -15876,6 +17213,13 @@
       ]
     },
     {
+      "candidate_id": "fa7789286f355d96",
+      "name": "Murapol",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "bb6d88b5131f2fad",
       "name": "MURAPOL ZY 40",
       "reason": [
@@ -15934,6 +17278,13 @@
     {
       "candidate_id": "685ce448639e2bc7",
       "name": "MY BEAT",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "83a8fafd4e7dbcdc",
+      "name": "Mycronic",
       "reason": [
         "aucune revue documentée"
       ]
@@ -16100,6 +17451,13 @@
       ]
     },
     {
+      "candidate_id": "9e9b24bf9c6acd85",
+      "name": "NCAB Group",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "911bf5e444e7c5ea",
       "name": "NCC [Cboe]",
       "reason": [
@@ -16219,6 +17577,13 @@
       ]
     },
     {
+      "candidate_id": "cbb7ad8f3635babc",
+      "name": "Neste",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "11c9776239b16a7c",
       "name": "NESTE [Cboe]",
       "reason": [
@@ -16331,6 +17696,13 @@
       ]
     },
     {
+      "candidate_id": "cbc351398bdc9adc",
+      "name": "Newag",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "9184e2b6e412f4bf",
       "name": "NEWAG A.B.C ZY",
       "reason": [
@@ -16354,6 +17726,13 @@
     {
       "candidate_id": "13c8bf54853db499",
       "name": "NEWPRINCES",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "03fd7ecee6f463b3",
+      "name": "NewPrinces",
       "reason": [
         "aucune revue documentée"
       ]
@@ -16541,6 +17920,13 @@
       ]
     },
     {
+      "candidate_id": "37ff1db22aefd2ed",
+      "name": "NOBA Bank Group",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "764cead4cf08f342",
       "name": "NOBIA [Cboe]",
       "reason": [
@@ -16597,6 +17983,13 @@
       ]
     },
     {
+      "candidate_id": "df5f75df98a993f6",
+      "name": "Norbit",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "816de103d2d61ffa",
       "name": "NORBIT ASA [Cboe]",
       "reason": [
@@ -16620,6 +18013,13 @@
     {
       "candidate_id": "b462b944137c59ec",
       "name": "NORCONSULT ASA [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "cde3d8534f24c6a5",
+      "name": "Nordea Bank Abp",
       "reason": [
         "aucune revue documentée"
       ]
@@ -16709,6 +18109,13 @@
       ]
     },
     {
+      "candidate_id": "c4b759ff536300ff",
+      "name": "Nordnet",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "a4fdd43a70963205",
       "name": "NORDNET PUBL [Cboe]",
       "reason": [
@@ -16723,6 +18130,13 @@
       ]
     },
     {
+      "candidate_id": "a870f434ef7e92a6",
+      "name": "Nordrest Holding",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "ba35c4424685a2be",
       "name": "NORDVI SVERIGE [Cboe]",
       "reason": [
@@ -16732,6 +18146,13 @@
     {
       "candidate_id": "8b5e8ae4f77d3c8f",
       "name": "NORDWEST HANDEL",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "b99f3acee936d817",
+      "name": "Norion Bank",
       "reason": [
         "aucune revue documentée"
       ]
@@ -16886,6 +18307,13 @@
     {
       "candidate_id": "27a9847e5caf6a41",
       "name": "NOVINA E ZY",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "8aa2935028d22b53",
+      "name": "Novo Nordisk",
       "reason": [
         "aucune revue documentée"
       ]
@@ -17080,6 +18508,13 @@
       ]
     },
     {
+      "candidate_id": "9b4be028b548e278",
+      "name": "Oberbank",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "6bbdac76285a15ae",
       "name": "OBIZ",
       "reason": [
@@ -17129,6 +18564,13 @@
       ]
     },
     {
+      "candidate_id": "e092e2b050ddf243",
+      "name": "Odfjell",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "b1f7cab7fc0120a2",
       "name": "ODFJELL [Cboe]",
       "reason": [
@@ -17173,6 +18615,13 @@
     {
       "candidate_id": "2130191182b0abdd",
       "name": "OEKOWORLD VZNA",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "c63dd7f9b08a5512",
+      "name": "OEM International",
       "reason": [
         "aucune revue documentée"
       ]
@@ -17255,6 +18704,13 @@
       ]
     },
     {
+      "candidate_id": "3156887f182cda5d",
+      "name": "Olvi",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "f62341c4a1c196fd",
       "name": "OLVI [Cboe]",
       "reason": [
@@ -17285,6 +18741,13 @@
     {
       "candidate_id": "59c56977efcd8046",
       "name": "OMER-DECUGIS & CIE",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "956d3b5dcb7182ca",
+      "name": "OMV",
       "reason": [
         "aucune revue documentée"
       ]
@@ -17458,6 +18921,13 @@
       ]
     },
     {
+      "candidate_id": "e3ba1aefb44a03d6",
+      "name": "Optima bank",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "8ee958ac7de27039",
       "name": "OPTIMA BANK .15",
       "reason": [
@@ -17556,6 +19026,13 @@
       ]
     },
     {
+      "candidate_id": "358069e79567f422",
+      "name": "Orion",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "61912d6dd116b39d",
       "name": "ORION A [Cboe]",
       "reason": [
@@ -17565,6 +19042,13 @@
     {
       "candidate_id": "dc92b733d9b14457",
       "name": "ORION B [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "7dfd0b46194aa079",
+      "name": "Orkla",
       "reason": [
         "aucune revue documentée"
       ]
@@ -17761,6 +19245,13 @@
     {
       "candidate_id": "0dcdac70c7ccafd6",
       "name": "PALFINGER [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "dc3bb95abd6f32b8",
+      "name": "Pandora",
       "reason": [
         "aucune revue documentée"
       ]
@@ -18011,6 +19502,13 @@
       ]
     },
     {
+      "candidate_id": "deee9231b4bf6ff1",
+      "name": "Pepco Group",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "86532247d6dc09f5",
       "name": "PEPTONIC MEDICAL",
       "reason": [
@@ -18020,6 +19518,13 @@
     {
       "candidate_id": "bd9d98a5dc1434e0",
       "name": "PER AARSLEFF [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "07075f533be82cf1",
+      "name": "Per Aarsleff Holding",
       "reason": [
         "aucune revue documentée"
       ]
@@ -18172,6 +19677,13 @@
       ]
     },
     {
+      "candidate_id": "96f537ffbd817233",
+      "name": "PharmaSGP Holding",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "163b161d76fc0d52",
       "name": "PHARMING",
       "reason": [
@@ -18223,6 +19735,13 @@
     {
       "candidate_id": "7d844c7093655cf4",
       "name": "PHILOGEN",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "e48739855813a5f5",
+      "name": "Philogen",
       "reason": [
         "aucune revue documentée"
       ]
@@ -18319,8 +19838,22 @@
       ]
     },
     {
+      "candidate_id": "5425ef86b4b77e4f",
+      "name": "Piraeus Port Authority",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "b929988e736c3bc1",
       "name": "PIRELLI & C",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "ab24aebf51b19722",
+      "name": "Pirelli & C.",
       "reason": [
         "aucune revue documentée"
       ]
@@ -18410,6 +19943,13 @@
       ]
     },
     {
+      "candidate_id": "37761293d587dcdd",
+      "name": "Plastika Kritis",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "dd85ecfdd30d4deb",
       "name": "PLASTIKA KRITIS .43",
       "reason": [
@@ -18431,6 +19971,13 @@
       ]
     },
     {
+      "candidate_id": "ba59d960a7b7647e",
+      "name": "PlayWay",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "80b5f4a72b5ce7c0",
       "name": "PLAYWAY ZY",
       "reason": [
@@ -18447,6 +19994,13 @@
     {
       "candidate_id": "c25edcc63230de63",
       "name": "PLEJD",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "a7fd1f1666a60007",
+      "name": "Plejd",
       "reason": [
         "aucune revue documentée"
       ]
@@ -18524,6 +20078,13 @@
     {
       "candidate_id": "f90884c46c8f71bf",
       "name": "POLIMEX-MOSTOSTAL [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "9626c509832e2a4b",
+      "name": "Polski Koncern Naftowy ORLEN Spólka Akcyjna",
       "reason": [
         "aucune revue documentée"
       ]
@@ -18629,6 +20190,20 @@
     {
       "candidate_id": "a7026fcf48caf604",
       "name": "POWSZECHNA KASA OSZCZEDNOSCI BANK [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "71c38c3d2ad5b140",
+      "name": "Powszechna Kasa Oszczednosci Bank Polski Spólka Akcyjna",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "a56fc05c16d43914",
+      "name": "Powszechny Zaklad Ubezpieczen",
       "reason": [
         "aucune revue documentée"
       ]
@@ -18774,6 +20349,13 @@
       ]
     },
     {
+      "candidate_id": "4f7314a580650aa7",
+      "name": "Prisma Properties",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "4685b0f24a89c08a",
       "name": "PRISMA PROPERTIES [Cboe]",
       "reason": [
@@ -18804,6 +20386,13 @@
     {
       "candidate_id": "8d7f46e892107097",
       "name": "PROACT IT [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "2ad485311c6b6c8d",
+      "name": "Proact IT Group",
       "reason": [
         "aucune revue documentée"
       ]
@@ -18928,6 +20517,13 @@
       ]
     },
     {
+      "candidate_id": "f7727f2479995da3",
+      "name": "Protector Forsikring",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "bcf6be144334295e",
       "name": "PROTECTOR FORSIKRING ASA [Cboe]",
       "reason": [
@@ -19007,6 +20603,13 @@
     {
       "candidate_id": "d89b21b8d8c4760a",
       "name": "PUMA",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "99a3f90d43336d93",
+      "name": "Puuilo",
       "reason": [
         "aucune revue documentée"
       ]
@@ -19222,6 +20825,13 @@
       ]
     },
     {
+      "candidate_id": "5f80f67f7729a850",
+      "name": "Quest Holdings",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "08e057c5eff3ef00",
       "name": "QUIRIN PRIVATBK",
       "reason": [
@@ -19264,6 +20874,20 @@
       ]
     },
     {
+      "candidate_id": "51a3256b7084698f",
+      "name": "Rai Way",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "1605d1a55376c6c8",
+      "name": "Raiffeisen Bank International",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "3be73a5e5cd6c01a",
       "name": "RAIFFEISEN BANK INTERNATIONAL [Cboe]",
       "reason": [
@@ -19273,6 +20897,13 @@
     {
       "candidate_id": "12cfbcf32887a0d9",
       "name": "RAILCARE [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "ff85879a5fe43e27",
+      "name": "Rainbow Tours",
       "reason": [
         "aucune revue documentée"
       ]
@@ -19376,6 +21007,13 @@
       ]
     },
     {
+      "candidate_id": "752b7566c608df9a",
+      "name": "RaySearch Laboratories",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "6739edb7966929ad",
       "name": "RAYSEARCH LABORATORIES [Cboe]",
       "reason": [
@@ -19448,6 +21086,13 @@
     {
       "candidate_id": "74e887697f053eed",
       "name": "RECORDATI",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "0b4c5b3b32aeeff3",
+      "name": "Recordati Industria Chimica e Farmaceutica",
       "reason": [
         "aucune revue documentée"
       ]
@@ -19635,6 +21280,13 @@
       ]
     },
     {
+      "candidate_id": "da94263dbb38c25e",
+      "name": "Reply",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "04c4c2f963e8ce99",
       "name": "REPSOL",
       "reason": [
@@ -19749,6 +21401,13 @@
     {
       "candidate_id": "5ccab91be85480cd",
       "name": "RINGKJOEBING LANDBOBANK [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "f884d1eea064e39b",
+      "name": "Ringkjøbing Landbobank",
       "reason": [
         "aucune revue documentée"
       ]
@@ -19873,6 +21532,13 @@
       ]
     },
     {
+      "candidate_id": "75d700e51202ef46",
+      "name": "Rogaland Sparebank",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "a194a96736ebd35d",
       "name": "ROGALAND SPAREBANK [Cboe]",
       "reason": [
@@ -19964,6 +21630,13 @@
       ]
     },
     {
+      "candidate_id": "1b801c89469ebbc5",
+      "name": "Royal Unibrew",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "72cb03e2aadb72cb",
       "name": "ROYAL UNIBREW [Cboe]",
       "reason": [
@@ -20041,6 +21714,13 @@
       ]
     },
     {
+      "candidate_id": "980af072adf2ab8f",
+      "name": "RVRC Holding",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "43bd37c9cc823681",
       "name": "RWE",
       "reason": [
@@ -20048,8 +21728,22 @@
       ]
     },
     {
+      "candidate_id": "cb12bac4ffa4412f",
+      "name": "Ryanair Holdings",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "b54f20b5a9566d96",
       "name": "RYVU THERAPEUTICS ZY",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "07c4125d11820d9d",
+      "name": "Röko",
       "reason": [
         "aucune revue documentée"
       ]
@@ -20078,6 +21772,13 @@
     {
       "candidate_id": "149879d15c36de09",
       "name": "S2MEDICAL B",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "8147e6ec0616b76a",
+      "name": "Saab",
       "reason": [
         "aucune revue documentée"
       ]
@@ -20216,6 +21917,13 @@
       ]
     },
     {
+      "candidate_id": "91646cc07c6cd36d",
+      "name": "SalMar",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "5e78ad4f93b83664",
       "name": "SALMAR ASA [Cboe]",
       "reason": [
@@ -20272,8 +21980,22 @@
       ]
     },
     {
+      "candidate_id": "ed69fff1f8755714",
+      "name": "Sampo",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "74cfa1c16c5fe5f9",
       "name": "SAMSE",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "407f7483be6fc575",
+      "name": "Sandvik",
       "reason": [
         "aucune revue documentée"
       ]
@@ -20295,6 +22017,13 @@
     {
       "candidate_id": "1ded2c077c0f35f2",
       "name": "SANLORENZO",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "5ca8a0efcb2c5f48",
+      "name": "Sanlorenzo",
       "reason": [
         "aucune revue documentée"
       ]
@@ -20622,6 +22351,13 @@
       ]
     },
     {
+      "candidate_id": "8761eda0698fb6eb",
+      "name": "Sdiptech",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "7d3b2cf500bc84f1",
       "name": "SDIPTECH [Cboe]",
       "reason": [
@@ -20678,6 +22414,13 @@
       ]
     },
     {
+      "candidate_id": "dba400267f805934",
+      "name": "Sectra",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "d6aaafe8b26aa370",
       "name": "SECTRA [Cboe]",
       "reason": [
@@ -20694,6 +22437,13 @@
     {
       "candidate_id": "145c866831009c7f",
       "name": "SECUOYA",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "739acdf401de13bb",
+      "name": "Securitas",
       "reason": [
         "aucune revue documentée"
       ]
@@ -20862,6 +22612,13 @@
     {
       "candidate_id": "e64a39b8ebd040fa",
       "name": "SESA",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "1406322c72921e90",
+      "name": "SeSa",
       "reason": [
         "aucune revue documentée"
       ]
@@ -21147,6 +22904,13 @@
       ]
     },
     {
+      "candidate_id": "e4c15dc5150c4261",
+      "name": "SJF Bank",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "2c36d79d10676ac1",
       "name": "SJF BANK [Cboe]",
       "reason": [
@@ -21156,6 +22920,13 @@
     {
       "candidate_id": "e4bbf445b9b72baf",
       "name": "SKANDIA GREENPOWER NK",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "86284bb516305e65",
+      "name": "Skandinaviska Enskilda Banken",
       "reason": [
         "aucune revue documentée"
       ]
@@ -21182,8 +22953,22 @@
       ]
     },
     {
+      "candidate_id": "d3735f5505857d66",
+      "name": "SkiStar",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "cf55b575a433347b",
       "name": "SKISTAR [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "d175f62850ec0f80",
+      "name": "Skjern Bank",
       "reason": [
         "aucune revue documentée"
       ]
@@ -21539,6 +23324,13 @@
       ]
     },
     {
+      "candidate_id": "bcca147cd8eadaa2",
+      "name": "SOL",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "0b1d4243dd818c4a",
       "name": "SOLAR [Cboe]",
       "reason": [
@@ -21735,6 +23527,13 @@
       ]
     },
     {
+      "candidate_id": "712a4546b8c8c478",
+      "name": "SP Group",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "8bcf614022aed9cc",
       "name": "SPADEL",
       "reason": [
@@ -21763,6 +23562,13 @@
       ]
     },
     {
+      "candidate_id": "851f6342e6946ec5",
+      "name": "SpareBank 1 Nord-Norge",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "47f87951c3ca4a4c",
       "name": "SPAREBANK 1 OESTLANDET [Cboe]",
       "reason": [
@@ -21777,8 +23583,29 @@
       ]
     },
     {
+      "candidate_id": "a6b0c8b17b47f88d",
+      "name": "SpareBank 1 Ostlandet",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "dc1e969bf1eab807",
+      "name": "SpareBank 1 Ringerike Hadeland",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "9d146980c43456ab",
       "name": "SPAREBANK 1 RINGERIKE HADELAND [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "b2cdf3b79fc41c00",
+      "name": "SpareBank 1 SMN",
       "reason": [
         "aucune revue documentée"
       ]
@@ -21798,8 +23625,36 @@
       ]
     },
     {
+      "candidate_id": "d37e56bfb2e3d948",
+      "name": "SpareBank 1 Sørøst-Norge",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "e17337572824f419",
+      "name": "SpareBank 1 Østfold Akershus",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "c1d916fd3e4caedf",
       "name": "SPAREBANKEN MORE [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "6a896023c8d1d180",
+      "name": "Sparebanken Møre",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "4d2b563514ba2159",
+      "name": "Sparebanken Norge",
       "reason": [
         "aucune revue documentée"
       ]
@@ -22183,6 +24038,13 @@
       ]
     },
     {
+      "candidate_id": "e4544cd48bcfe521",
+      "name": "Storebrand",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "3d0c4e5c56e0bf5e",
       "name": "STOREBRAND ASA [Cboe]",
       "reason": [
@@ -22197,8 +24059,22 @@
       ]
     },
     {
+      "candidate_id": "05be7368b2aaf02c",
+      "name": "Storytel",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "8d5ee636e8d6ea60",
       "name": "STORYTEL [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "dd774ce74a83780f",
+      "name": "Strabag",
       "reason": [
         "aucune revue documentée"
       ]
@@ -22281,6 +24157,13 @@
       ]
     },
     {
+      "candidate_id": "8411f1fd32d3a85f",
+      "name": "Subsea 7",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "186a79a107a1f4f5",
       "name": "SUBSTRATE AI",
       "reason": [
@@ -22332,6 +24215,13 @@
     {
       "candidate_id": "48a463dcb27bd55b",
       "name": "SURGICAL SCIENCE SWEDEN",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "5fa92008c3f15375",
+      "name": "Surgical Science Sweden",
       "reason": [
         "aucune revue documentée"
       ]
@@ -22393,6 +24283,13 @@
       ]
     },
     {
+      "candidate_id": "b3f618b90aed72b8",
+      "name": "Svenska Handelsbanken",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "c1cdd2d180df7ba2",
       "name": "SVENSKA HANDELSBANKEN [Cboe]",
       "reason": [
@@ -22421,8 +24318,22 @@
       ]
     },
     {
+      "candidate_id": "fae5bd10ebc6dc07",
+      "name": "Sweco",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "c8308017f24297e0",
       "name": "SWECO [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "c00249b7293757f1",
+      "name": "Swedbank",
       "reason": [
         "aucune revue documentée"
       ]
@@ -22456,6 +24367,13 @@
       ]
     },
     {
+      "candidate_id": "2ff59e97499199ad",
+      "name": "Swedish Orphan Biovitrum",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "30ab8c049a44e311",
       "name": "SWEDISH ORPHAN BIOVITRUM [Cboe]",
       "reason": [
@@ -22479,6 +24397,13 @@
     {
       "candidate_id": "d79ec30fb3a9dee4",
       "name": "SYENSQO",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "c0efeff6346731f1",
+      "name": "Sygnity",
       "reason": [
         "aucune revue documentée"
       ]
@@ -22521,6 +24446,13 @@
     {
       "candidate_id": "f34d56edce717a1d",
       "name": "SYNEKTIK [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "74e2e7ebc620530e",
+      "name": "Synektik Spólka Akcyjna",
       "reason": [
         "aucune revue documentée"
       ]
@@ -22570,6 +24502,13 @@
     {
       "candidate_id": "aa7874cd3aa4c5f2",
       "name": "SYS-DAT",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "812ff69900083ee6",
+      "name": "Systemair",
       "reason": [
         "aucune revue documentée"
       ]
@@ -22743,6 +24682,13 @@
       ]
     },
     {
+      "candidate_id": "dfb0f3a185982081",
+      "name": "Technogym",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "c5b74a64a3219ff7",
       "name": "TECHNOMECA",
       "reason": [
@@ -22752,6 +24698,13 @@
     {
       "candidate_id": "59966cb4dc6fac9a",
       "name": "TECHNOPROBE",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "2cbe281aa086f502",
+      "name": "Technoprobe",
       "reason": [
         "aucune revue documentée"
       ]
@@ -22787,6 +24740,13 @@
     {
       "candidate_id": "7ff060f152adbad3",
       "name": "TEKNA ASA [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "7c2b9b99764a8526",
+      "name": "Tele2",
       "reason": [
         "aucune revue documentée"
       ]
@@ -22941,6 +24901,13 @@
     {
       "candidate_id": "9097b3367ed9910e",
       "name": "TENEO AI",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "5d48a17416ede3d2",
+      "name": "Teqnion",
       "reason": [
         "aucune revue documentée"
       ]
@@ -23520,6 +25487,13 @@
       ]
     },
     {
+      "candidate_id": "fe06eb6c283258c7",
+      "name": "Trelleborg",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "3b889f7b5ec4e1ac",
       "name": "TRELLEBORG [Cboe]",
       "reason": [
@@ -23590,8 +25564,22 @@
       ]
     },
     {
+      "candidate_id": "cc364d2528aca126",
+      "name": "Truecaller",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "960ad215943138e0",
       "name": "TRUECALLER [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "a1f5525339b8f70e",
+      "name": "Tryg",
       "reason": [
         "aucune revue documentée"
       ]
@@ -23674,6 +25662,13 @@
       ]
     },
     {
+      "candidate_id": "037beed324316451",
+      "name": "TXT e-solutions",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "e591455e0743e417",
       "name": "U.C.A.",
       "reason": [
@@ -23732,6 +25727,13 @@
     {
       "candidate_id": "7a4d609eac99755f",
       "name": "UIE [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "7a95f57615887a13",
+      "name": "UIE Plc",
       "reason": [
         "aucune revue documentée"
       ]
@@ -23800,6 +25802,13 @@
       ]
     },
     {
+      "candidate_id": "7b447f933446710c",
+      "name": "UniCredit",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "2f5871d9b46960ab",
       "name": "UNIDATA",
       "reason": [
@@ -23842,8 +25851,22 @@
       ]
     },
     {
+      "candidate_id": "c3256a92179ea1f5",
+      "name": "Unipol Gruppo",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "8d1d146c32697a5d",
       "name": "UNIQA INSURANCE [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "19ed8d5f5daed1a2",
+      "name": "UNIQA Insurance Group",
       "reason": [
         "aucune revue documentée"
       ]
@@ -23970,6 +25993,13 @@
     {
       "candidate_id": "32cc63e5dd74758a",
       "name": "VAESTRA HAMNEN FIN.",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "2fca4b232701bafd",
+      "name": "Vaisala",
       "reason": [
         "aucune revue documentée"
       ]
@@ -24150,6 +26180,13 @@
       ]
     },
     {
+      "candidate_id": "f1d8bc3f0ebffcac",
+      "name": "Veidekke",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "8bdb1d6239ed4dc5",
       "name": "VEIDEKKE ASA [Cboe]",
       "reason": [
@@ -24199,6 +26236,13 @@
       ]
     },
     {
+      "candidate_id": "834ef8ea6fea27ce",
+      "name": "Vercom",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "e61d2dae86726624",
       "name": "VERCOM ZY",
       "reason": [
@@ -24229,6 +26273,13 @@
     {
       "candidate_id": "b3de79db0188e0a5",
       "name": "VERVE ME AEO",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "d026078215f442db",
+      "name": "Vestas Wind Systems",
       "reason": [
         "aucune revue documentée"
       ]
@@ -24313,6 +26364,13 @@
     {
       "candidate_id": "3f649a6f686c4d2e",
       "name": "VIEL ET COMPAGNIE",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "c78b1745e00e657f",
+      "name": "Vienna Insurance Group",
       "reason": [
         "aucune revue documentée"
       ]
@@ -24453,6 +26511,13 @@
     {
       "candidate_id": "42ab601dd1f0987c",
       "name": "VITEC SOFTWARE [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "63c24ddae5cf4357",
+      "name": "Vitec Software Group",
       "reason": [
         "aucune revue documentée"
       ]
@@ -24633,6 +26698,13 @@
       ]
     },
     {
+      "candidate_id": "a4e3b20c72b329f5",
+      "name": "Voxel",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "09ab86d233c89f4c",
       "name": "VOXEL ZY 1",
       "reason": [
@@ -24670,6 +26742,13 @@
     {
       "candidate_id": "5eac9be96703f588",
       "name": "VYTRUS BIOTECH",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "a056bfa6d9611c6e",
+      "name": "Vår Energi AS",
       "reason": [
         "aucune revue documentée"
       ]
@@ -24719,6 +26798,13 @@
     {
       "candidate_id": "fbe4c4235ee9929b",
       "name": "WALLBOX CLASS A",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "1833fcfc761776ab",
+      "name": "Wallenius Wilhelmsen",
       "reason": [
         "aucune revue documentée"
       ]
@@ -24955,6 +27041,13 @@
       ]
     },
     {
+      "candidate_id": "260813e6a4b02abf",
+      "name": "Wilh. Wilhelmsen Holding",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "b0a00e116f4b2130",
       "name": "WINAMP",
       "reason": [
@@ -25060,6 +27153,13 @@
       ]
     },
     {
+      "candidate_id": "ac10d10f223f9022",
+      "name": "Wärtsilä Oyj Abp",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "4a46a6fe0e588837",
       "name": "X-FAB",
       "reason": [
@@ -25144,6 +27244,13 @@
       ]
     },
     {
+      "candidate_id": "03db072d1ee55e3d",
+      "name": "XTB",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "bea6e9e361bf6fee",
       "name": "XTB [Cboe]",
       "reason": [
@@ -25207,6 +27314,13 @@
       ]
     },
     {
+      "candidate_id": "7fb2a34ae309940c",
+      "name": "Yubico",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "02e06e9cd063c0f1",
       "name": "YUBICO [Cboe]",
       "reason": [
@@ -25216,6 +27330,13 @@
     {
       "candidate_id": "f7c3b77ac346dcd3",
       "name": "ZABKA [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "9b0b8947fc20f6e9",
+      "name": "Zabka Group",
       "reason": [
         "aucune revue documentée"
       ]
@@ -25244,6 +27365,13 @@
     {
       "candidate_id": "dab8760bf8f44b3e",
       "name": "ZAPLOX",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "ba20583b5d77e319",
+      "name": "Zaptec",
       "reason": [
         "aucune revue documentée"
       ]
@@ -25305,6 +27433,13 @@
       ]
     },
     {
+      "candidate_id": "7632ede57f5a4496",
+      "name": "Zespól Elektrocieplowni Wroclawskich KOGENERACJA",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "9061eb8c27ff7aa0",
       "name": "ZEST",
       "reason": [
@@ -25314,6 +27449,13 @@
     {
       "candidate_id": "dd6b2f21062bbf18",
       "name": "ZIGNAGO VETRO",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "885bf89d2a2a7388",
+      "name": "Zinzino",
       "reason": [
         "aucune revue documentée"
       ]
@@ -25349,6 +27491,13 @@
     {
       "candidate_id": "a3855462ddd842e7",
       "name": "ZUMTOBEL [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "beb1db4f1d4f4eb7",
+      "name": "Ålandsbanken Abp",
       "reason": [
         "aucune revue documentée"
       ]
