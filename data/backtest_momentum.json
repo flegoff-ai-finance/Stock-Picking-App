@@ -1,11 +1,12 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-11-26T13:47:39.594765+00:00",
+  "generated_at_utc": "2026-11-26T13:48:32.696687+00:00",
   "strategy": "Growth Momentum",
   "method": "Monthly point-in-time cross-sectional rank diagnostic; top 2 versus bottom 2; no fundamental factors.",
   "universe_count": 7,
   "universe": "verified PEA pilot securities only",
   "rebalance_frequency": "monthly diagnostic snapshots",
+  "rank_correlation_method": "Spearman correlation (Pearson correlation of cross-sectional percentile ranks), averaged across monthly snapshots",
   "transaction_fee_each_side_pct": 0.5,
   "benchmark": "CAC 40 (^FCHI), France-listed pilot universe proxy",
   "history_start": "2024-06-07",
@@ -32,7 +33,7 @@
       "top2_avg_return_pct": 7.75,
       "top2_avg_net_return_pct": 6.68,
       "top2_positive_rate_pct": 68.75,
-      "top2_minus_bottom2_spread_pct": 1.27
+      "top2_minus_bottom2_spread_pct": 1.26
     },
     "6m": {
       "snapshots": 21,
