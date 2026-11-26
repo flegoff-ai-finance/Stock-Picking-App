@@ -1,4 +1,5 @@
 name: Refresh European discovery universe
+# The script validates its own source snapshot and keeps the scoring registry untouched.
 
 on:
   push:
