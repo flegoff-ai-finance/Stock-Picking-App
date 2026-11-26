@@ -1,6 +1,10 @@
 name: Refresh Yahoo Finance market data
 
 on:
+  push:
+    paths:
+      - "scripts/ingest_yahoo.py"
+      - ".github/workflows/refresh-yahoo-data.yml"
   workflow_dispatch:
   schedule:
     - cron: "25 6 * * 1-5"
