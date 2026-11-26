@@ -24,7 +24,7 @@ jobs:
         run: python scripts/discover_pea_candidates.py
       - name: Commit candidate registry
         run: |
-          if git diff --quiet -- data/pea_candidates.json; then
+          if [ -z "$(git status --porcelain -- data/pea_candidates.json)" ]; then
             echo "No candidate changes."
             exit 0
           fi
