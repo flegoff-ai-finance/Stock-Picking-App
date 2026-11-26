@@ -14,7 +14,7 @@ Application de recherche et de simulation de trois portefeuilles PEA indépendan
 - Yahoo Finance via `yfinance` : cours ajustés, indicateurs techniques, états financiers disponibles et estimations de croissance BPA.
 - Banque centrale européenne : €STR quotidien pour le Sharpe excédentaire.
 - CAC 40 : proxy de marché pour la performance relative des titres pilotes cotés à Paris.
-- ProRealTime : découverte des candidats France, Europe et EEE. Cette liste ne constitue pas, à elle seule, une preuve juridique d'éligibilité.
+- ProRealTime : découverte large des candidats France, Europe et EEE. MEQIRI : liste complémentaire préfiltrée selon les critères légaux annoncés, avec exclusions SIIC et indications de pays. Ces sources ne remplacent pas la confirmation du courtier ni notre contrôle documentaire.
 
 ## Univers PEA — état du pilote
 
