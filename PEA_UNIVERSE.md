@@ -23,7 +23,7 @@ Each candidate must include:
 6. a source documenting PEA eligibility and a separate issuer source;
 7. reviewer and verification date.
 
-`scripts/build_pea_registry.py` rejects incomplete, stale (over 90 days), duplicate or inconsistent reviews. A provisional ticker or a third-party directory label alone never promotes a security to eligible.
+`scripts/build_pea_registry.py` rejects incomplete, stale (over 90 days), duplicate or inconsistent reviews. A provisional ticker or a third-party directory label alone never promotes a security to eligible. `scripts/sync_pea_registry.py` adds only approved rows to the technical universe, after which Yahoo enrichment processes up to 50 oldest/missing securities per run.
 
 ## Scoring gate
 
