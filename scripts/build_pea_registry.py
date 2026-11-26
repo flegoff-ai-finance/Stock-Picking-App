@@ -81,11 +81,19 @@ def build(today=None):
     ids = [row.get("candidate_id", "").strip() for row in rows]
     candidate_ids = {value for value in ids if value}
     duplicate_ids = {value for value in candidate_ids if ids.count(value) > 1}
+    isins = [row.get("isin", "").strip().upper() for row in rows if row.get("isin", "").strip()]
+    tickers = [row.get("ticker", "").strip().upper() for row in rows if row.get("ticker", "").strip()]
+    duplicate_isins = {value for value in isins if isins.count(value) > 1}
+    duplicate_tickers = {value for value in tickers if tickers.count(value) > 1}
     verified, pending = [], []
     for row in rows:
         errors = validate_review(row, candidate_ids - duplicate_ids, today)
         if row.get("candidate_id", "").strip() in duplicate_ids:
             errors.append("candidate_id dupliqué")
+        if row.get("isin", "").strip().upper() in duplicate_isins:
+            errors.append("ISIN dupliqué")
+        if row.get("ticker", "").strip().upper() in duplicate_tickers:
+            errors.append("ticker Yahoo dupliqué")
         if not errors:
             verified.append({
                 "candidate_id": row["candidate_id"].strip(),
