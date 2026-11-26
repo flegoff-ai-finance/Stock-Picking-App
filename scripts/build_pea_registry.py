@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 CANDIDATES = ROOT / "data" / "pea_candidates.json"
 REVIEWS = ROOT / "data" / "pea_verification.csv"
 OUTPUT = ROOT / "data" / "pea_registry_audit.json"
+TECHNICAL = ROOT / "data" / "technical_screener.json"
 ISIN_RE = re.compile(r"^[A-Z]{2}[A-Z0-9]{10}$")
 EEA_EU_COUNTRIES = {
     "AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR",
@@ -58,9 +59,24 @@ def validate_review(row, candidate_ids, today=None):
     return errors
 
 
+def is_recently_verified_pilot(row, today):
+    if row.get("pea_status") != "eligible" or not ISIN_RE.fullmatch(str(row.get("isin") or "")):
+        return False
+    if not (row.get("ticker") or "").strip():
+        return False
+    try:
+        checked = date.fromisoformat(str(row.get("pea_checked_at") or "")[:10])
+        age = (today - checked).days
+        return 0 <= age <= 90
+    except ValueError:
+        return False
+
+
 def build(today=None):
     today = today or date.today()
     document = json.loads(CANDIDATES.read_text(encoding="utf-8"))
+    technical = json.loads(TECHNICAL.read_text(encoding="utf-8")) if TECHNICAL.exists() else {"instruments": []}
+    pilot_verified = [row for row in technical.get("instruments", []) if is_recently_verified_pilot(row, today)]
     candidate_ids = {row["candidate_id"] for row in document.get("candidates", [])}
     reviews = {}
     if REVIEWS.exists():
@@ -99,6 +115,10 @@ def build(today=None):
         "schema_version": 1,
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
         "candidate_count": len(document.get("candidates", [])),
+        "newly_verified_count": len(verified),
+        "legacy_verified_pilot_count": len(pilot_verified),
+        "total_verified_universe_count": len(verified) + len(pilot_verified),
+        "verified_pilot_names": [row.get("name") for row in pilot_verified],
         "verified_count": len(verified),
         "pending_count": len(pending),
         "verified_instruments": verified,
