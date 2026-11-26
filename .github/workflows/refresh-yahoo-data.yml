@@ -26,20 +26,23 @@ jobs:
         run: python scripts/ingest_yahoo.py
       - name: Commit refreshed dataset
         run: |
-          if git diff --quiet -- data/technical_screener.json; then
-            echo "No data changes."
-            exit 0
-          fi
+          cp data/technical_screener.json /tmp/technical_screener.json
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/technical_screener.json
-          git commit -m "Refresh Yahoo Finance market data"
           for attempt in 1 2 3 4 5; do
-            git pull --rebase origin main
+            git fetch origin main
+            git reset --hard origin/main
+            cp /tmp/technical_screener.json data/technical_screener.json
+            if [ -z "$(git status --porcelain -- data/technical_screener.json)" ]; then
+              echo "No data changes."
+              exit 0
+            fi
+            git add data/technical_screener.json
+            git commit -m "Refresh Yahoo Finance market data"
             if git push; then
               exit 0
             fi
-            echo "Push race detected (attempt $attempt); retrying after fetching main."
+            echo "Push race detected (attempt $attempt); retrying from latest main."
             sleep 2
           done
           exit 1
