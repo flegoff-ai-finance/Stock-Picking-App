@@ -19,13 +19,13 @@
 <div class="grid">
 <div class="card"><div class="muted small">Capital virtuel total</div><div class="metric">3 000 €</div><div class="metric-sub">3 portefeuilles · 1 000 € chacun</div></div>
 <div class="card"><div class="muted small">Frais simulés</div><div class="metric">0,50 %</div><div class="metric-sub">à l'achat et à la vente</div></div>
-<div class="card"><div class="muted small">Signaux à valider</div><div class="metric">—</div><div class="metric-sub">en attente du moteur de scoring</div></div>
+<div class="card"><div class="muted small">Signaux d’achat à étudier</div><div class="metric" id="buySignalCount">—</div><div class="metric-sub">sur l’univers PEA vérifié · simulation uniquement</div></div>
 </div>
-<div class="section-head"><h3>Les 3 stratégies</h3><span>Comparaison en construction</span></div>
+<div class="section-head"><h3>Les 3 stratégies</h3><span>Résultats du pilote</span></div>
 <div class="grid">
-<div class="card strategy"><span class="tag">STRATÉGIE 01</span><h3>Growth Quantitative</h3><p class="small muted">Croissance, momentum, révisions et valorisation.</p><div class="progress"><i style="width:30%"></i></div><div class="row small"><span class="muted">Moteur de score</span><b>Actif · PEG pluriannuel à alimenter</b></div></div>
-<div class="card strategy"><span class="tag">STRATÉGIE 02</span><h3>Growth Quality</h3><p class="small muted">Croissance rentable, cash-flow et solidité du bilan.</p><div class="progress"><i style="width:30%"></i></div><div class="row small"><span class="muted">Moteur de score</span><b>Actif · couverture pilote 75 %</b></div></div>
-<div class="card strategy"><span class="tag">STRATÉGIE 03</span><h3>Growth Momentum</h3><p class="small muted">Dynamique des cours, croissance et révisions.</p><div class="progress"><i style="width:30%"></i></div><div class="row small"><span class="muted">Moteur de score</span><b>Actif · couverture pilote 80 %</b></div></div>
+<div class="card strategy"><span class="tag">STRATÉGIE 01</span><h3>Growth</h3><p class="small muted">PEG classique : PER prévisionnel rapporté à la croissance BPA estimée sur cinq ans.</p><div class="row small"><span class="muted">Moteur de score</span><b>Actif · consensus BPA 5 ans manquant</b></div></div>
+<div class="card strategy"><span class="tag">STRATÉGIE 02</span><h3>Growth Quality</h3><p class="small muted">Croissance rentable, marges, cash-flow, rendement du capital et dette.</p><div class="row small"><span class="muted">Moteur de score</span><b>Actif · 85 % du poids documenté</b></div></div>
+<div class="card strategy"><span class="tag">STRATÉGIE 03</span><h3>Growth Momentum</h3><p class="small muted">Tendance des cours, momentum, risque et performance relative au CAC 40.</p><div class="row small"><span class="muted">Moteur de score</span><b>Actif · 100 % des facteurs en couche 2</b></div></div>
 </div>
 <div class="section-head"><h3>État d’avancement</h3><span>Version pilote</span></div>
 <div class="card list">
@@ -106,7 +106,7 @@
 // Navigation native par ancres HTML : aucun JavaScript requis.
 const ids=['fee','stop','capital'];try{const s=JSON.parse(localStorage.getItem('sppea-settings')||'{}');if(s.capital===10000)s.capital=1000;ids.forEach(id=>{if(s[id]!==undefined)document.getElementById(id).value=s[id]})}catch(e){}
 document.getElementById('save').addEventListener('click',()=>{const s={};ids.forEach(id=>s[id]=Number(document.getElementById(id).value));localStorage.setItem('sppea-settings',JSON.stringify(s));document.getElementById('saved').textContent='Paramètres enregistrés sur cet appareil.';});
-const portfolioNames={quant:'Growth Quantitative',quality:'Growth Quality',momentum:'Growth Momentum'};
+const portfolioNames={quant:'Growth',quality:'Growth Quality',momentum:'Growth Momentum'};
 const tradeKey='sppea-trades-v1';
 const readTrades=()=>{try{return JSON.parse(localStorage.getItem(tradeKey)||'[]')}catch(e){return []}};
 const money=v=>new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR'}).format(v);
@@ -190,6 +190,10 @@ async function loadTechnicalData(){
   window.stockPickingPeaUniverse=eligibleInstruments;
   window.stockPickingPeaExcluded=excludedInstruments;
   window.StockPickingLayeredSelection?.render(eligibleInstruments);
+  const strategyResults=window.StockPickingLayeredSelection?.run(eligibleInstruments)||[];
+  const buySignalCount=strategyResults.reduce((sum,strategy)=>sum+strategy.third.rows.filter(row=>row.decision==='ACHAT').length,0);
+  const buySignalNode=document.getElementById('buySignalCount');
+  if(buySignalNode)buySignalNode.textContent=String(buySignalCount);
   body.innerHTML=data.instruments.map(x=>'<tr><td>'+safe(x.name)+'</td><td>'+euro(x.last_close)+'</td><td>'+pct(x.return_12_1m_pct)+'</td><td>'+pct(x.return_6m_pct)+'</td><td>'+pct(x.volatility_1y_pct)+'</td><td>'+(x.momentum_score===null?'—':Number(x.momentum_score).toFixed(1))+'</td><td><span class="pill">'+(isPeaEligible(x)?'Éligible':'Exclu · à vérifier')+'</span></td></tr>').join('');
   const gate=document.getElementById('peaGateSummary');
   if(gate){
