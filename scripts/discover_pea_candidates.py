@@ -127,10 +127,10 @@ def parse_listing(html, region, source_url):
 
 def extract_meqiri_total(html):
     text = html_lib.unescape(re.sub(r"<[^>]+>", " ", html))
-    match = re.search(r"([0-9\\s\\u00a0\\u202f]+)\\s+actions de sociétés", text, re.IGNORECASE)
+    match = re.search(r"([0-9\s\u00a0\u202f]+)\s+actions de sociétés", text, re.IGNORECASE)
     if not match:
         return None
-    digits = re.sub(r"\\D", "", match.group(1))
+    digits = re.sub(r"\D", "", match.group(1))
     return int(digits) if digits else None
 
 
