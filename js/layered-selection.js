@@ -68,17 +68,29 @@
       // Layer 1 ranks the full discovery pool. PEA evidence is applied only afterwards.
       // Continue down the ranked list until 150 verified instruments are found, so
       // unverified candidates are replaced by the next ranked candidate.
-      const candidates=first.ranked
-        .map(row=>({discovery:row.item,verified:verifiedByIsin.get(String(row.item.isin||'').toUpperCase())}))
-        .filter(row=>row.verified)
-        .slice(0,150)
-        .map(row=>({...row.discovery,...row.verified}));
+      const candidates=[];
+      let peaRejected=0;
+      for(const row of first.ranked){
+        const verified=verifiedByIsin.get(String(row.item.isin||'').toUpperCase());
+        if(!verified){peaRejected++;continue;}
+        candidates.push({
+          ...verified,
+          ...row.item,
+          name:verified.name||row.item.name,
+          ticker:verified.ticker,
+          isin:verified.isin,
+          pea_status:'eligible',
+          pea_checked_at:verified.pea_checked_at||verified.verified_at,
+          verification_status:'verified'
+        });
+        if(candidates.length>=150)break;
+      }
       const engine=key==='growth'?engines.growth(candidates):key==='quality'?engines.quality(candidates):engines.momentum(candidates);
       const finalists=engine.ranked.slice(0,25).map(r=>({item:r.item,peg:r.peg??null,layer2_score:r.score??null,layer2_rank:r.rank??null,layer2_coverage:r.coverage??null,layer2_coverage_weight_pct:r.coverageWeightPct??null}));
       const third=finalScore(finalists,key);
       const blockers={};
       (engine.rows||[]).filter(r=>r.reason).forEach(r=>{blockers[r.reason]=(blockers[r.reason]||0)+1;});
-      return {key,label:specs[key].label,screened:first.candidates.length,peaVerified:candidates.length,peaRejected:first.ranked.length-candidates.length,engine,finalists,third,blockers};
+      return {key,label:specs[key].label,screened:first.candidates.length,peaVerified:candidates.length,peaRejected,engine,finalists,third,blockers};
     });
   }
   const fmt=v=>v===null||v===undefined?'—':Number(v).toFixed(1);
