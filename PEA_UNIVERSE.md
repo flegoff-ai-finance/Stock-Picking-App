@@ -34,3 +34,5 @@ The discovery job creates `data/pea_candidates.json`. Candidate rows remain pend
 `scripts/build_pea_registry.py` validates every field and writes `data/pea_registry_audit.json`. It never promotes a candidate based only on a provisional Yahoo ticker or directory presence. The current seven pilot instruments remain in the existing technical dataset; new candidates are not fed into scoring until their evidence passes this gate.
 
 MEQIRI source: https://meqiri.com/fr/actions/eligibles-pea. Its published list includes issuer country hints derived from the ISIN country code. These hints and its ticker are stored as prequalification metadata only; they do not override the independent evidence gate.
+
+The MEQIRI page currently advertises 1,332 eligible-share candidates but renders only its first 500 rows on the public page. The importer records the full advertised total separately and only imports rows actually exposed in the page HTML; the remaining rows are not silently assumed present. The discovery universe is therefore broad but not yet exhaustive.
