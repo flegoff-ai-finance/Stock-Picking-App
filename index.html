@@ -192,7 +192,14 @@ async function loadTechnicalData(){
   window.StockPickingLayeredSelection?.render(eligibleInstruments);
   body.innerHTML=data.instruments.map(x=>'<tr><td>'+safe(x.name)+'</td><td>'+euro(x.last_close)+'</td><td>'+pct(x.return_12_1m_pct)+'</td><td>'+pct(x.return_6m_pct)+'</td><td>'+pct(x.volatility_1y_pct)+'</td><td>'+(x.momentum_score===null?'—':Number(x.momentum_score).toFixed(1))+'</td><td><span class="pill">'+(isPeaEligible(x)?'Éligible':'Exclu · à vérifier')+'</span></td></tr>').join('');
   const gate=document.getElementById('peaGateSummary');
-  if(gate)gate.innerHTML='<strong>Filtre PEA actif :</strong> '+eligibleInstruments.length+' titre(s) admis dans l\'univers de scoring ; '+excludedInstruments.length+' exclu(s) faute de statut vérifié. Les modules de scoring devront utiliser <code>stockPickingPeaUniverse</code>, jamais la liste brute.';
+  if(gate){
+   gate.innerHTML='<strong>Filtre PEA actif :</strong> '+eligibleInstruments.length+' titre(s) admis dans l\'univers de scoring ; '+excludedInstruments.length+' exclu(s) faute de statut vérifié. Les modules de scoring devront utiliser <code>stockPickingPeaUniverse</code>, jamais la liste brute.';
+   fetch('./data/pea_candidates.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(registry=>{
+    if(!registry)return;
+    window.stockPickingPeaCandidatesSummary={discovered:registry.discovered_candidate_count,verified:registry.verified_count,pending:registry.pending_verification_count};
+    gate.innerHTML+=' <span class="muted">Référentiel de découverte : '+registry.discovered_candidate_count+' candidats détectés ; '+registry.pending_verification_count+' en attente de vérification légale, non scorés.</span>';
+   }).catch(()=>{});
+  }
   stamp.textContent=data.data_ok_count+'/'+data.universe_count+' titres · données du '+new Date(data.generated_at_utc).toLocaleString('fr-FR');
  }catch(err){
   body.innerHTML='<tr><td colspan="7">Données non disponibles. Vérifie la connexion internet.</td></tr>';
