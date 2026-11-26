@@ -57,7 +57,9 @@
     if(!engines)return [];
     return Object.keys(specs).map(key=>{
       const first=screen(universe,key);
-      const engine=key==='growth'?engines.growth(first.candidates):key==='quality'?engines.quality(first.candidates):engines.momentum(first.candidates);
+      // Screening rows are wrappers; strategic engines must receive the underlying instruments.
+      const candidates=first.candidates.map(row=>row.item);
+      const engine=key==='growth'?engines.growth(candidates):key==='quality'?engines.quality(candidates):engines.momentum(candidates);
       const finalists=engine.ranked.slice(0,25).map(r=>({item:r.item,peg:r.peg??null,layer2_score:r.score??null,layer2_rank:r.rank??null,layer2_coverage:r.coverage??null,layer2_coverage_weight_pct:r.coverageWeightPct??null}));
       const third=finalScore(finalists,key);
       const blockers={};
