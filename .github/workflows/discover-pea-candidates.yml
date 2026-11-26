@@ -22,7 +22,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Discover France and Europe candidate lists
+      - name: Discover France, Europe, EEA and MEQIRI candidate lists
         run: python scripts/discover_pea_candidates.py
       - name: Build strict eligibility audit
         run: python scripts/build_pea_registry.py
