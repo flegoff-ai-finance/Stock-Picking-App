@@ -1,10 +1,12 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-11-26T13:43:10.693273+00:00",
+  "generated_at_utc": "2026-11-26T13:43:30.597093+00:00",
   "source_count": 3,
   "discovered_candidate_count": 3621,
   "verified_count": 0,
   "pending_verification_count": 3621,
+  "provisional_ticker_mapped_count": 1451,
+  "provisional_ticker_unmapped_count": 2170,
   "important_notice": "Discovery only. Directory presence is not legal proof of PEA eligibility. All rows remain excluded from scoring until eligibility, instrument type, ISIN and tax conditions are independently verified.",
   "source_errors": [],
   "candidates": [
