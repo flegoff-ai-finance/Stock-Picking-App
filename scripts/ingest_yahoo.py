@@ -6,13 +6,17 @@ research prototype only; check Yahoo terms/licensing before public redistributio
 """
 from __future__ import annotations
 
+import csv
+import io
 import json
 import math
 import re
 import statistics
 import sys
+from bisect import bisect_right
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
+from urllib.request import Request, urlopen
 
 try:
     import yfinance as yf
@@ -59,7 +63,56 @@ def cagr(values, years=3):
     return ((new / old) ** (1 / years) - 1) * 100
 
 
-def price_metrics(history):
+def parse_estr_csv(content):
+    """Parse ECB €STR SDMX-CSV into {date: annual_rate_percent}."""
+    rates = {}
+    reader = csv.DictReader(io.StringIO(content))
+    for row in reader:
+        observed = row.get("TIME_PERIOD")
+        value = number(row.get("OBS_VALUE"))
+        if observed and value is not None:
+            try:
+                rates[date.fromisoformat(observed)] = value
+            except ValueError:
+                continue
+    return rates
+
+
+def fetch_estr_rates(start_date):
+    url = (
+        "https://data-api.ecb.europa.eu/service/data/EST/"
+        "B.EU000A2X2A25.WT"
+        f"?startPeriod={start_date.isoformat()}&format=csvdata"
+    )
+    request = Request(url, headers={"Accept": "text/csv", "User-Agent": "PEA-Stock-Picking-Research/1.0"})
+    with urlopen(request, timeout=30) as response:
+        return parse_estr_csv(response.read().decode("utf-8", errors="replace"))
+
+
+def calculate_sharpe(price_points, risk_free_rates):
+    """Annualized Sharpe using daily EUR €STR, carrying forward the last known rate."""
+    if not risk_free_rates or len(price_points) < 200:
+        return None
+    rate_dates = sorted(risk_free_rates)
+    excess_returns = []
+    for (_, previous_close), (current_date, current_close) in zip(price_points, price_points[1:]):
+        if previous_close <= 0 or current_close <= 0:
+            continue
+        index = bisect_right(rate_dates, current_date) - 1
+        if index < 0:
+            continue
+        annual_rate_pct = risk_free_rates[rate_dates[index]]
+        daily_rf = annual_rate_pct / 100 / 360
+        excess_returns.append(current_close / previous_close - 1 - daily_rf)
+    if len(excess_returns) < 200:
+        return None
+    deviation = statistics.stdev(excess_returns)
+    if deviation == 0:
+        return None
+    return statistics.mean(excess_returns) / deviation * math.sqrt(252)
+
+
+def price_metrics(history, risk_free_rates=None):
     if history is None or history.empty or "Close" not in history:
         return {"price_data_status": "missing_history"}
     closes = history["Close"].dropna()
@@ -104,12 +157,30 @@ def price_metrics(history):
         "sma50_vs_sma200_pct": (sma50 / sma200 - 1) * 100 if sma50 and sma200 else None,
         "volatility_1y_pct": vol, "max_drawdown_1y_pct": drawdown(one_year),
         "max_drawdown_3y_pct": drawdown(three_year),
-        "sharpe_3y": None, "relative_return_6m_pct": None,
+        "sharpe_3y": calculate_sharpe(
+            [(d.date() if hasattr(d, "date") else d, v)
+             for d, v in zip(dates, values)
+             if (d.date() if hasattr(d, "date") else d) >= three_year_start],
+            risk_free_rates or {},
+        ),
+        "relative_return_6m_pct": None,
         "observations": len(values), "price_data_status": "ok",
     }
 
 
-def fundamental_metrics(info, financials, cashflow, balance):
+def growth_estimate_value(estimates, period):
+    """Yahoo growth_estimates uses rows +1y/+5y and a 'stock' column."""
+    if not estimates:
+        return None
+    try:
+        stock = estimates.get("stock") or estimates.get("Stock") or {}
+        value = number(stock.get(period))
+        return value * 100 if value is not None else None
+    except (AttributeError, TypeError):
+        return None
+
+
+def fundamental_metrics(info, financials, cashflow, balance, growth_estimates=None):
     revenue = series_value(financials, "Total Revenue")
     ebit = series_value(financials, "Operating Income", "EBIT")
     cash_ops = series_value(cashflow, "Operating Cash Flow", "Cash Flow From Continuing Operating Activities")
@@ -132,9 +203,9 @@ def fundamental_metrics(info, financials, cashflow, balance):
         "roic_pct": None,
         "net_debt_ebitda": net_debt / ebitda if net_debt is not None and ebitda and ebitda > 0 else None,
         "forward_pe": number(info.get("forwardPE")),
-        "eps_growth_next_year_pct": None,
-        # Yahoo's one-year growth is never substituted for a 3-5y PEG input.
-        "eps_growth_cagr_pct": None,
+        "eps_growth_next_year_pct": growth_estimate_value(growth_estimates, "+1y"),
+        # +5y is Yahoo's explicit annualized five-year analyst growth estimate.
+        "eps_growth_cagr_pct": growth_estimate_value(growth_estimates, "+5y"),
         "fundamental_data_status": "partial" if revenue or ebit else "missing_statements",
     }
 
@@ -153,7 +224,7 @@ def verified_instruments(document, today=None):
     return result
 
 
-def update_instrument(item, ticker_factory=None):
+def update_instrument(item, ticker_factory=None, risk_free_rates=None):
     factory = ticker_factory or yf.Ticker
     ticker = factory(item["ticker"])
     history = ticker.history(period="3y", auto_adjust=True, actions=False)
@@ -165,8 +236,16 @@ def update_instrument(item, ticker_factory=None):
             info = ticker.info or {}
         except Exception:
             info = {}
-    item.update(price_metrics(history))
-    item.update(fundamental_metrics(info, ticker.financials, ticker.cashflow, ticker.balance_sheet))
+    item.update(price_metrics(history, risk_free_rates))
+    estimates = {}
+    try:
+        estimates = ticker.get_growth_estimates(as_dict=True) or {}
+    except Exception:
+        estimates = {}
+    item.update(fundamental_metrics(info, ticker.financials, ticker.cashflow, ticker.balance_sheet, estimates))
+    item["eps_growth_estimates_provider"] = "Yahoo Finance analyst growth estimates" if estimates else None
+    item["risk_free_rate_provider"] = "ECB €STR" if risk_free_rates else None
+    item["risk_free_rate_last_date"] = str(max(risk_free_rates)) if risk_free_rates else None
     item["provider"] = "Yahoo Finance (yfinance)"
     item["provider_retrieved_at_utc"] = datetime.now(timezone.utc).isoformat()
     item["provider_data_status"] = "ok" if item.get("price_data_status") == "ok" else "partial"
@@ -180,9 +259,15 @@ def main():
     document = json.loads(DATA.read_text(encoding="utf-8"))
     eligible = verified_instruments(document)
     errors = []
+    try:
+        risk_free_rates = fetch_estr_rates(date.today() - timedelta(days=3 * 365 + 10))
+    except Exception as exc:
+        risk_free_rates = {}
+        document["risk_free_rate_error"] = str(exc)[:240]
+        errors.append({"source": "ECB €STR", "error": str(exc)[:240]})
     for item in eligible:
         try:
-            update_instrument(item)
+            update_instrument(item, risk_free_rates=risk_free_rates)
         except Exception as exc:
             item["provider"] = "Yahoo Finance (yfinance)"
             item["provider_data_status"] = "error"
@@ -196,8 +281,9 @@ def main():
     limitations = methodology.setdefault("limitations", [])
     for note in [
         "Yahoo Finance via yfinance is an unofficial interface; coverage and fields vary by security.",
-        "Yahoo one-year earnings growth is contextual only and is not substituted for the 3-5 year PEG input.",
-        "Sharpe remains N/D without a dated EUR risk-free series; relative return remains N/D without verified benchmark mapping.",
+        "EPS growth estimates use Yahoo's explicit +1y and +5y consensus fields; +5y is the PEG growth input and is never substituted by earningsGrowth.",
+        "Sharpe uses daily adjusted-price returns in excess of the ECB €STR daily series (ACT/360), annualized with sqrt(252); missing rates leave Sharpe N/D.",
+        "Relative return remains N/D without a verified local benchmark mapping.",
         "ROIC remains N/D until a consistent tax rate and invested-capital definition are available.",
         "Automated access and redistribution rights must be checked before public use.",
     ]:
