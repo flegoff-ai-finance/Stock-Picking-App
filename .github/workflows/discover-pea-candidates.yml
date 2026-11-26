@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - "scripts/discover_pea_candidates.py"
+      - "scripts/build_pea_registry.py"
+      - "data/pea_verification.csv"
       - ".github/workflows/discover-pea-candidates.yml"
   workflow_dispatch:
   schedule:
@@ -22,15 +24,17 @@ jobs:
           python-version: "3.12"
       - name: Discover France and Europe candidate lists
         run: python scripts/discover_pea_candidates.py
+      - name: Build strict eligibility audit
+        run: python scripts/build_pea_registry.py
       - name: Commit candidate registry
         run: |
-          if [ -z "$(git status --porcelain -- data/pea_candidates.json)" ]; then
+          if [ -z "$(git status --porcelain -- data/pea_candidates.json data/pea_registry_audit.json)" ]; then
             echo "No candidate changes."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/pea_candidates.json
+          git add data/pea_candidates.json data/pea_registry_audit.json
           git commit -m "Refresh PEA candidate discovery registry"
           for attempt in 1 2 3 4 5; do
             git pull --rebase origin main
