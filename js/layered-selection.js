@@ -15,9 +15,9 @@
     return lowerIsBetter?100-p:p;
   };
   const specs={
-    growth:{label:'Growth',screen:[['revenue_cagr_3y_pct',false],['eps_growth_next_year_pct',false],['forward_pe',true]],final:[['peg',true,35],['revenue_cagr_3y_pct',false,20],['operating_margin_pct',false,15],['return_12_1m_pct',false,15],['max_drawdown_3y_pct',false,15]]},
-    quality:{label:'Growth Quality',screen:[['revenue_cagr_3y_pct',false],['operating_margin_pct',false],['roic_pct',false]],final:[['layer2_score',false,35],['forward_pe',true,10],['fcf_margin_pct',false,15],['roic_pct',false,15],['net_debt_ebitda',true,10],['max_drawdown_3y_pct',false,15]]},
-    momentum:{label:'Growth Momentum',screen:[['return_12_1m_pct',false],['return_6m_pct',false],['price_vs_sma200_pct',false]],final:[['layer2_score',false,35],['forward_pe',true,10],['eps_growth_next_year_pct',false,10],['sharpe_3y',false,15],['max_drawdown_1y_pct',false,15],['volatility_1y_pct',true,15]]}
+    growth:{label:'Growth',screen:[['revenue_cagr_3y_pct',false],['eps_growth_cagr_pct',false],['forward_pe',true]],final:[['peg',true,35],['revenue_cagr_3y_pct',false,20],['operating_margin_pct',false,15],['return_12_1m_pct',false,15],['max_drawdown_3y_pct',false,15]]},
+    quality:{label:'Growth Quality',screen:[['revenue_cagr_3y_pct',false],['operating_margin_pct',false],['roic_pct',false],['fcf_margin_pct',false],['net_debt_ebitda',true]],final:[['layer2_score',false,35],['forward_pe',true,10],['fcf_margin_pct',false,15],['roic_pct',false,15],['net_debt_ebitda',true,10],['max_drawdown_3y_pct',false,15]]},
+    momentum:{label:'Growth Momentum',screen:[['return_12_1m_pct',false],['return_6m_pct',false],['price_vs_sma200_pct',false],['volatility_1y_pct',true],['max_drawdown_1y_pct',false]],final:[['layer2_score',false,35],['forward_pe',true,10],['eps_growth_next_year_pct',false,10],['sharpe_3y',false,15],['max_drawdown_1y_pct',false,15],['volatility_1y_pct',true,15]]}
   };
   function screen(universe,key){
     const cfg=specs[key];
@@ -26,7 +26,12 @@
       const available=values.filter(v=>v!==null).length;
       const components=values.map((v,i)=>v===null?null:rank(universe.map(x=>n(x[cfg.screen[i][0]])),v,cfg.screen[i][1]));
       const valid=components.filter(v=>v!==null);
-      return {item,score:valid.length>=2?valid.reduce((a,b)=>a+b,0)/valid.length:null,coverage:available,coverageMax:cfg.screen.length};
+      const required=key==='growth'
+        ? values.every(v=>v!==null) && n(item.forward_pe)>0 && n(item.eps_growth_cagr_pct)>0
+        : key==='quality'
+          ? available>=4 && n(item.revenue_cagr_3y_pct)!==null && (n(item.roic_pct)!==null || n(item.fcf_margin_pct)!==null)
+          : available>=4 && n(item.return_12_1m_pct)!==null && n(item.return_6m_pct)!==null;
+      return {item,score:required?valid.reduce((a,b)=>a+b,0)/valid.length:null,coverage:available,coverageMax:cfg.screen.length,excludedReason:required?null:'Couverture stratégique minimale non atteinte'};
     });
     const ranked=raw.filter(x=>x.score!==null).sort((a,b)=>b.score-a.score||b.coverage-a.coverage);
     ranked.forEach((x,i)=>x.rank=i+1);
