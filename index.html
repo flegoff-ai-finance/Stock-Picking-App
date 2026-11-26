@@ -23,15 +23,15 @@
 </div>
 <div class="section-head"><h3>Les 3 stratégies</h3><span>Comparaison en construction</span></div>
 <div class="grid">
-<div class="card strategy"><span class="tag">STRATÉGIE 01</span><h3>Growth Quantitative</h3><p class="small muted">Croissance, momentum, révisions et valorisation.</p><div class="progress"><i style="width:30%"></i></div><div class="row small"><span class="muted">Moteur de score</span><b>Intégré · données à alimenter</b></div></div>
-<div class="card strategy"><span class="tag">STRATÉGIE 02</span><h3>Growth Quality</h3><p class="small muted">Croissance rentable, cash-flow et solidité du bilan.</p><div class="progress"><i style="width:30%"></i></div><div class="row small"><span class="muted">Moteur de score</span><b>Intégré · données à alimenter</b></div></div>
-<div class="card strategy"><span class="tag">STRATÉGIE 03</span><h3>Growth Momentum</h3><p class="small muted">Dynamique des cours, croissance et révisions.</p><div class="progress"><i style="width:30%"></i></div><div class="row small"><span class="muted">Moteur de score</span><b>Intégré · données à alimenter</b></div></div>
+<div class="card strategy"><span class="tag">STRATÉGIE 01</span><h3>Growth Quantitative</h3><p class="small muted">Croissance, momentum, révisions et valorisation.</p><div class="progress"><i style="width:30%"></i></div><div class="row small"><span class="muted">Moteur de score</span><b>Actif · PEG pluriannuel à alimenter</b></div></div>
+<div class="card strategy"><span class="tag">STRATÉGIE 02</span><h3>Growth Quality</h3><p class="small muted">Croissance rentable, cash-flow et solidité du bilan.</p><div class="progress"><i style="width:30%"></i></div><div class="row small"><span class="muted">Moteur de score</span><b>Actif · couverture pilote 75 %</b></div></div>
+<div class="card strategy"><span class="tag">STRATÉGIE 03</span><h3>Growth Momentum</h3><p class="small muted">Dynamique des cours, croissance et révisions.</p><div class="progress"><i style="width:30%"></i></div><div class="row small"><span class="muted">Moteur de score</span><b>Actif · couverture pilote 80 %</b></div></div>
 </div>
-<div class="section-head"><h3>À faire ensuite</h3><span>Feuille de route MVP</span></div>
+<div class="section-head"><h3>État d’avancement</h3><span>Version pilote</span></div>
 <div class="card list">
-<div class="list-row"><div><b>01 · Connecter les cours</b><div class="company">Historique, dernière cotation, fraîcheur des données</div></div><span class="pill">Prochaine étape</span></div>
-<div class="list-row"><div><b>02 · Calculer les scores</b><div class="company">Facteurs Growth / Quality / Momentum, note sur 100</div></div><span class="pill">À venir</span></div>
-<div class="list-row"><div><b>03 · Simuler les opérations</b><div class="company">Validation manuelle, frais et journal des décisions</div></div><span class="pill">À venir</span></div>
+<div class="list-row"><div><b>01 · Données de marché</b><div class="company">Yahoo Finance connecté · 7 titres pilotes · actualisation automatique</div></div><span class="pill">Actif</span></div>
+<div class="list-row"><div><b>02 · Moteurs Growth / Quality / Momentum</b><div class="company">Screening interne 150 maximum → 25 maximum → score final</div></div><span class="pill">Actif</span></div>
+<div class="list-row"><div><b>03 · Univers PEA exhaustif et backtests</b><div class="company">Élargir les titres vérifiés, compléter les données et valider les seuils</div></div><span class="pill">À construire</span></div>
 </div></section>
 <section id="strategies"><div class="section-head"><h3>Comparatif des stratégies</h3><span>Synthèse des règles validées</span></div><div class="card table-wrap"><table class="table"><thead><tr><th>Facteur</th><th>Growth Quant.</th><th>Growth Quality</th><th>Growth Momentum</th></tr></thead><tbody><tr><td>Mesure centrale</td><td>PEG (Forward P/E ÷ croissance BPA)</td><td>Score qualité pondéré /100</td><td>Score momentum pondéré /100</td></tr><tr><td>Valorisation dans le score</td><td>Oui · critère unique</td><td>Non · affichée séparément</td><td>Non · affichée séparément</td></tr><tr><td>Fondamentaux</td><td>Prévisions BPA + PER</td><td>CA, EBIT, marge, FCF, ROIC, dette</td><td>Non utilisés dans le score</td></tr><tr><td>Marché / risque</td><td>Indicateurs affichés séparément</td><td>Sharpe 3 ans, drawdown 3 ans</td><td>Performances, moyennes mobiles, Sharpe, drawdown, volatilité, performance relative</td></tr><tr><td>Classement</td><td>PEG croissant</td><td>Score décroissant</td><td>Score décroissant</td></tr><tr><td>Univers cible</td><td>Top 25</td><td>Top 25</td><td>Top 25</td></tr></tbody></table></div><div class="notice">Les scores Quality et Momentum utilisent les pondérations validées. Les rangs sont relatifs à l’univers PEA disposant de données complètes ; ils ne constituent pas une promesse de performance.</div></section>
 <section id="quality-model">
@@ -65,9 +65,9 @@
 </div>
 <div class="section-head"><h3>État des données</h3><span>Transparence avant tout score</span></div>
 <div class="grid">
-<div class="card"><div class="muted small">Données fondamentales</div><div class="metric">À connecter</div><div class="metric-sub">CA, EBIT, marges, FCF, ROIC, dette</div></div>
-<div class="card"><div class="muted small">Historique quotidien 3 ans</div><div class="metric">À collecter</div><div class="metric-sub">Cours ajustés et historique €STR synchronisé</div></div>
-<div class="card"><div class="muted small">Score Growth Quality</div><div class="metric">N/D</div><div class="metric-sub">Aucun score ne sera inventé ou extrapolé</div></div>
+<div class="card"><div class="muted small">Données fondamentales</div><div class="metric">Partielles</div><div class="metric-sub">CA, EBIT, marges, FCF et dette disponibles ; ROIC à compléter</div></div>
+<div class="card"><div class="muted small">Historique quotidien 3 ans</div><div class="metric">Connecté</div><div class="metric-sub">Cours ajustés Yahoo ; Sharpe N/D sans série €STR alignée</div></div>
+<div class="card"><div class="muted small">Score Growth Quality</div><div class="metric">Calculé · pilote</div><div class="metric-sub">Score renormalisé sur 75 % du poids documenté ; univers de 7 titres seulement</div></div>
 </div>
 <div class="notice">Important : le Sharpe d'une action ne préjuge pas du Sharpe du portefeuille. Le risque du portefeuille devra être calculé séparément à partir des rendements agrégés, des pondérations, des liquidités et des corrélations entre positions. Les frais simulés de 0,5 % à l'achat et à la vente seront intégrés aux backtests.</div>
 </section>
