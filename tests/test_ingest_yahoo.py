@@ -26,7 +26,10 @@ class YahooIngestionTests(unittest.TestCase):
         self.assertIsNone(growth_estimate_value(estimates, "+3y"))
 
     def test_ecb_estr_csv_parser(self):
-        content = "TIME_PERIOD,OBS_VALUE\\n2026-11-24,2.105\\n2026-11-25,2.104\\n"
+        content = """TIME_PERIOD,OBS_VALUE
+2026-11-24,2.105
+2026-11-25,2.104
+"""
         rates = parse_estr_csv(content)
         self.assertEqual(rates[date(2026, 11, 24)], 2.105)
         self.assertEqual(len(rates), 2)
