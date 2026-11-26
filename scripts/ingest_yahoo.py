@@ -132,7 +132,7 @@ def fundamental_metrics(info, financials, cashflow, balance):
         "roic_pct": None,
         "net_debt_ebitda": net_debt / ebitda if net_debt is not None and ebitda and ebitda > 0 else None,
         "forward_pe": number(info.get("forwardPE")),
-        "eps_growth_next_year_pct": number(info.get("earningsGrowth")) * 100 if number(info.get("earningsGrowth")) is not None else None,
+        "eps_growth_next_year_pct": None,
         # Yahoo's one-year growth is never substituted for a 3-5y PEG input.
         "eps_growth_cagr_pct": None,
         "fundamental_data_status": "partial" if revenue or ebit else "missing_statements",
