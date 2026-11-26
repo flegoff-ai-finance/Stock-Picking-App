@@ -21,6 +21,18 @@ SOURCES = {
     "france": "https://www.prorealtime.com/fr/financial-instruments/actions-eligibles-pea",
     "europe": "https://www.prorealtime.com/fr/financial-instruments/actions-europe-eligibles-pea",
     "eee": "https://www.prorealtime.com/fr/financial-instruments/actions-eee-eligibles-pea",
+    "meqiri": "https://meqiri.com/fr/actions/eligibles-pea",
+}
+MEQIRI_TICKER_RE = re.compile(r"^(?P<name>.+?)\\s+(?P<ticker>[A-Z0-9][A-Z0-9.\\-]{0,20}\\.(?:PA|DE|AS|MC|MI|BR|ST|CO|OL|HE|WA|VI|AT|IR|LS))$")
+COUNTRY_CODES = {
+    "France": "FR", "Allemagne": "DE", "Pays-Bas": "NL", "Grèce": "GR",
+    "Suède": "SE", "Pologne": "PL", "Finlande": "FI", "Espagne": "ES",
+    "Italie": "IT", "Belgique": "BE", "Danemark": "DK", "Norvège": "NO",
+    "Irlande": "IE", "Autriche": "AT", "Malte": "MT", "Chypre": "CY",
+    "Slovénie": "SI", "Luxembourg": "LU", "Estonie": "EE", "Lettonie": "LV",
+    "Lituanie": "LT", "Tchéquie": "CZ", "Croatie": "HR", "Hongrie": "HU",
+    "Bulgarie": "BG", "Islande": "IS", "Liechtenstein": "LI", "Portugal": "PT",
+    "Roumanie": "RO", "Slovaquie": "SK",
 }
 MARKET_SUFFIX = {
     "xpar": ".PA", "xams": ".AS", "xbru": ".BR", "xdub": ".IR",
@@ -112,21 +124,74 @@ def parse_listing(html, region, source_url):
     return rows
 
 
+def parse_meqiri_listing(html, source_url):
+    parser = ListingParser()
+    parser.feed(html)
+    rows = []
+    for cells in parser.rows:
+        texts = [" ".join(cell["text"]).strip() for cell in cells]
+        name, ticker, href = None, None, None
+        for index, value in enumerate(texts):
+            match = MEQIRI_TICKER_RE.fullmatch(value)
+            if match:
+                name, ticker = match.group("name").strip(), match.group("ticker")
+                href = cells[index].get("href")
+                break
+            if re.fullmatch(r"[A-Z0-9][A-Z0-9.\\-]{0,20}\\.(?:PA|DE|AS|MC|MI|BR|ST|CO|OL|HE|WA|VI|AT|IR|LS)", value):
+                ticker = value
+                name = texts[index - 1] if index > 0 else None
+                href = cells[index - 1].get("href") if index > 0 else cells[index].get("href")
+                break
+        if not name or not ticker:
+            continue
+        country_hint = next((code for country, code in COUNTRY_CODES.items()
+                             if any(country.casefold() == value.casefold() for value in texts)), None)
+        market = ticker.rsplit(".", 1)[-1]
+        rows.append({
+            "candidate_id": hashlib.sha1(("MEQIRI|" + ticker).encode("utf-8")).hexdigest()[:16],
+            "name": name,
+            "source_code": ticker.rsplit(".", 1)[0],
+            "source_market": market,
+            "provisional_yahoo_ticker": ticker,
+            "isin": None,
+            "pea_status": "pending_verification",
+            "verification_status": "prequalified_pending_legal_review",
+            "source": "MEQIRI PEA list",
+            "source_region": "meqiri",
+            "source_url": source_url,
+            "source_instrument_url": href,
+            "issuer_country_hint_iso2": country_hint,
+            "meqiri_pea_listed": True,
+            "eligibility_evidence": [],
+            "exclusion_reason": None,
+        })
+    return rows
+
+
 def main():
     fetched_at = datetime.now(timezone.utc).isoformat()
     discovered, errors = {}, []
     for region, url in SOURCES.items():
         try:
-            rows = parse_listing(fetch(url), region, url)
+            html = fetch(url)
+            rows = parse_meqiri_listing(html, url) if region == "meqiri" else parse_listing(html, region, url)
             if not rows:
                 raise RuntimeError("No instrument rows parsed; source markup may have changed.")
             for row in rows:
-                key = (row["source_market"], row["source_code"], row["name"].casefold())
+                ticker = row.get("provisional_yahoo_ticker")
+                key = ("ticker", ticker) if ticker else ("market", row["source_market"], row["source_code"], row["name"].casefold())
                 current = discovered.get(key)
                 if current is None:
+                    row["source_regions"] = [region]
                     discovered[key] = row
                 else:
                     current["source_regions"] = sorted(set(current.get("source_regions", [current["source_region"]]) + [region]))
+                    if region == "meqiri":
+                        current["meqiri_pea_listed"] = True
+                        current["issuer_country_hint_iso2"] = row.get("issuer_country_hint_iso2")
+                        current["pea_candidate_source_url"] = url
+                        current["verification_status"] = "prequalified_pending_legal_review"
+                        current["source_instrument_url"] = row.get("source_instrument_url") or current.get("source_instrument_url")
         except Exception as exc:
             errors.append({"region": region, "url": url, "error": str(exc)[:300]})
     if not discovered:
@@ -141,6 +206,7 @@ def main():
         "pending_verification_count": len(discovered),
         "provisional_ticker_mapped_count": sum(1 for row in discovered.values() if row["provisional_yahoo_ticker"]),
         "provisional_ticker_unmapped_count": sum(1 for row in discovered.values() if not row["provisional_yahoo_ticker"]),
+        "meqiri_prequalified_count": sum(1 for row in discovered.values() if row.get("meqiri_pea_listed")),
         "important_notice": "Discovery only. Directory presence is not legal proof of PEA eligibility. All rows remain excluded from scoring until eligibility, instrument type, ISIN and tax conditions are independently verified.",
         "source_errors": errors,
         "candidates": sorted(discovered.values(), key=lambda x: (x["name"].casefold(), x["source_code"])),
