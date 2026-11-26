@@ -120,7 +120,7 @@ async function loadTechnicalData(){
   const data=await response.json();
   const pct=v=>v===null||v===undefined?'—':(v>0?'+':'')+Number(v).toFixed(1)+' %';
   const euro=v=>new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR'}).format(v);
-  const isPeaEligible=x=>x.pea_status==='eligible'&&/^([A-Z]{2}[A-Z0-9]{10})$/.test(String(x.isin||''))&&/^\\d{4}-\\d{2}-\\d{2}$/.test(String(x.pea_checked_at||''))&&x.pea_checked_at>= '2026-11-26';
+  const isPeaEligible=x=>{const checkedAt=Date.parse(String(x.pea_checked_at||'')+'T00:00:00Z');const ageDays=(Date.now()-checkedAt)/86400000;return x.pea_status==='eligible'&&/^([A-Z]{2}[A-Z0-9]{10})$/.test(String(x.isin||''))&&Number.isFinite(checkedAt)&&ageDays>=0&&ageDays<=90;};
   const eligibleInstruments=data.instruments.filter(isPeaEligible);
   const excludedInstruments=data.instruments.filter(x=>!isPeaEligible(x));
   // Single source of truth for future scoring and proposal modules: only this list may be scored.
