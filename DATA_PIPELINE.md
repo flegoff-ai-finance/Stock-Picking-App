@@ -18,7 +18,7 @@ Before automating collection or redistributing any provider data in a public web
 - The current registry `data/technical_screener.json` still contains seven pilot securities only. It is not the complete PEA universe.
 - The PEA status gate remains independent from market-data providers. A data vendor listing does not prove PEA eligibility.
 - The previous EODHD ingestion script remains in the repository as a dormant alternative. No subscription has been purchased and no API token is configured.
-- The Yahoo Finance ingestion adapter is the next data-engineering step; it must be tested on a representative sample before being treated as reliable.
+- `scripts/ingest_yahoo.py` is the first Yahoo Finance adapter. It refreshes only the already verified registry entries, retrieves up to three years of adjusted daily prices, and attempts selected annual financial fields.\n- The Yahoo connector workflow runs on weekdays at 06:25 UTC and can also be started manually. It installs `yfinance` in the runner; no API key or paid subscription is required.\n- Yahoo `earningsGrowth` is deliberately not treated as a forward EPS growth estimate. The next-year and 3–5 year EPS growth fields remain N/D until a correctly defined estimate field is validated.\n- The connector has been added but live Yahoo retrieval and the first GitHub Actions run still need confirmation. The current registry remains seven pilot securities.
 
 ## Yahoo Finance pilot — intended scope
 
