@@ -1,6 +1,6 @@
 # PEA candidate discovery and eligibility controls
 
-The discovery job imports instrument names and trading codes from ProRealTime's public France and Europe PEA directories. It is a **candidate source only**, not a legal eligibility certificate.
+The discovery job imports instrument names and trading codes from ProRealTime's public France, Europe and EEA PEA directories. It is a **candidate source only**, not a legal eligibility certificate.
 
 Every discovered record is created with:
 - `pea_status=pending_verification`
