@@ -92,6 +92,19 @@ def pct_change(series, months):
     return (series[-1][1] / base - 1) * 100 if base > 0 else None
 
 
+def return_12_1(series):
+    if len(series) < 2:
+        return None
+    latest_date = series[-1][0].date()
+    start_target = latest_date - timedelta(days=366)
+    end_target = latest_date - timedelta(days=30)
+    starts = [row for row in series if row[0].date() <= start_target]
+    ends = [row for row in series if row[0].date() <= end_target]
+    if not starts or not ends or starts[-1][1] <= 0:
+        return None
+    return (ends[-1][1] / starts[-1][1] - 1) * 100
+
+
 def max_drawdown(series):
     peak = None
     worst = 0.0
@@ -130,7 +143,7 @@ def price_metrics(history):
         "last_date": rows[-1][0].date().isoformat(),
         "return_6m_pct": pct_change(rows, 6),
         "return_12m_pct": pct_change(rows, 12),
-        "return_12_1m_pct": (pct_change(rows, 11) if pct_change(rows, 12) is not None else None),
+        "return_12_1m_pct": return_12_1(rows),
         "price_vs_sma200_pct": (latest / sma200 - 1) * 100 if sma200 else None,
         "sma50_vs_sma200_pct": (sma50 / sma200 - 1) * 100 if sma50 and sma200 else None,
         "volatility_1y_pct": vol,
@@ -238,7 +251,7 @@ def main():
             fundamentals = request_json(f"fundamentals/{ticker}", {"filter": "General,Highlights,Valuation,Technicals,Earnings,Financials"})
             item.update(price_metrics(history))
             item.update(fundamental_metrics(fundamentals if isinstance(fundamentals, dict) else {}))
-            item["provider"] = "EODHD"
+            item["provider"] = "EODHD"\n            item["provider_data_status"] = "ok"
             item["provider_retrieved_at_utc"] = datetime.now(timezone.utc).isoformat()
         except Exception as exc:  # Keep the rest of the universe usable when one symbol fails.
             item["provider_data_status"] = "error"
