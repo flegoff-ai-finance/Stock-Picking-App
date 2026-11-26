@@ -23,7 +23,9 @@ SOURCES = {
 }
 MARKET_SUFFIX = {
     "xpar": ".PA", "xams": ".AS", "xbru": ".BR", "xdub": ".IR",
-    "xlis": ".LS", "xmil": ".MI", "xosl": ".OL",
+    "xlis": ".LS", "xmil": ".MI", "xosl": ".OL", "xetr": ".DE",
+    "xfra": ".DE", "xmce": ".MC", "xsto": ".ST", "xhel": ".HE",
+    "xcse": ".CO", "xwar": ".WA",
 }
 
 
