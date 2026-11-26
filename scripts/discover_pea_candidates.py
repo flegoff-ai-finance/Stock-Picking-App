@@ -137,7 +137,7 @@ def parse_meqiri_listing(html, source_url):
                 name, ticker = match.group("name").strip(), match.group("ticker")
                 href = cells[index].get("href")
                 break
-            if re.fullmatch(r"[A-Z0-9][A-Z0-9.\-]{0,20}\.(?:PA|DE|AS|MC|MI|BR|ST|CO|OL|HE|WA|VI|AT|IR|LS)", value):
+            if re.fullmatch(r"[A-Z0-9][A-Z0-9.\-]{0,20}\.(?:PA|DE|F|AS|MC|MI|BR|ST|CO|OL|HE|WA|VI|AT|IR|LS|PR|IS|BD|RO)", value):
                 ticker = value
                 name = texts[index - 1] if index > 0 else None
                 href = cells[index - 1].get("href") if index > 0 else cells[index].get("href")
