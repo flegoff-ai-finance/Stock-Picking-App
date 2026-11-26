@@ -5,6 +5,7 @@ on:
     paths:
       - "index.html"
       - "js/**"
+      - "tests/test_selection_engines.js"
       - ".github/workflows/validate-selection.yml"
   pull_request:
     paths:
