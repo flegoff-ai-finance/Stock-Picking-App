@@ -112,7 +112,35 @@ def calculate_sharpe(price_points, risk_free_rates):
     return statistics.mean(excess_returns) / deviation * math.sqrt(252)
 
 
-def price_metrics(history, risk_free_rates=None):
+def calculate_relative_return(stock_points, benchmark_points, months=6):
+    """Stock return minus local benchmark return over the same six-month window."""
+    if len(stock_points) < 2 or len(benchmark_points) < 2:
+        return None
+    as_of = min(stock_points[-1][0], benchmark_points[-1][0])
+    target = as_of - timedelta(days=round(months * 30.4375))
+
+    def window_return(points):
+        prior = [(day, close) for day, close in points if day <= target]
+        latest = [(day, close) for day, close in points if day <= as_of]
+        if not prior or not latest or prior[-1][1] <= 0:
+            return None
+        return latest[-1][1] / prior[-1][1] - 1
+
+    stock_return = window_return(stock_points)
+    benchmark_return = window_return(benchmark_points)
+    if stock_return is None or benchmark_return is None:
+        return None
+    return (stock_return - benchmark_return) * 100
+
+
+def benchmark_for_ticker(ticker):
+    # CAC 40 is used as the current France-listed universe proxy only.
+    if str(ticker).upper().endswith(".PA"):
+        return {"ticker": "^FCHI", "name": "CAC 40 (proxy France)"}
+    return None
+
+
+def price_metrics(history, risk_free_rates=None, benchmark_history=None):
     if history is None or history.empty or "Close" not in history:
         return {"price_data_status": "missing_history"}
     closes = history["Close"].dropna()
@@ -146,6 +174,14 @@ def price_metrics(history, risk_free_rates=None):
     sma200 = statistics.mean(values[-200:]) if len(values) >= 200 else None
     latest = values[-1]
     vol = statistics.stdev(one_year_returns) * math.sqrt(252) * 100 if len(one_year_returns) > 20 else None
+    stock_points = [(d.date() if hasattr(d, "date") else d, v) for d, v in zip(dates, values)]
+    benchmark_points = []
+    if benchmark_history is not None and not getattr(benchmark_history, "empty", True) and "Close" in benchmark_history:
+        benchmark_closes = benchmark_history["Close"].dropna().sort_index()
+        benchmark_points = [
+            (d.date() if hasattr(d, "date") else d, float(v))
+            for d, v in zip(benchmark_closes.index, benchmark_closes.tolist())
+        ]
     start_12m = [(d, v) for d, v in zip(dates, values) if d.date() <= latest_date - timedelta(days=366)]
     end_1m = [(d, v) for d, v in zip(dates, values) if d.date() <= latest_date - timedelta(days=30)]
     momentum = (end_1m[-1][1] / start_12m[-1][1] - 1) * 100 if start_12m and end_1m and start_12m[-1][1] > 0 else None
@@ -163,7 +199,7 @@ def price_metrics(history, risk_free_rates=None):
              if (d.date() if hasattr(d, "date") else d) >= three_year_start],
             risk_free_rates or {},
         ),
-        "relative_return_6m_pct": None,
+        "relative_return_6m_pct": calculate_relative_return(stock_points, benchmark_points),
         "observations": len(values), "price_data_status": "ok",
     }
 
@@ -224,7 +260,7 @@ def verified_instruments(document, today=None):
     return result
 
 
-def update_instrument(item, ticker_factory=None, risk_free_rates=None):
+def update_instrument(item, ticker_factory=None, risk_free_rates=None, benchmark_history=None, benchmark_info=None):
     factory = ticker_factory or yf.Ticker
     ticker = factory(item["ticker"])
     history = ticker.history(period="3y", auto_adjust=True, actions=False)
@@ -236,7 +272,13 @@ def update_instrument(item, ticker_factory=None, risk_free_rates=None):
             info = ticker.info or {}
         except Exception:
             info = {}
-    item.update(price_metrics(history, risk_free_rates))
+    item.update(price_metrics(history, risk_free_rates, benchmark_history))
+    if benchmark_info:
+        item["benchmark_ticker"] = benchmark_info["ticker"]
+        item["benchmark_name"] = benchmark_info["name"]
+    else:
+        item["benchmark_ticker"] = None
+        item["benchmark_name"] = None
     estimates = {}
     try:
         estimates = ticker.get_growth_estimates(as_dict=True) or {}
@@ -265,9 +307,27 @@ def main():
         risk_free_rates = {}
         document["risk_free_rate_error"] = str(exc)[:240]
         errors.append({"source": "ECB €STR", "error": str(exc)[:240]})
+    benchmark_cache = {}
     for item in eligible:
+        benchmark_info = benchmark_for_ticker(item.get("ticker", ""))
+        benchmark_history = None
+        if benchmark_info:
+            benchmark_ticker = benchmark_info["ticker"]
+            if benchmark_ticker not in benchmark_cache:
+                try:
+                    benchmark_cache[benchmark_ticker] = yf.Ticker(benchmark_ticker).history(
+                        period="3y", auto_adjust=True, actions=False
+                    )
+                except Exception:
+                    benchmark_cache[benchmark_ticker] = None
+            benchmark_history = benchmark_cache[benchmark_ticker]
         try:
-            update_instrument(item, risk_free_rates=risk_free_rates)
+            update_instrument(
+                item,
+                risk_free_rates=risk_free_rates,
+                benchmark_history=benchmark_history,
+                benchmark_info=benchmark_info if benchmark_history is not None else None,
+            )
         except Exception as exc:
             item["provider"] = "Yahoo Finance (yfinance)"
             item["provider_data_status"] = "error"
@@ -283,7 +343,7 @@ def main():
         "Yahoo Finance via yfinance is an unofficial interface; coverage and fields vary by security.",
         "EPS growth estimates use Yahoo's explicit +1y and +5y consensus fields; +5y is the PEG growth input and is never substituted by earningsGrowth.",
         "Sharpe uses daily adjusted-price returns in excess of the ECB €STR daily series (ACT/360), annualized with sqrt(252); missing rates leave Sharpe N/D.",
-        "Relative return remains N/D without a verified local benchmark mapping.",
+        "Relative return is calculated against the CAC 40 proxy for Paris-listed pilot securities; other exchanges remain N/D until a local benchmark mapping is verified.",
         "ROIC remains N/D until a consistent tax rate and invested-capital definition are available.",
         "Automated access and redistribution rights must be checked before public use.",
     ]:
