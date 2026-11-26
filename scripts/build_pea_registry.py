@@ -125,6 +125,7 @@ def build(today=None):
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
         "imported_candidate_count": len(rows),
         "newly_verified_count": len(verified),
+        "pending_count": len(pending),
         "legacy_verified_pilot_count": len(pilot_verified),
         "total_verified_universe_count": len(verified) + len(pilot_verified),
         "verified_pilot_names": [row.get("name") for row in pilot_verified],
