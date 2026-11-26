@@ -1,3 +1,4 @@
+// Regression coverage for the hidden first screening layer and visible strategy outputs.
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');
