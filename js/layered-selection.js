@@ -52,19 +52,33 @@
     valid.forEach((x,i)=>x.finalRank=i+1);
     return {rows:valid.concat(scored.filter(x=>x.score===null)),valid:valid.length};
   }
-  function build(universe){
+  function isPeaVerified(item,today=new Date()){
+    if(!item||item.pea_status!=='eligible'||!/^([A-Z]{2}[A-Z0-9]{10})$/.test(String(item.isin||''))||!String(item.ticker||'').trim())return false;
+    const checked=Date.parse(String(item.pea_checked_at||item.verified_at||'')+'T00:00:00Z');
+    const age=(today.getTime()-checked)/86400000;
+    return Number.isFinite(checked)&&age>=0&&age<=90;
+  }
+  function build(universe,peaRegistry){
     const engines=window.StockPickingEngines;
     if(!engines)return [];
+    const registry=Array.isArray(peaRegistry)?peaRegistry:universe;
+    const verifiedByIsin=new Map(registry.filter(item=>isPeaVerified(item)).map(item=>[String(item.isin).toUpperCase(),item]));
     return Object.keys(specs).map(key=>{
       const first=screen(universe,key);
-      // Screening rows are wrappers; strategic engines must receive the underlying instruments.
-      const candidates=first.candidates.map(row=>row.item);
+      // Layer 1 ranks the full discovery pool. PEA evidence is applied only afterwards.
+      // Continue down the ranked list until 150 verified instruments are found, so
+      // unverified candidates are replaced by the next ranked candidate.
+      const candidates=first.ranked
+        .map(row=>({discovery:row.item,verified:verifiedByIsin.get(String(row.item.isin||'').toUpperCase())}))
+        .filter(row=>row.verified)
+        .slice(0,150)
+        .map(row=>({...row.discovery,...row.verified}));
       const engine=key==='growth'?engines.growth(candidates):key==='quality'?engines.quality(candidates):engines.momentum(candidates);
       const finalists=engine.ranked.slice(0,25).map(r=>({item:r.item,peg:r.peg??null,layer2_score:r.score??null,layer2_rank:r.rank??null,layer2_coverage:r.coverage??null,layer2_coverage_weight_pct:r.coverageWeightPct??null}));
       const third=finalScore(finalists,key);
       const blockers={};
       (engine.rows||[]).filter(r=>r.reason).forEach(r=>{blockers[r.reason]=(blockers[r.reason]||0)+1;});
-      return {key,label:specs[key].label,screened:first.candidates.length,engine,finalists,third,blockers};
+      return {key,label:specs[key].label,screened:first.candidates.length,peaVerified:candidates.length,peaRejected:first.ranked.length-candidates.length,engine,finalists,third,blockers};
     });
   }
   const fmt=v=>v===null||v===undefined?'—':Number(v).toFixed(1);
@@ -97,7 +111,7 @@
           ?'<div class="empty"><b>Aucun titre ne satisfait encore les exigences de données de '+esc(o.label)+'.</b><br>'+o.screened+' candidat(s) transmis par le filtre interne ; indicateurs stratégiques incomplets. Aucun classement artificiel.</div>'
           :'<div class="empty">Aucun finaliste disponible.</div>';
         return '<div class="card wide" style="margin-top:14px"><div class="row"><h3>'+o.label+'</h3><span class="pill">'+o.finalists.length+' / 25 finalistes</span></div>'+
-          '<div class="grid"><div><div class="small muted">Univers PEA vérifié</div><div class="metric">'+(o.engine.required??o.screened)+'</div><div class="metric-sub">Titres transmis au moteur</div></div><div><div class="small muted">Couche 2 · analyse stratégique</div><div class="metric">'+o.engine.available+' / '+o.screened+'</div><div class="metric-sub">Dossiers classables avec les indicateurs requis</div></div><div><div class="small muted">Couche 3 · score final</div><div class="metric">'+o.third.valid+' / '+o.finalists.length+'</div><div class="metric-sub">Scores suffisamment documentés</div></div></div>'+
+          '<div class="grid"><div><div class="small muted">Titres vérifiés PEA après couche 2</div><div class="metric">'+(o.engine.required??o.screened)+'</div><div class="metric-sub">Titres transmis au moteur après vérification PEA</div></div><div><div class="small muted">Couche 2 · analyse stratégique</div><div class="metric">'+o.engine.available+' / '+o.screened+'</div><div class="metric-sub">Dossiers classables avec les indicateurs requis</div></div><div><div class="small muted">Couche 3 · score final</div><div class="metric">'+o.third.valid+' / '+o.finalists.length+'</div><div class="metric-sub">Scores suffisamment documentés</div></div></div>'+
           '<div class="section-head"><h3>Couche 2 · sélection stratégique</h3><span>Top 25 maximum</span></div>'+
           (secondRows?topTable('<th>Rang</th><th>Société</th><th>'+(o.key==='growth'?'PEG':'Score stratégique /100')+'</th><th>Couverture</th><th>Indicateurs</th>',secondRows,'Aucun titre classable.'):layer2Empty)+
           (blockerText?'<div class="notice"><strong>Indicateurs bloquants :</strong><ul>'+blockerText+'</ul></div>':'')+
