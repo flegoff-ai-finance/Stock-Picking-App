@@ -1,6 +1,6 @@
 import unittest
 from datetime import date, timedelta
-from scripts.ingest_yahoo import (cagr, calculate_sharpe, growth_estimate_value, parse_estr_csv, price_metrics, verified_instruments)
+from scripts.ingest_yahoo import (cagr, calculate_relative_return, calculate_sharpe, growth_estimate_value, parse_estr_csv, price_metrics, verified_instruments)
 
 
 class YahooIngestionTests(unittest.TestCase):
@@ -33,6 +33,11 @@ class YahooIngestionTests(unittest.TestCase):
         rates = parse_estr_csv(content)
         self.assertEqual(rates[date(2026, 11, 24)], 2.105)
         self.assertEqual(len(rates), 2)
+
+    def test_relative_return_uses_same_six_month_window(self):
+        stock = [(date(2026, 1, 1), 100.0), (date(2026, 7, 1), 120.0)]
+        benchmark = [(date(2026, 1, 1), 100.0), (date(2026, 7, 1), 110.0)]
+        self.assertAlmostEqual(calculate_relative_return(stock, benchmark), 10.0, places=6)
 
     def test_sharpe_uses_aligned_risk_free_rate(self):
         start = date(2025, 1, 1)
