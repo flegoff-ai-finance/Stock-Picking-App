@@ -1,7 +1,7 @@
 import unittest
 from datetime import date
 
-from scripts.build_pea_registry import validate_review
+from scripts.build_pea_registry import is_recently_verified_pilot, validate_review
 
 
 class PeaRegistryAuditTests(unittest.TestCase):
@@ -18,6 +18,13 @@ class PeaRegistryAuditTests(unittest.TestCase):
             "verified_by": "reviewer",
             "verified_at": "2026-11-26",
         }
+
+    def test_recent_verified_pilot_is_counted_but_stale_one_is_not(self):
+        row = {"pea_status": "eligible", "isin": "FR0000120271",
+               "ticker": "TTE.PA", "pea_checked_at": "2026-11-26"}
+        self.assertTrue(is_recently_verified_pilot(row, date(2026, 11, 26)))
+        row["pea_checked_at"] = "2026-01-01"
+        self.assertFalse(is_recently_verified_pilot(row, date(2026, 11, 26)))
 
     def test_complete_recent_evidence_is_accepted(self):
         self.assertEqual(validate_review(self.valid_review(), {"abc123"}, date(2026, 11, 26)), [])
