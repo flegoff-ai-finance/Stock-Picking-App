@@ -13,15 +13,15 @@
 
 ## Couche 1 — screening large
 
-Le premier écran utilise des facteurs simples et relativement accessibles. Un titre doit avoir au moins deux facteurs disponibles sur trois pour être classable. Les facteurs sont transformés en rangs percentiles au sein de l'univers PEA vérifié ; les facteurs manquants ne contribuent pas au score et la couverture est affichée.
+Le premier écran est appliqué à l'univers de découverte complet, avant la vérification PEA. Un titre qui ne respecte pas le socle minimal de données de sa stratégie est exclu immédiatement. Les données manquantes ne sont ni imputées ni remplacées par zéro. Les candidats classables sont rangés par percentiles et le moteur conserve au maximum 150 candidats par stratégie.
 
-| Stratégie | Facteurs de screening | Sens favorable |
+| Stratégie | Indicateurs du filtre | Règle minimale de passage |
 |---|---|---|
-| Growth | CAGR du CA 3 ans ; croissance BPA estimée à 1 an ; Forward P/E | Plus élevé ; plus élevé ; plus faible |
-| Growth Quality | CAGR du CA 3 ans ; marge opérationnelle ; ROIC | Plus élevé pour les trois |
-| Growth Momentum | Performance 12-1 mois ; performance 6 mois ; cours vs MM200 | Plus élevé pour les trois |
+| Growth | CAGR du CA 3 ans ; croissance BPA annualisée estimée à 5 ans ; Forward P/E | Les 3 disponibles ; Forward P/E et croissance BPA strictement positifs pour calculer le PEG |
+| Growth Quality | CAGR du CA 3 ans ; marge opérationnelle ; ROIC ; marge FCF ; dette nette / EBITDA | Au moins 4 sur 5, avec croissance du CA obligatoire et ROIC ou marge FCF obligatoire |
+| Growth Momentum | Performance 12-1 mois ; performance 6 mois ; cours vs MM200 ; volatilité 1 an ; drawdown 1 an | Au moins 4 sur 5, avec les performances 12-1 mois et 6 mois obligatoires |
 
-La croissance BPA à un an n'est qu'un filtre initial de découverte. Elle ne remplace jamais la croissance BPA 3–5 ans utilisée dans le PEG classique.
+Les candidats écartés sont comptabilisés par stratégie avec un motif d'exclusion. Les raisons incluent notamment l'absence de données financières, un historique de cours trop court ou l'absence d'un indicateur indispensable.
 
 ## Couche 2 — vérification PEA et sélection stratégique approfondie
 
@@ -29,11 +29,11 @@ Le moteur classe d'abord l'univers de découverte complet. Il prend ensuite les 
 
 Le moteur stratégique est appliqué uniquement aux candidats retenus après ce contrôle PEA.
 
-- Growth : PEG classique = Forward P/E / croissance annuelle anticipée du BPA en pourcentage. Croissance BPA pluriannuelle positive requise ; classement par PEG croissant.
-- Growth Quality : score pondéré existant, fondé sur croissance CA et EBIT, marges opérationnelle et FCF, ROIC, dette nette/EBITDA, Sharpe 3 ans et drawdown 3 ans.
-- Growth Momentum : score pondéré existant, fondé sur momentum 12-1, performance 6 mois, cours vs MM200, MM50 vs MM200, Sharpe 3 ans, drawdown 1 an, volatilité 1 an et performance relative à l'indice local.
+- Growth : PEG classique = Forward P/E / croissance annuelle anticipée du BPA à 5 ans en pourcentage. Les quatre données (Forward P/E, croissance BPA 5 ans, PEG calculable et CAGR du CA 3 ans) sont indispensables ; la croissance BPA doit être positive. Classement par PEG croissant.
+- Growth Quality : au moins 4 indicateurs sur 5 doivent être présents : CAGR du CA, marge opérationnelle, ROIC, marge FCF et dette nette / EBITDA. La croissance du CA est obligatoire, ainsi que le ROIC ou la marge FCF.
+- Growth Momentum : au moins 4 indicateurs sur 5 doivent être présents : performance 12-1 mois, performance 6 mois, cours vs MM200, volatilité 1 an et drawdown 1 an. Les performances 12-1 mois et 6 mois sont obligatoires.
 
-Seuls les 25 premiers titres classables sont transmis à la couche 3. Les moteurs stratégiques n'imputent aucune donnée. Un score de couche 2 n'est calculé que si au moins quatre facteurs sont disponibles et si leur poids cumulé atteint 75 % du poids total ; les poids absents sont renormalisés sur les seuls facteurs documentés. La couverture en nombre de facteurs et en poids doit rester visible.
+Seuls les 25 premiers titres classables sont transmis à la couche 3. Les titres qui échouent aux règles minimales sont exclus du classement de la stratégie concernée, même si d'autres indicateurs sont disponibles. Les motifs d'exclusion sont comptabilisés. Les scores ne reposent que sur des données observées ; aucune donnée manquante n'est imputée.
 
 ## Couche 3 — score global et décision
 
