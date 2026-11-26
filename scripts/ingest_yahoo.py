@@ -261,6 +261,16 @@ def verified_instruments(document, today=None):
     return result
 
 
+def select_ingestion_batch(eligible, batch_size=50):
+    def last_updated(item):
+        value = item.get("market_data_last_updated_utc") or item.get("provider_retrieved_at_utc")
+        try:
+            return datetime.fromisoformat(str(value).replace("Z", "+00:00")).timestamp()
+        except (TypeError, ValueError):
+            return 0
+    return sorted(eligible, key=last_updated)[:max(1, int(batch_size))]
+
+
 def update_instrument(item, ticker_factory=None, risk_free_rates=None, benchmark_history=None, benchmark_info=None):
     factory = ticker_factory or yf.Ticker
     ticker = factory(item["ticker"])
@@ -303,14 +313,7 @@ def main():
     document = json.loads(DATA.read_text(encoding="utf-8"))
     eligible = verified_instruments(document)
     batch_size = max(1, int(os.getenv("PEA_INGEST_BATCH_SIZE", "50")))
-    def last_updated(item):
-        value = item.get("market_data_last_updated_utc") or item.get("provider_retrieved_at_utc")
-        try:
-            return datetime.fromisoformat(str(value).replace("Z", "+00:00")).timestamp()
-        except (TypeError, ValueError):
-            return 0
-    eligible.sort(key=last_updated)
-    batch = eligible[:batch_size]
+    batch = select_ingestion_batch(eligible, batch_size)
     errors = []
     try:
         risk_free_rates = fetch_estr_rates(date.today() - timedelta(days=3 * 365 + 10))
