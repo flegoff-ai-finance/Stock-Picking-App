@@ -18,7 +18,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OUTPUT = ROOT / "data" / "discovery_universe.csv"
 SOURCE_REPO = "JerBouma/FinanceDatabase"
-MARKETS = ("PAR", "AMS", "BRU", "MIL", "GER", "STO", "CPH", "HEL", "OSL", "LIS", "VIE", "ATH", "PRA", "BUD", "WSE", "FRA", "HAM", "MUN", "BER")
+MARKETS = (
+    "PAR", "AMS", "BRU", "MIL", "GER", "STO", "CPH", "HEL", "OSL",
+    "LIS", "VIE", "ATH", "PRA", "BUD", "WSE", "FRA", "HAM", "MUN", "BER",
+)
 HOME_MARKET = {
     "France": "PAR", "Netherlands": "AMS", "Belgium": "BRU", "Italy": "MIL",
     "Germany": "GER", "Sweden": "STO", "Denmark": "CPH", "Finland": "HEL",
@@ -44,15 +47,12 @@ def valid_isin(value: str) -> bool:
     if not re.fullmatch(r"[A-Z]{2}[A-Z0-9]{10}", value):
         return False
     expanded = "".join(str(int(ch, 36)) if ch.isalpha() else ch for ch in value)
-    digits = "".join(str(int(ch) * 2) if i % 2 == (len(expanded) - 2) % 2 else ch
-                     for i, ch in enumerate(expanded))
-    # Standard Luhn check, expanding letters before applying parity.
     nums = [int(ch) for ch in expanded]
     total = 0
     parity = len(nums) % 2
-    for i, number in enumerate(nums):
-        n = number * (2 if i % 2 == parity else 1)
-        total += n // 10 + n % 10
+    for index, number in enumerate(nums):
+        doubled = number * (2 if index % 2 == parity else 1)
+        total += doubled // 10 + doubled % 10
     return total % 10 == 0
 
 
@@ -62,7 +62,7 @@ def _truthy_delisted(value: str) -> bool:
 
 def build_candidates(rows_by_market: dict[str, list[dict]], source_commit: str,
                      retrieved_at: str) -> list[dict]:
-    priority = {market: index for index, market in enumerate(MARKETS)}
+    market_priority = {market: index for index, market in enumerate(MARKETS)}
     selected: dict[str, dict] = {}
     for market, rows in rows_by_market.items():
         for row in rows:
@@ -91,7 +91,10 @@ def build_candidates(rows_by_market: dict[str, list[dict]], source_commit: str,
                 "source": f"https://github.com/{SOURCE_REPO}/tree/{source_commit}/database/equities",
                 "source_commit": source_commit,
                 "retrieved_at_utc": retrieved_at,
-                "_priority": (0 if HOME_MARKET.get(country) == market else 1, priority.get(market, 999)),
+                "_priority": (
+                    0 if HOME_MARKET.get(country) == market else 1,
+                    market_priority.get(market, 999),
+                ),
             }
             previous = selected.get(isin)
             if previous is None or candidate["_priority"] < previous["_priority"]:
@@ -125,7 +128,12 @@ def build(output: Path = DEFAULT_OUTPUT, markets=MARKETS) -> int:
             rows_by_market[market] = list(csv.DictReader(io.StringIO(_get_text(url))))
         except Exception as exc:
             print(f"Skipping {market}: {exc}")
-    if len(rows_by_market) < 6:\n        raise RuntimeError(f"Only {len(rows_by_market)} exchange files downloaded; refusing to overwrite the previous universe.")\n    rows = build_candidates(rows_by_market, commit, retrieved_at)
+    if len(rows_by_market) < 6:
+        raise RuntimeError(
+            f"Only {len(rows_by_market)} exchange files downloaded; "
+            "refusing to overwrite the previous universe."
+        )
+    rows = build_candidates(rows_by_market, commit, retrieved_at)
     output.parent.mkdir(parents=True, exist_ok=True)
     with output.open("w", encoding="utf-8", newline="") as stream:
         writer = csv.DictWriter(stream, fieldnames=FIELDNAMES)
