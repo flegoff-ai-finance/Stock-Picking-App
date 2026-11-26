@@ -19,6 +19,7 @@ try:
 except ImportError:
     yf = None
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from scripts.ingest_yahoo import fetch_estr_rates, price_metrics, verified_instruments
 
 ROOT = Path(__file__).resolve().parents[1]
