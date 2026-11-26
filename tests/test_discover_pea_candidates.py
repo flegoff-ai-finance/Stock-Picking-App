@@ -1,6 +1,6 @@
 import unittest
 
-from scripts.discover_pea_candidates import parse_listing, parse_meqiri_listing
+from scripts.discover_pea_candidates import extract_meqiri_total, parse_listing, parse_meqiri_listing
 
 
 class CandidateDiscoveryTests(unittest.TestCase):
@@ -51,6 +51,10 @@ class CandidateDiscoveryTests(unittest.TestCase):
         self.assertTrue(rows[0]["meqiri_pea_listed"])
         self.assertEqual(rows[2]["provisional_yahoo_ticker"], "ADDT-B.ST")
         self.assertEqual(rows[3]["provisional_yahoo_ticker"], "1SXP.F")
+
+    def test_extracts_total_meqiri_universe_count(self):
+        html = "<h1>1 332 actions de sociétés ayant leur siège dans l'Union européenne</h1>"
+        self.assertEqual(extract_meqiri_total(html), 1332)
 
     def test_ignores_header_and_empty_rows(self):
         html = "<table><tr><td>Code</td><td>Nom</td></tr><tr><td></td><td></td></tr></table>"
