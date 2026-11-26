@@ -25,6 +25,8 @@ jobs:
         run: |
           node --check js/scoring-engines.js
           node --check js/layered-selection.js
+      - name: Run stock selection engine tests
+        run: node tests/test_selection_engines.js
       - name: Check inline application script
         run: |
           python - <<'PY'
