@@ -10,6 +10,7 @@ import csv
 import io
 import json
 import math
+import os
 import re
 import statistics
 import sys
@@ -290,6 +291,7 @@ def update_instrument(item, ticker_factory=None, risk_free_rates=None, benchmark
     item["risk_free_rate_last_date"] = str(max(risk_free_rates)) if risk_free_rates else None
     item["provider"] = "Yahoo Finance (yfinance)"
     item["provider_retrieved_at_utc"] = datetime.now(timezone.utc).isoformat()
+    item["market_data_last_updated_utc"] = item["provider_retrieved_at_utc"]
     item["provider_data_status"] = "ok" if item.get("price_data_status") == "ok" else "partial"
     item.pop("provider_error", None)
 
@@ -300,6 +302,15 @@ def main():
         return 2
     document = json.loads(DATA.read_text(encoding="utf-8"))
     eligible = verified_instruments(document)
+    batch_size = max(1, int(os.getenv("PEA_INGEST_BATCH_SIZE", "50")))
+    def last_updated(item):
+        value = item.get("market_data_last_updated_utc") or item.get("provider_retrieved_at_utc")
+        try:
+            return datetime.fromisoformat(str(value).replace("Z", "+00:00")).timestamp()
+        except (TypeError, ValueError):
+            return 0
+    eligible.sort(key=last_updated)
+    batch = eligible[:batch_size]
     errors = []
     try:
         risk_free_rates = fetch_estr_rates(date.today() - timedelta(days=3 * 365 + 10))
@@ -308,7 +319,7 @@ def main():
         document["risk_free_rate_error"] = str(exc)[:240]
         errors.append({"source": "ECB €STR", "error": str(exc)[:240]})
     benchmark_cache = {}
-    for item in eligible:
+    for item in batch:
         benchmark_info = benchmark_for_ticker(item.get("ticker", ""))
         benchmark_history = None
         if benchmark_info:
@@ -335,7 +346,11 @@ def main():
             errors.append({"ticker": item["ticker"], "error": str(exc)[:240]})
     document["generated_at_utc"] = datetime.now(timezone.utc).isoformat()
     document["data_provider"] = "Yahoo Finance (yfinance)"
-    document["pea_verified_universe_count"] = len(eligible)
+    document["pea_verified_universe_count"] = len(verified_instruments(document))
+    document["batch_processed_count"] = len(batch)
+    document["batch_remaining_count"] = max(0, len(eligible) - len(batch))
+    document["data_ok_count"] = sum(1 for item in document.get("instruments", []) if item.get("price_data_status") == "ok")
+    document["universe_count"] = len(document.get("instruments", []))
     document["provider_errors"] = errors
     methodology = document.setdefault("methodology", {})
     limitations = methodology.setdefault("limitations", [])
@@ -357,7 +372,7 @@ def main():
         if note not in limitations:
             limitations.append(note)
     DATA.write_text(json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"Yahoo refresh complete: {len(eligible)} verified PEA instruments; {len(errors)} errors.")
+    print(f"Yahoo refresh complete: {len(batch)}/{len(eligible)} verified PEA instruments processed; {max(0, len(eligible)-len(batch))} remain in queue; {len(errors)} errors.")
     return 0
 
 
