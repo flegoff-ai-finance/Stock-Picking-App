@@ -12,7 +12,7 @@ vm.runInContext(fs.readFileSync(root + '/js/layered-selection.js', 'utf8'), cont
 
 const pilot = context.window.StockPickingLayeredSelection.run(document.instruments);
 assert.equal(pilot.length, 3);
-assert.deepEqual(pilot.map(x => x.key), ['growth', 'quality', 'momentum']);
+assert.equal(Array.from(pilot, x => x.key).join(','), 'growth,quality,momentum');
 for (const strategy of pilot) {
   assert.equal(strategy.screened, 7, strategy.key + ' should screen the seven verified pilot securities internally');
   assert.equal(strategy.finalists.length, 0, strategy.key + ' must not invent layer-2 scores');
