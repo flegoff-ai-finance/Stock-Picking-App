@@ -39,7 +39,7 @@ assert.ok(!rendered.innerHTML.includes('Score écran'));
 assert.ok(!rendered.innerHTML.includes('Couche 1 · premiers candidats'));
 
 const sample = [0,1,2,3].map(i => ({
-  name: 'TEST' + i, isin: 'FR000000000' + i, pea_status: 'eligible', pea_checked_at: '2026-11-26',
+  name: 'TEST' + i, ticker: 'TEST' + i + '.PA', isin: 'FR000000000' + i, pea_status: 'eligible', pea_checked_at: '2026-11-26',
   forward_pe: 12 + i, eps_growth_cagr_pct: 8 + i * 2,
   revenue_cagr_3y_pct: 5 + i * 3, operating_income_cagr_3y_pct: 6 + i * 3,
   operating_margin_pct: 10 + i, fcf_margin_pct: 7 + i, roic_pct: 8 + i,
