@@ -194,6 +194,7 @@ def run_backtest(instruments, ticker_factory=None, estr_rates=None):
         "universe_count": len(histories),
         "universe": "verified PEA pilot securities only",
         "rebalance_frequency": "monthly diagnostic snapshots",
+        "rank_correlation_method": "Spearman correlation (Pearson correlation of cross-sectional percentile ranks), averaged across monthly snapshots",
         "transaction_fee_each_side_pct": FEE_RATE * 100,
         "benchmark": "CAC 40 (^FCHI), France-listed pilot universe proxy",
         "history_start": str(common_dates[0].date() if hasattr(common_dates[0], "date") else common_dates[0]),
