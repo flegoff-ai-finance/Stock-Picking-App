@@ -23,23 +23,33 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Install Yahoo Finance client
+        run: python -m pip install "yfinance>=0.2.54,<1"
       - name: Validate broker-provided PEA evidence
         run: python scripts/build_pea_registry.py
-      - name: Commit audit summary
+      - name: Sync only verified securities
+        run: python scripts/sync_pea_registry.py
+      - name: Enrich market data (batch size 50)
+        env:
+          PEA_INGEST_BATCH_SIZE: "50"
+        run: python scripts/ingest_yahoo.py
+      - name: Commit audit and market data
         run: |
           cp data/pea_registry_audit.json /tmp/pea_registry_audit.json
+          cp data/technical_screener.json /tmp/technical_screener.json
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           for attempt in 1 2 3 4 5; do
             git fetch origin main
             git reset --hard origin/main
             cp /tmp/pea_registry_audit.json data/pea_registry_audit.json
-            if [ -z "$(git status --porcelain -- data/pea_registry_audit.json)" ]; then
-              echo "No audit changes."
+            cp /tmp/technical_screener.json data/technical_screener.json
+            if [ -z "$(git status --porcelain -- data/pea_registry_audit.json data/technical_screener.json)" ]; then
+              echo "No registry or market-data changes."
               exit 0
             fi
-            git add data/pea_registry_audit.json
-            git commit -m "Refresh PEA registry audit"
+            git add data/pea_registry_audit.json data/technical_screener.json
+            git commit -m "Sync verified PEA registry and market data"
             if git push; then
               exit 0
             fi
