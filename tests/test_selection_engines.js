@@ -15,7 +15,7 @@ const pilot = context.window.StockPickingLayeredSelection.run(document.instrumen
 assert.equal(pilot.length, 3);
 assert.equal(Array.from(pilot, x => x.key).join(','), 'growth,quality,momentum');
 for (const strategy of pilot) {
-  assert.equal(strategy.screened, 7, strategy.key + ' should screen the seven verified pilot securities internally');
+  assert.equal(strategy.screened, strategy.key === 'growth' ? 0 : 7, strategy.key + ' should only pass candidates meeting the minimum layer-1 indicator coverage');
   if (strategy.key === 'growth') {
     assert.equal(strategy.finalists.length, 0, 'Growth PEG must remain N/D without 3-5 year EPS growth');
     assert.equal(strategy.third.valid, 0, 'Growth final scores must remain N/D without PEG');
@@ -53,6 +53,15 @@ const engines = context.window.StockPickingEngines;
 assert.equal(engines.growth(sample).available, 4);
 assert.equal(engines.quality(sample).available, 4);
 assert.equal(engines.momentum(sample).available, 4);
+// Missing mandatory indicators exclude a stock even if its raw coverage is otherwise high.
+const noRevenue = sample.map(x => ({ ...x, revenue_cagr_3y_pct: null }));
+assert.equal(engines.quality(noRevenue).available, 0, 'Quality requires revenue growth');
+const noProfitability = sample.map(x => ({ ...x, roic_pct: null, fcf_margin_pct: null }));
+assert.equal(engines.quality(noProfitability).available, 0, 'Quality requires ROIC or FCF margin');
+const noMomentum12m = sample.map(x => ({ ...x, return_12_1m_pct: null }));
+assert.equal(engines.momentum(noMomentum12m).available, 0, 'Momentum requires 12-1 month performance');
+const noMomentum6m = sample.map(x => ({ ...x, return_6m_pct: null }));
+assert.equal(engines.momentum(noMomentum6m).available, 0, 'Momentum requires six-month performance');
 // Layer 1 must rank the discovery pool before layer 2 applies the PEA evidence gate.
 const mixed = context.window.StockPickingLayeredSelection.run(sample, sample.slice(0, 2));
 assert.equal(mixed[0].screened, 4, 'all four discovery candidates are screened before PEA verification');
