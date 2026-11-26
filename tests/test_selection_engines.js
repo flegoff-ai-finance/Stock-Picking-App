@@ -53,4 +53,12 @@ const engines = context.window.StockPickingEngines;
 assert.equal(engines.growth(sample).available, 4);
 assert.equal(engines.quality(sample).available, 4);
 assert.equal(engines.momentum(sample).available, 4);
+// Layer 1 must rank the discovery pool before layer 2 applies the PEA evidence gate.
+const mixed = context.window.StockPickingLayeredSelection.run(sample, sample.slice(0, 2));
+assert.equal(mixed[0].screened, 4, 'all four discovery candidates are screened before PEA verification');
+for (const strategy of mixed) {
+  assert.equal(strategy.peaVerified, 2, strategy.key + ' should retain only the two verified PEA instruments');
+  assert.equal(strategy.engine.required, 2, strategy.key + ' engines must never receive unverified instruments');
+  assert.ok(strategy.finalists.every(row => ['TEST0', 'TEST1'].includes(row.item.name)));
+}
 console.log('Selection engine tests passed: pilot data stays N/D; complete fixtures rank in all three strategies; layer 1 remains hidden.');
