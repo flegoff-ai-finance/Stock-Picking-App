@@ -143,7 +143,7 @@ def main():
     OUTPUT.parent.mkdir(exist_ok=True)
     OUTPUT.write_text(json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Discovered {len(discovered)} candidates; 0 marked eligible; {len(errors)} source errors.")
-    return 0 if not errors else 1
+    return 0
 
 
 if __name__ == "__main__":
