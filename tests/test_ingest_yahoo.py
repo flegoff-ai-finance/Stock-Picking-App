@@ -1,6 +1,6 @@
 import unittest
 from datetime import date, timedelta
-from scripts.ingest_yahoo import (cagr, calculate_relative_return, calculate_sharpe, growth_estimate_value, parse_estr_csv, price_metrics, verified_instruments)
+from scripts.ingest_yahoo import (cagr, calculate_relative_return, calculate_sharpe, growth_estimate_value, parse_estr_csv, price_metrics, select_ingestion_batch, verified_instruments)
 
 
 class YahooIngestionTests(unittest.TestCase):
@@ -52,6 +52,15 @@ class YahooIngestionTests(unittest.TestCase):
         value = calculate_sharpe(points, rates)
         self.assertIsNotNone(value)
         self.assertGreater(value, 0)
+
+    def test_ingestion_batch_prioritizes_missing_and_old_data(self):
+        rows = [
+            {"ticker": "NEW.PA"},
+            {"ticker": "OLD.PA", "market_data_last_updated_utc": "2026-01-01T00:00:00+00:00"},
+            {"ticker": "FRESH.PA", "market_data_last_updated_utc": "2026-11-25T00:00:00+00:00"},
+        ]
+        selected = select_ingestion_batch(rows, 2)
+        self.assertEqual([row["ticker"] for row in selected], ["NEW.PA", "OLD.PA"])
 
     def test_empty_history_is_explicit(self):
         class Empty:
