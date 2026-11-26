@@ -173,7 +173,8 @@ function renderScoringEngines(universe){
   return '<div class="card wide"><h3>'+c.title+'</h3><p class="small muted">'+c.detail+'</p>'+table+'</div>';
  }).join('');
 }
-\nasync function loadTechnicalData(){
+
+async function loadTechnicalData(){
  const body=document.getElementById('marketDataBody'),stamp=document.getElementById('marketDataDate');
  if(!body)return;
  try{
@@ -195,7 +196,8 @@ function renderScoringEngines(universe){
   stamp.textContent=data.data_ok_count+'/'+data.universe_count+' titres · données du '+new Date(data.generated_at_utc).toLocaleString('fr-FR');
  }catch(err){
   body.innerHTML='<tr><td colspan="7">Données non disponibles. Vérifie la connexion internet.</td></tr>';
-  stamp.textContent='Données indisponibles';\n  window.StockPickingLayeredSelection?.render([]);
+  stamp.textContent='Données indisponibles';
+  window.StockPickingLayeredSelection?.render([]);
  }
 }
 loadTechnicalData();
