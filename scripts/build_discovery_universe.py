@@ -148,3 +148,4 @@ if __name__ == "__main__":
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     args = parser.parse_args()
     build(args.output)
+
