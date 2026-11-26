@@ -1,5 +1,6 @@
 name: Refresh European discovery universe
-# The script validates its own source snapshot and keeps the scoring registry untouched.
+# The script validates its source snapshot and keeps the scoring registry untouched.
+# Home-market preference prevents secondary cross-listings from winning deduplication.
 
 on:
   push:
