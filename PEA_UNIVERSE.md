@@ -35,4 +35,4 @@ The discovery job creates `data/pea_candidates.json`. Candidate rows remain pend
 
 MEQIRI source: https://meqiri.com/fr/actions/eligibles-pea. Its published list includes issuer country hints derived from the ISIN country code. These hints and its ticker are stored as prequalification metadata only; they do not override the independent evidence gate.
 
-The MEQIRI page currently advertises 1,332 eligible-share candidates but renders only its first 500 rows on the public page. The importer records the full advertised total separately and only imports rows actually exposed in the page HTML; the remaining rows are not silently assumed present. The discovery universe is therefore broad but not yet exhaustive.
+The MEQIRI page currently advertises 1,304 eligible-share candidates at the latest refresh but renders only its first 500 rows on the public page. The importer records the full advertised total separately and only imports rows actually exposed in the page HTML; the remaining rows are not silently assumed present. The discovery universe is therefore broad but not yet exhaustive.
