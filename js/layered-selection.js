@@ -69,6 +69,19 @@
   }
   const fmt=v=>v===null||v===undefined?'—':Number(v).toFixed(1);
   const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const indicatorSpecs={
+    growth:[['PEG','peg','ratio'],['PER prévisionnel','forward_pe','ratio'],['Croissance BPA estimée 5 ans','eps_growth_cagr_pct','pct'],['Croissance CA 3 ans','revenue_cagr_3y_pct','pct'],['Marge opérationnelle','operating_margin_pct','pct'],['Momentum 12-1 mois','return_12_1m_pct','pct'],['Drawdown maximal 3 ans','max_drawdown_3y_pct','pct']],
+    quality:[['Croissance CA 3 ans','revenue_cagr_3y_pct','pct'],['Croissance EBIT 3 ans','operating_income_cagr_3y_pct','pct'],['Marge opérationnelle','operating_margin_pct','pct'],['Marge FCF','fcf_margin_pct','pct'],['ROIC','roic_pct','pct'],['Dette nette / EBITDA','net_debt_ebitda','ratio'],['Sharpe 3 ans','sharpe_3y','number'],['Drawdown maximal 3 ans','max_drawdown_3y_pct','pct']],
+    momentum:[['Performance 12-1 mois','return_12_1m_pct','pct'],['Performance 6 mois','return_6m_pct','pct'],['Cours vs MM200','price_vs_sma200_pct','pct'],['MM50 vs MM200','sma50_vs_sma200_pct','pct'],['Sharpe 3 ans','sharpe_3y','number'],['Drawdown maximal 1 an','max_drawdown_1y_pct','pct'],['Volatilité 1 an','volatility_1y_pct','pct'],['Performance relative 6 mois','relative_return_6m_pct','pct']]
+  };
+  function indicatorDetails(item,key,peg){
+    const rows=indicatorSpecs[key].map(([label,field,type])=>{
+      const value=field==='peg'?peg:item[field];
+      const shown=value===null||value===undefined?'N/D':type==='pct'?fmt(value)+' %':type==='ratio'?fmt(value)+'x':fmt(value);
+      return '<tr><td>'+esc(label)+'</td><td>'+shown+'</td></tr>';
+    }).join('');
+    return '<details><summary>Voir les indicateurs</summary><div class="table-wrap"><table class="table"><tbody>'+rows+'</tbody></table></div></details>';
+  }
   function render(universe){
     const root=document.getElementById('layeredSelection');
     if(!root)return;
@@ -76,7 +89,7 @@
     if(!output.length){root.innerHTML='<div class="empty">Moteurs de sélection indisponibles.</div>';return;}
     root.innerHTML='<div class="notice"><strong>Pipeline interne :</strong> le premier filtre réduit l’univers à 150 candidats maximum par stratégie ; ses résultats détaillés restent masqués. Seuls les 25 dossiers les mieux classés et suffisamment documentés peuvent atteindre la couche finale. Les seuils 75/40 sont provisoires et non backtestés. Aucune donnée manquante n’est imputée.</div>'+
       output.map(o=>{
-        const secondRows=o.finalists.map((r,i)=>'<tr><td>'+(i+1)+'</td><td>'+esc(r.item.name)+'</td><td>'+(o.key==='growth'?fmt(r.peg):fmt(r.layer2_score))+'</td><td>'+(r.layer2_coverage===null?'PEG':r.layer2_coverage+'/8 · '+fmt(r.layer2_coverage_weight_pct)+' %')+'</td></tr>').join('');
+        const secondRows=o.finalists.map((r,i)=>'<tr><td>'+(i+1)+'</td><td>'+esc(r.item.name)+'</td><td>'+(o.key==='growth'?fmt(r.peg):fmt(r.layer2_score))+'</td><td>'+(r.layer2_coverage===null?'PEG':r.layer2_coverage+'/8 · '+fmt(r.layer2_coverage_weight_pct)+' %')+'</td><td>'+indicatorDetails(r.item,o.key,r.peg)+'</td></tr>').join('');
         const thirdRows=o.third.rows.slice(0,25).map(r=>'<tr><td>'+(r.finalRank??'—')+'</td><td>'+esc(r.item.name)+'</td><td>'+(r.score===null?'N/D':fmt(r.score))+'</td><td>'+fmt(r.coveragePct)+' %</td><td>'+r.decision+'</td></tr>').join('');
         const topTable=(head,body,empty)=>'<div class="table-wrap"><table class="table"><thead><tr>'+head+'</tr></thead><tbody>'+(body||'<tr><td colspan="5">'+empty+'</td></tr>')+'</tbody></table></div>';
         const blockerText=Object.entries(o.blockers).map(([reason,count])=>'<li>'+count+' titre(s) : '+esc(reason)+'</li>').join('');
@@ -86,7 +99,7 @@
         return '<div class="card wide" style="margin-top:14px"><div class="row"><h3>'+o.label+'</h3><span class="pill">'+o.finalists.length+' / 25 finalistes</span></div>'+
           '<div class="grid"><div><div class="small muted">Univers PEA vérifié</div><div class="metric">'+(o.engine.required??o.screened)+'</div><div class="metric-sub">Titres transmis au moteur</div></div><div><div class="small muted">Couche 2 · analyse stratégique</div><div class="metric">'+o.engine.available+' / '+o.screened+'</div><div class="metric-sub">Dossiers classables avec les indicateurs requis</div></div><div><div class="small muted">Couche 3 · score final</div><div class="metric">'+o.third.valid+' / '+o.finalists.length+'</div><div class="metric-sub">Scores suffisamment documentés</div></div></div>'+
           '<div class="section-head"><h3>Couche 2 · sélection stratégique</h3><span>Top 25 maximum</span></div>'+
-          (secondRows?topTable('<th>Rang</th><th>Société</th><th>'+(o.key==='growth'?'PEG':'Score stratégique /100')+'</th><th>Couverture</th>',secondRows,'Aucun titre classable.'):layer2Empty)+
+          (secondRows?topTable('<th>Rang</th><th>Société</th><th>'+(o.key==='growth'?'PEG':'Score stratégique /100')+'</th><th>Couverture</th><th>Indicateurs</th>',secondRows,'Aucun titre classable.'):layer2Empty)+
           (blockerText?'<div class="notice"><strong>Indicateurs bloquants :</strong><ul>'+blockerText+'</ul></div>':'')+
           '<div class="section-head"><h3>Couche 3 · score global et décision</h3><span>Achat ≥ 75 · Vente / éviter &lt; 40</span></div>'+
           topTable('<th>Rang</th><th>Société</th><th>Score /100</th><th>Poids couvert</th><th>Signal</th>',thirdRows,'Scores finaux non calculables avec les données actuelles.')+
