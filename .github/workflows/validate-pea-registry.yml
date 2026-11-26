@@ -5,6 +5,8 @@ on:
     paths:
       - "data/pea_verification.csv"
       - "scripts/build_pea_registry.py"
+      - "scripts/sync_pea_registry.py"
+      - "scripts/ingest_yahoo.py"
       - ".github/workflows/validate-pea-registry.yml"
   workflow_dispatch:
 
