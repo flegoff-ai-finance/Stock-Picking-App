@@ -7,6 +7,7 @@ are marked pending and are excluded from scoring until separately verified.
 from __future__ import annotations
 
 import hashlib
+import html as html_lib
 import json
 import re
 import sys
@@ -124,6 +125,15 @@ def parse_listing(html, region, source_url):
     return rows
 
 
+def extract_meqiri_total(html):
+    text = html_lib.unescape(re.sub(r"<[^>]+>", " ", html))
+    match = re.search(r"([0-9\\s\\u00a0\\u202f]+)\\s+actions de sociétés", text, re.IGNORECASE)
+    if not match:
+        return None
+    digits = re.sub(r"\\D", "", match.group(1))
+    return int(digits) if digits else None
+
+
 def parse_meqiri_listing(html, source_url):
     parser = ListingParser()
     parser.feed(html)
@@ -171,10 +181,15 @@ def parse_meqiri_listing(html, source_url):
 def main():
     fetched_at = datetime.now(timezone.utc).isoformat()
     discovered, errors = {}, []
+    meqiri_total_count = None
     for region, url in SOURCES.items():
         try:
             html = fetch(url)
-            rows = parse_meqiri_listing(html, url) if region == "meqiri" else parse_listing(html, region, url)
+            if region == "meqiri":
+                meqiri_total_count = extract_meqiri_total(html)
+                rows = parse_meqiri_listing(html, url)
+            else:
+                rows = parse_listing(html, region, url)
             if not rows:
                 raise RuntimeError("No instrument rows parsed; source markup may have changed.")
             for row in rows:
@@ -207,6 +222,8 @@ def main():
         "provisional_ticker_mapped_count": sum(1 for row in discovered.values() if row["provisional_yahoo_ticker"]),
         "provisional_ticker_unmapped_count": sum(1 for row in discovered.values() if not row["provisional_yahoo_ticker"]),
         "meqiri_prequalified_count": sum(1 for row in discovered.values() if row.get("meqiri_pea_listed")),
+        "meqiri_list_total_count": meqiri_total_count,
+        "meqiri_displayed_rows_limit": 500 if meqiri_total_count and meqiri_total_count > sum(1 for row in discovered.values() if row.get("meqiri_pea_listed")) else None,
         "important_notice": "Discovery only. Directory presence is not legal proof of PEA eligibility. All rows remain excluded from scoring until eligibility, instrument type, ISIN and tax conditions are independently verified.",
         "source_errors": errors,
         "candidates": sorted(discovered.values(), key=lambda x: (x["name"].casefold(), x["source_code"])),
