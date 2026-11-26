@@ -20,6 +20,7 @@ OUTPUT = ROOT / "data" / "pea_candidates.json"
 SOURCES = {
     "france": "https://www.prorealtime.com/fr/financial-instruments/actions-eligibles-pea",
     "europe": "https://www.prorealtime.com/fr/financial-instruments/actions-europe-eligibles-pea",
+    "eee": "https://www.prorealtime.com/fr/financial-instruments/actions-eee-eligibles-pea",
 }
 MARKET_SUFFIX = {
     "xpar": ".PA", "xams": ".AS", "xbru": ".BR", "xdub": ".IR",
