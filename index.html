@@ -186,12 +186,12 @@ async function loadTechnicalData(){
   const response=await fetch('./data/technical_screener.json',{cache:'no-store'});
   if(!response.ok)throw new Error('HTTP '+response.status);
   const data=await response.json();
-  let discoveryUniverse=data.instruments;
+  let discoveryUniverse=data.instruments,discoveryDataLoaded=false;
   try{
    const discoveryResponse=await fetch('./data/discovery_financials.json',{cache:'no-store'});
    if(discoveryResponse.ok){
     const discoveryData=await discoveryResponse.json();
-    if(Array.isArray(discoveryData.instruments)&&discoveryData.instruments.length)discoveryUniverse=discoveryData.instruments;
+    if(Array.isArray(discoveryData.instruments)&&discoveryData.instruments.length){discoveryUniverse=discoveryData.instruments;discoveryDataLoaded=true;}
    }
   }catch(_error){/* Keep the verified pilot as a safe fallback until discovery data is published. */}
   const pct=v=>v===null||v===undefined?'—':(v>0?'+':'')+Number(v).toFixed(1)+' %';
@@ -211,7 +211,9 @@ async function loadTechnicalData(){
   body.innerHTML=data.instruments.map(x=>'<tr><td>'+safe(x.name)+'</td><td>'+euro(x.last_close)+'</td><td>'+pct(x.return_12_1m_pct)+'</td><td>'+pct(x.return_6m_pct)+'</td><td>'+pct(x.volatility_1y_pct)+'</td><td>'+(x.momentum_score===null?'—':Number(x.momentum_score).toFixed(1))+'</td><td><span class="pill">'+(isPeaEligible(x)?'Éligible':'Exclu · à vérifier')+'</span></td></tr>').join('');
   const gate=document.getElementById('peaGateSummary');
   if(gate){
-   gate.innerHTML='<strong>Filtre PEA en couche 2 :</strong> '+discoveryUniverse.length+' candidat(s) dans l\'univers de découverte ; '+eligibleInstruments.length+' titre(s) disposent actuellement d\'une vérification PEA récente dans le registre technique. Les candidats non vérifiés sont écartés après le premier classement et remplacés par les suivants.';
+   gate.innerHTML=discoveryDataLoaded
+    ?'<strong>Filtre PEA en couche 2 :</strong> '+discoveryUniverse.length+' candidat(s) dans l\'univers de découverte ; '+eligibleInstruments.length+' titre(s) disposent actuellement d\'une vérification PEA récente dans le registre technique. Les candidats non vérifiés sont écartés après le premier classement et remplacés par les suivants.'
+    :'<strong>Mode pilote :</strong> le fichier discovery_financials.json n\'est pas encore publié. L\'application utilise donc les '+discoveryUniverse.length+' titres du registre pilote ; le filtre PEA intervient après le screening dans le moteur, mais le screening élargi n\'est pas encore alimenté.';
   }
   stamp.textContent=data.data_ok_count+'/'+data.universe_count+' titres · données du '+new Date(data.generated_at_utc).toLocaleString('fr-FR');
  }catch(err){
