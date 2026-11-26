@@ -12,7 +12,7 @@ class CandidateDiscoveryTests(unittest.TestCase):
         </table>
         """
         rows = parse_listing(html, "france", "https://example.test/list")
-        self.assertEqual(len(rows), 2)
+        self.assertEqual(len(rows), 4)
         self.assertEqual(rows[0]["pea_status"], "pending_verification")
         self.assertEqual(rows[0]["verification_status"], "not_verified")
         self.assertEqual(rows[0]["provisional_yahoo_ticker"], "AI.PA")
@@ -38,6 +38,8 @@ class CandidateDiscoveryTests(unittest.TestCase):
         <table><tr><th>Rang</th><th>Action</th><th>Score</th><th>Siège</th></tr>
         <tr><td>1</td><td><a href="/fr/actions/euronext-athens">Euronext Athens Holding EXAE.AT</a></td><td>91</td><td>Grèce</td></tr>
         <tr><td>2</td><td><a href="/fr/actions/viel">VIEL &amp; Cie VIL.PA</a></td><td>86</td><td>France</td></tr>
+        <tr><td>3</td><td><a href="/fr/actions/addtech">Addtech AB (publ.)ADDT-B.ST</a></td><td>68</td><td>Suède</td></tr>
+        <tr><td>4</td><td><a href="/fr/actions/schott">SCHOTT Pharma 1SXP.F</a></td><td>70</td><td>Allemagne</td></tr>
         </table>
         """
         rows = parse_meqiri_listing(html, "https://meqiri.com/fr/actions/eligibles-pea")
@@ -47,6 +49,8 @@ class CandidateDiscoveryTests(unittest.TestCase):
         self.assertEqual(rows[0]["pea_status"], "pending_verification")
         self.assertEqual(rows[0]["verification_status"], "prequalified_pending_legal_review")
         self.assertTrue(rows[0]["meqiri_pea_listed"])
+        self.assertEqual(rows[2]["provisional_yahoo_ticker"], "ADDT-B.ST")
+        self.assertEqual(rows[3]["provisional_yahoo_ticker"], "1SXP.F")
 
     def test_ignores_header_and_empty_rows(self):
         html = "<table><tr><td>Code</td><td>Nom</td></tr><tr><td></td><td></td></tr></table>"
