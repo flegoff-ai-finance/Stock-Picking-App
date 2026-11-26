@@ -1,13 +1,15 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-11-26T13:51:44.769541+00:00",
+  "generated_at_utc": "2026-11-26T13:52:31.576593+00:00",
   "source_count": 4,
-  "discovered_candidate_count": 3928,
+  "discovered_candidate_count": 3933,
   "verified_count": 0,
-  "pending_verification_count": 3928,
-  "provisional_ticker_mapped_count": 1758,
+  "pending_verification_count": 3933,
+  "provisional_ticker_mapped_count": 1763,
   "provisional_ticker_unmapped_count": 2170,
-  "meqiri_prequalified_count": 495,
+  "meqiri_prequalified_count": 500,
+  "meqiri_list_total_count": null,
+  "meqiri_displayed_rows_limit": null,
   "important_notice": "Discovery only. Directory presence is not legal proof of PEA eligibility. All rows remain excluded from scoring until eligibility, instrument type, ISIN and tax conditions are independently verified.",
   "source_errors": [],
   "candidates": [
@@ -21933,6 +21935,27 @@
       ]
     },
     {
+      "candidate_id": "8b597d2847b4e97b",
+      "name": "Doosan Skoda Power",
+      "source_code": "DSPW",
+      "source_market": "PR",
+      "provisional_yahoo_ticker": "DSPW.PR",
+      "isin": null,
+      "pea_status": "pending_verification",
+      "verification_status": "prequalified_pending_legal_review",
+      "source": "MEQIRI PEA list",
+      "source_region": "meqiri",
+      "source_url": "https://meqiri.com/fr/actions/eligibles-pea",
+      "source_instrument_url": "/fr/action/DSPW.PR",
+      "issuer_country_hint_iso2": "CZ",
+      "meqiri_pea_listed": true,
+      "eligibility_evidence": [],
+      "exclusion_reason": null,
+      "source_regions": [
+        "meqiri"
+      ]
+    },
+    {
       "candidate_id": "31778badd82c0de7",
       "name": "DOOSAN SKODA POWER KC 50",
       "source_code": "J3G",
@@ -41658,6 +41681,27 @@
       ]
     },
     {
+      "candidate_id": "1a42bcd8c8da38b4",
+      "name": "Komercní banka, a.s.",
+      "source_code": "KOMB",
+      "source_market": "PR",
+      "provisional_yahoo_ticker": "KOMB.PR",
+      "isin": null,
+      "pea_status": "pending_verification",
+      "verification_status": "prequalified_pending_legal_review",
+      "source": "MEQIRI PEA list",
+      "source_region": "meqiri",
+      "source_url": "https://meqiri.com/fr/actions/eligibles-pea",
+      "source_instrument_url": "/fr/action/KOMB.PR",
+      "issuer_country_hint_iso2": "CZ",
+      "meqiri_pea_listed": true,
+      "eligibility_evidence": [],
+      "exclusion_reason": null,
+      "source_regions": [
+        "meqiri"
+      ]
+    },
+    {
       "candidate_id": "e790b680890dbab7",
       "name": "KOMPLETT ASA [Cboe]",
       "source_code": "KOMPL_NO",
@@ -48655,6 +48699,27 @@
       "exclusion_reason": null,
       "source_regions": [
         "eee"
+      ]
+    },
+    {
+      "candidate_id": "75662f9e49692be0",
+      "name": "MONETA Money Bank, a.s.",
+      "source_code": "MONET",
+      "source_market": "PR",
+      "provisional_yahoo_ticker": "MONET.PR",
+      "isin": null,
+      "pea_status": "pending_verification",
+      "verification_status": "prequalified_pending_legal_review",
+      "source": "MEQIRI PEA list",
+      "source_region": "meqiri",
+      "source_url": "https://meqiri.com/fr/actions/eligibles-pea",
+      "source_instrument_url": "/fr/action/MONET.PR",
+      "issuer_country_hint_iso2": "CZ",
+      "meqiri_pea_listed": true,
+      "eligibility_evidence": [],
+      "exclusion_reason": null,
+      "source_regions": [
+        "meqiri"
       ]
     },
     {
@@ -63929,6 +63994,27 @@
       ]
     },
     {
+      "candidate_id": "4863bbde49c3743a",
+      "name": "SCHOTT Pharma",
+      "source_code": "1SXP",
+      "source_market": "F",
+      "provisional_yahoo_ticker": "1SXP.F",
+      "isin": null,
+      "pea_status": "pending_verification",
+      "verification_status": "prequalified_pending_legal_review",
+      "source": "MEQIRI PEA list",
+      "source_region": "meqiri",
+      "source_url": "https://meqiri.com/fr/actions/eligibles-pea",
+      "source_instrument_url": "/fr/action/1SXP.F",
+      "issuer_country_hint_iso2": "DE",
+      "meqiri_pea_listed": true,
+      "eligibility_evidence": [],
+      "exclusion_reason": null,
+      "source_regions": [
+        "meqiri"
+      ]
+    },
+    {
       "candidate_id": "8670618290f80c9f",
       "name": "SCHOUW & CO [Cboe]",
       "source_code": "SCHO_DC",
@@ -68176,6 +68262,27 @@
       "source_regions": [
         "eee",
         "europe"
+      ]
+    },
+    {
+      "candidate_id": "4dbceb9c28a4b254",
+      "name": "Springer Nature",
+      "source_code": "SPG",
+      "source_market": "F",
+      "provisional_yahoo_ticker": "SPG.F",
+      "isin": null,
+      "pea_status": "pending_verification",
+      "verification_status": "prequalified_pending_legal_review",
+      "source": "MEQIRI PEA list",
+      "source_region": "meqiri",
+      "source_url": "https://meqiri.com/fr/actions/eligibles-pea",
+      "source_instrument_url": "/fr/action/SPG.F",
+      "issuer_country_hint_iso2": "DE",
+      "meqiri_pea_listed": true,
+      "eligibility_evidence": [],
+      "exclusion_reason": null,
+      "source_regions": [
+        "meqiri"
       ]
     },
     {

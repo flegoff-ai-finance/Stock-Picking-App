@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-11-26T13:51:52.131803+00:00",
-  "candidate_count": 3928,
+  "generated_at_utc": "2026-11-26T13:52:38.695080+00:00",
+  "candidate_count": 3933,
   "verified_count": 0,
-  "pending_count": 3928,
+  "pending_count": 3933,
   "verified_instruments": [],
   "pending_review": [
     {
@@ -7651,6 +7651,13 @@
       ]
     },
     {
+      "candidate_id": "8b597d2847b4e97b",
+      "name": "Doosan Skoda Power",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "31778badd82c0de7",
       "name": "DOOSAN SKODA POWER KC 50",
       "reason": [
@@ -14525,6 +14532,13 @@
       ]
     },
     {
+      "candidate_id": "1a42bcd8c8da38b4",
+      "name": "Komercní banka, a.s.",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "e790b680890dbab7",
       "name": "KOMPLETT ASA [Cboe]",
       "reason": [
@@ -16949,6 +16963,13 @@
     {
       "candidate_id": "a1de62c1e88693b3",
       "name": "MONETA MONEY BANK AS [Cboe]",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "75662f9e49692be0",
+      "name": "MONETA Money Bank, a.s.",
       "reason": [
         "aucune revue documentée"
       ]
@@ -22295,6 +22316,13 @@
       ]
     },
     {
+      "candidate_id": "4863bbde49c3743a",
+      "name": "SCHOTT Pharma",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
       "candidate_id": "8670618290f80c9f",
       "name": "SCHOUW & CO [Cboe]",
       "reason": [
@@ -23774,6 +23802,13 @@
     {
       "candidate_id": "c3f5d4fae0f32472",
       "name": "SPRINGER NATURE",
+      "reason": [
+        "aucune revue documentée"
+      ]
+    },
+    {
+      "candidate_id": "4dbceb9c28a4b254",
+      "name": "Springer Nature",
       "reason": [
         "aucune revue documentée"
       ]
