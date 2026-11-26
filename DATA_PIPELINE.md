@@ -1,37 +1,46 @@
 # Market data pipeline
 
-## Provider pilot: EOD Historical Data (EODHD)
+## Source strategy
 
-The ingestion job reads the existing `data/technical_screener.json` registry and updates only instruments whose PEA status is already verified in that registry. It does **not** discover securities or determine PEA eligibility.
+Yahoo Finance is the preferred first source for the personal research prototype, using the community-maintained Python package `yfinance`. It can provide historical prices and selected company fundamentals / estimates without a paid API key. Coverage and field quality vary by exchange and security, especially for smaller European companies.
 
-### Activate
+Other sources to validate or cross-check selectively:
+- Google Finance / Google Sheets: supplementary price checks; not a full fundamentals feed.
+- ABC Bourse: useful French-market histories and selected ratios; automated access and terms must be checked.
+- Zonebourse: useful for financial statements, estimates and analyst consensus; some datasets and automated access may be restricted or paid.
+- Issuer annual reports and investor-relations publications remain the preferred source for audited financial statement data.
 
-1. First validate that the required endpoints cover the target exchanges and small caps. The current EODHD personal free package does not include company fundamentals and only includes one year of EOD prices; this pipeline needs the paid combination of EOD history and fundamentals (the published All-In-One plan is $99.99/month on monthly billing).
-2. Do not subscribe until the coverage test is satisfactory and the cost is explicitly accepted.
-3. If approved, create an EODHD account, obtain an API token, and add a GitHub Actions repository secret named `EODHD_API_TOKEN`.
-4. Run **Actions → Refresh market and fundamental data → Run workflow**.
+Before automating collection or redistributing any provider data in a public website, verify the provider's terms, licensing and permitted use. Free to view does not automatically mean free to scrape, automate or republish.
 
-The workflow also runs on weekdays at 06:25 UTC once the secret exists. No API key is stored in source code.
+## Current implementation status
 
-### Important data limitations
+- The application now has a three-layer selection engine documented in `SELECTION_METHODOLOGY.md`.
+- The current registry `data/technical_screener.json` still contains seven pilot securities only. It is not the complete PEA universe.
+- The PEA status gate remains independent from market-data providers. A data vendor listing does not prove PEA eligibility.
+- The previous EODHD ingestion script remains in the repository as a dormant alternative. No subscription has been purchased and no API token is configured.
+- The Yahoo Finance ingestion adapter is the next data-engineering step; it must be tested on a representative sample before being treated as reliable.
 
-- The current registry still contains only the seven pilot securities; this is not the complete PEA universe.
-- The script requests up to three years of EOD prices and the EODHD fundamentals payload.
-- It computes 6-month and 12-month returns, 12-1 momentum, moving-average distances, volatility, and drawdowns.
-- It extracts annual revenue/operating-income growth, operating margin, FCF margin, ROIC, net debt/EBITDA and forward P/E where source fields are present.
-- EODHD's next-year EPS growth estimate is stored separately. It is **not** substituted for the classic 3–5 year growth input of the PEG engine.
-- Sharpe is left null until a dated EUR risk-free series is connected. Relative momentum is left null until a verified benchmark ticker is mapped for each instrument.
-- All missing fields remain null. The scoring engines therefore keep a stock unranked when required inputs are absent.
+## Yahoo Finance pilot — intended scope
 
-## Provider cost and license gate
+Use `yfinance` for:
+- adjusted daily price history (where available) to calculate returns, moving averages, volatility and drawdowns;
+- selected annual financial statements to calculate revenue growth, operating margins and free-cash-flow margins;
+- forward P/E and available near-term analyst estimates, with explicit field-level availability checks.
 
-EODHD pricing and package coverage were checked on 26 November 2026. The published personal All-In-One offer combines global end-of-day prices and fundamentals at $99.99/month; the free package does not provide the fundamentals feed required by the Quality engine. No subscription has been purchased and the workflow remains inactive until the repository secret is configured. Confirm data-display rights and personal-use restrictions before redistributing provider data in a public application.
+Do not assume Yahoo supplies a reliable 3–5 year EPS growth consensus for every European stock. The classic PEG remains N/D when that specific input is absent. A one-year estimate can be used in the broad first screening layer only; it must not be substituted into the PEG calculation.
 
-## Next validation gates
+## Data quality rules
 
-1. Validate EODHD ticker mapping and field coverage across a representative sample of EU/EEA markets and small caps.
-2. Validate company/ISIN/tax-residence criteria for the complete PEA-eligible universe independently of market-data coverage.
-3. Add a provider for 3–5 year EPS consensus estimates if EODHD does not provide adequate coverage.
-4. Add benchmark mappings and EUR risk-free data before activating the Sharpe and relative-momentum components.
+- Every metric must carry a provider, retrieval timestamp and underlying observation date where possible.
+- Keep missing values null. Never fabricate a value, infer PEA eligibility from an exchange, or silently substitute a different forecast horizon.
+- Record provider errors per security without stopping the full batch.
+- Keep price history, fundamental statements, analyst estimates and PEA eligibility as distinct data domains.
+- Preserve excluded securities and exclusion reasons to reduce survivorship bias.
+- Show coverage and freshness alongside every ranking.
+- Reconcile key company financials with issuer-published reports before relying on them for final decisions.
 
-This pipeline is for research and virtual portfolio simulation only. It does not submit orders.
+## Previous EODHD option (dormant)
+
+The EODHD script and manual GitHub Actions workflow are retained only as a possible fallback. The published All-in-One plan was previously identified at $99.99/month on monthly billing. Do not subscribe unless Yahoo coverage proves inadequate, a representative comparison demonstrates material value, and the cost is explicitly approved.
+
+This application is for research and virtual portfolio simulation only. It does not submit orders.
