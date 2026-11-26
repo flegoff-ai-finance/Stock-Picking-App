@@ -10,20 +10,26 @@ permissions:
 
 jobs:
   refresh:
-    if: ${{ secrets.EODHD_API_TOKEN != '' }}
     runs-on: ubuntu-latest
+    env:
+      EODHD_API_TOKEN: ${{ secrets.EODHD_API_TOKEN }}
     steps:
+      - name: Check provider credentials
+        if: ${{ env.EODHD_API_TOKEN == '' }}
+        run: echo 'EODHD_API_TOKEN is not configured; refresh skipped.'
       - name: Checkout
+        if: ${{ env.EODHD_API_TOKEN != '' }}
         uses: actions/checkout@v4
       - name: Set up Python
+        if: ${{ env.EODHD_API_TOKEN != '' }}
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - name: Fetch EODHD data and calculate indicators
-        env:
-          EODHD_API_TOKEN: ${{ secrets.EODHD_API_TOKEN }}
+        if: ${{ env.EODHD_API_TOKEN != '' }}
         run: python scripts/ingest_eodhd.py
       - name: Commit refreshed dataset
+        if: ${{ env.EODHD_API_TOKEN != '' }}
         run: |
           if git diff --quiet -- data/technical_screener.json; then
             echo "No data changes."
