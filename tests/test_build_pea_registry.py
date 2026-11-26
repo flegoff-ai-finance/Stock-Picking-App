@@ -1,6 +1,10 @@
+import csv
+import tempfile
 import unittest
 from datetime import date
+from pathlib import Path
 
+import scripts.build_pea_registry as registry
 from scripts.build_pea_registry import is_recently_verified_pilot, validate_review
 
 
@@ -26,6 +30,28 @@ class PeaRegistryAuditTests(unittest.TestCase):
         self.assertTrue(is_recently_verified_pilot(row, date(2026, 11, 26)))
         row["pea_checked_at"] = "2026-01-01"
         self.assertFalse(is_recently_verified_pilot(row, date(2026, 11, 26)))
+
+    def test_duplicate_isin_and_ticker_are_rejected(self):
+        rows = [self.valid_review(), self.valid_review()]
+        rows[1]["candidate_id"] = "abc124"
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            csv_path, output_path, technical_path = root / "input.csv", root / "audit.json", root / "technical.json"
+            with csv_path.open("w", newline="", encoding="utf-8") as stream:
+                writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
+                writer.writeheader()
+                writer.writerows(rows)
+            technical_path.write_text('{"instruments": []}', encoding="utf-8")
+            old = (registry.REVIEWS, registry.OUTPUT, registry.TECHNICAL)
+            try:
+                registry.REVIEWS, registry.OUTPUT, registry.TECHNICAL = csv_path, output_path, technical_path
+                audit = registry.build(date(2026, 11, 26))
+                self.assertEqual(audit["newly_verified_count"], 0)
+                self.assertEqual(audit["pending_count"], 2)
+                self.assertTrue(any("ISIN dupliqué" in reason for row in audit["pending_review"] for reason in row["reason"]))
+                self.assertTrue(any("ticker Yahoo dupliqué" in reason for row in audit["pending_review"] for reason in row["reason"]))
+            finally:
+                registry.REVIEWS, registry.OUTPUT, registry.TECHNICAL = old
 
     def test_complete_recent_evidence_is_accepted(self):
         self.assertEqual(validate_review(self.valid_review(), {"abc123"}, date(2026, 11, 26)), [])
