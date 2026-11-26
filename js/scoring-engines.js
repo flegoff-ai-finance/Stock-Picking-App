@@ -22,7 +22,9 @@
     return raw.map(r=>{
       if(r.values.some(v=>v===null))return {item:r.x,score:null,coverage:r.values.filter(v=>v!==null).length,components:[]};
       const components=r.values.map((v,i)=>pctRank(columns[i],v,directions[i]));
-      const totalWeight=weights.reduce((a,b)=>a+b,0);\n      const score=components.reduce((sum,v,i)=>sum+v*weights[i],0)/totalWeight;\n      return {item:r.x,score,coverage:keys.length,components};
+      const totalWeight=weights.reduce((a,b)=>a+b,0);
+      const score=components.reduce((sum,v,i)=>sum+v*weights[i],0)/totalWeight;
+      return {item:r.x,score,coverage:keys.length,components};
     });
   };
   function growth(items){
