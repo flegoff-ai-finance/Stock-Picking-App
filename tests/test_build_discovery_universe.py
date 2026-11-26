@@ -33,3 +33,19 @@ def test_filters_and_deduplicates_by_isin():
     assert len(result) == 1
     assert result[0]["ticker"] == "AAA.PA"
     assert result[0]["discovery_status"] == "unverified_pea"
+
+
+def test_prefers_issuer_home_exchange():
+    rows = {
+        "BER": [
+            {"symbol": "SAP.BE", "name": "SAP SE", "isin": "DE0007164600",
+             "country": "Germany", "delisted": "False", "market": "Berlin Stock Exchange"},
+        ],
+        "GER": [
+            {"symbol": "SAP.DE", "name": "SAP SE", "isin": "DE0007164600",
+             "country": "Germany", "delisted": "False", "market": "XETRA"},
+        ],
+    }
+    result = discovery.build_candidates(rows, "abc123", "2026-11-26T00:00:00+00:00")
+    assert len(result) == 1
+    assert result[0]["ticker"] == "SAP.DE"
