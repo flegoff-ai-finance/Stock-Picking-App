@@ -23,7 +23,7 @@ SOURCES = {
     "eee": "https://www.prorealtime.com/fr/financial-instruments/actions-eee-eligibles-pea",
     "meqiri": "https://meqiri.com/fr/actions/eligibles-pea",
 }
-MEQIRI_TICKER_RE = re.compile(r"^(?P<name>.+?)\\s+(?P<ticker>[A-Z0-9][A-Z0-9.\\-]{0,20}\\.(?:PA|DE|AS|MC|MI|BR|ST|CO|OL|HE|WA|VI|AT|IR|LS))$")
+MEQIRI_TICKER_RE = re.compile(r"^(?P<name>.+?)\s+(?P<ticker>[A-Z0-9][A-Z0-9.\-]{0,20}\.(?:PA|DE|AS|MC|MI|BR|ST|CO|OL|HE|WA|VI|AT|IR|LS))$")
 COUNTRY_CODES = {
     "France": "FR", "Allemagne": "DE", "Pays-Bas": "NL", "Grèce": "GR",
     "Suède": "SE", "Pologne": "PL", "Finlande": "FI", "Espagne": "ES",
@@ -137,7 +137,7 @@ def parse_meqiri_listing(html, source_url):
                 name, ticker = match.group("name").strip(), match.group("ticker")
                 href = cells[index].get("href")
                 break
-            if re.fullmatch(r"[A-Z0-9][A-Z0-9.\\-]{0,20}\\.(?:PA|DE|AS|MC|MI|BR|ST|CO|OL|HE|WA|VI|AT|IR|LS)", value):
+            if re.fullmatch(r"[A-Z0-9][A-Z0-9.\-]{0,20}\.(?:PA|DE|AS|MC|MI|BR|ST|CO|OL|HE|WA|VI|AT|IR|LS)", value):
                 ticker = value
                 name = texts[index - 1] if index > 0 else None
                 href = cells[index - 1].get("href") if index > 0 else cells[index].get("href")
