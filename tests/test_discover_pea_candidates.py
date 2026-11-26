@@ -1,6 +1,6 @@
 import unittest
 
-from scripts.discover_pea_candidates import parse_listing
+from scripts.discover_pea_candidates import parse_listing, parse_meqiri_listing
 
 
 class CandidateDiscoveryTests(unittest.TestCase):
@@ -32,6 +32,21 @@ class CandidateDiscoveryTests(unittest.TestCase):
         self.assertEqual(tickers["2G ENERGY"], "2GB.DE")
         self.assertEqual(tickers["A. DOMINGUEZ"], "ADZ.MC")
         self.assertIsNone(tickers["UNKNOWN MARKET"])
+
+    def test_meqiri_candidates_are_prequalified_but_not_eligible(self):
+        html = """
+        <table><tr><th>Rang</th><th>Action</th><th>Score</th><th>Siège</th></tr>
+        <tr><td>1</td><td><a href="/fr/actions/euronext-athens">Euronext Athens Holding EXAE.AT</a></td><td>91</td><td>Grèce</td></tr>
+        <tr><td>2</td><td><a href="/fr/actions/viel">VIEL &amp; Cie VIL.PA</a></td><td>86</td><td>France</td></tr>
+        </table>
+        """
+        rows = parse_meqiri_listing(html, "https://meqiri.com/fr/actions/eligibles-pea")
+        self.assertEqual(len(rows), 2)
+        self.assertEqual(rows[0]["provisional_yahoo_ticker"], "EXAE.AT")
+        self.assertEqual(rows[0]["issuer_country_hint_iso2"], "GR")
+        self.assertEqual(rows[0]["pea_status"], "pending_verification")
+        self.assertEqual(rows[0]["verification_status"], "prequalified_pending_legal_review")
+        self.assertTrue(rows[0]["meqiri_pea_listed"])
 
     def test_ignores_header_and_empty_rows(self):
         html = "<table><tr><td>Code</td><td>Nom</td></tr><tr><td></td><td></td></tr></table>"
