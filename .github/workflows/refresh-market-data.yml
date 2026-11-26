@@ -1,9 +1,7 @@
-name: Refresh market and fundamental data
+name: Legacy EODHD refresh (manual only)
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "25 6 * * 1-5"
 
 permissions:
   contents: write
