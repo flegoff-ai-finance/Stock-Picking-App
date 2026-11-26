@@ -19,8 +19,8 @@ Application de recherche et de simulation de trois portefeuilles PEA indépendan
 ## Univers PEA — état du pilote
 
 - 7 titres pilotes actuellement admis dans l'univers de scoring.
-- 3 621 candidats détectés dans les répertoires de découverte.
-- 1 451 tickers Yahoo provisoires identifiés ; aucun candidat nouvellement découvert n'est admis automatiquement.
+- 3 933 candidats détectés dans les répertoires de découverte.
+- 1 763 tickers Yahoo provisoires identifiés ; 500 candidats préfiltrés extraits des 1 304 affichés par MEQIRI ; aucun candidat nouvellement découvert n'est admis automatiquement.
 - Les nouveaux titres restent en attente jusqu'à vérification de l'ISIN, de la nature du titre, du siège UE/EEE, de l'assujettissement fiscal et des sources probantes.
 - La revue est tracée dans `data/pea_verification.csv` ; le contrôle est automatisé par `scripts/build_pea_registry.py`.
 
