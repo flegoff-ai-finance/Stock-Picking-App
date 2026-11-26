@@ -1,1 +1,1 @@
-candidate_id,isin,ticker,issuer_country_iso2,corporate_tax_status,instrument_type,pea_eligibility_source_url,issuer_source_url,verified_by,verified_at
+candidate_id,name,isin,ticker,issuer_country_iso2,corporate_tax_status,instrument_type,pea_eligibility_source_url,issuer_source_url,verified_by,verified_at
