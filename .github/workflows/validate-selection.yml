@@ -1,0 +1,39 @@
+name: Validate selection JavaScript
+
+on:
+  push:
+    paths:
+      - "index.html"
+      - "js/**"
+      - ".github/workflows/validate-selection.yml"
+  pull_request:
+    paths:
+      - "index.html"
+      - "js/**"
+      - ".github/workflows/validate-selection.yml"
+  workflow_dispatch:
+
+jobs:
+  syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Check standalone JavaScript modules
+        run: |
+          node --check js/scoring-engines.js
+          node --check js/layered-selection.js
+      - name: Check inline application script
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          html = Path("index.html").read_text(encoding="utf-8")
+          scripts = re.findall(r"<script>([\\s\\S]*?)</script>", html)
+          if len(scripts) != 1:
+              raise SystemExit(f"Expected one inline script, found {len(scripts)}")
+          Path("/tmp/app-inline.js").write_text(scripts[0], encoding="utf-8")
+          PY
+          node --check /tmp/app-inline.js
