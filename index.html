@@ -206,7 +206,7 @@ async function loadTechnicalData(){
    fetch('./data/pea_candidates.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(registry=>{
     if(!registry)return;
     window.stockPickingPeaCandidatesSummary={discovered:registry.discovered_candidate_count,verified:registry.verified_count,pending:registry.pending_verification_count};
-    gate.innerHTML+=' <span class="muted">Référentiel de découverte : '+registry.discovered_candidate_count+' candidats ; '+(registry.provisional_ticker_mapped_count||0)+' avec ticker Yahoo provisoire ; '+registry.pending_verification_count+' en attente de vérification légale, non scorés.</span>';
+    gate.innerHTML+=' <span class="muted">Référentiel : '+registry.discovered_candidate_count+' candidats détectés ; '+(registry.meqiri_prequalified_count||0)+' présents dans la liste MEQIRI préfiltrée ; '+(registry.provisional_ticker_mapped_count||0)+' tickers Yahoo provisoires. Tous restent exclus du scoring jusqu’à vérification.</span>';
    }).catch(()=>{});
   }
   stamp.textContent=data.data_ok_count+'/'+data.universe_count+' titres · données du '+new Date(data.generated_at_utc).toLocaleString('fr-FR');
