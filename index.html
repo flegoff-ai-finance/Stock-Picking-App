@@ -202,12 +202,7 @@ async function loadTechnicalData(){
   body.innerHTML=data.instruments.map(x=>'<tr><td>'+safe(x.name)+'</td><td>'+euro(x.last_close)+'</td><td>'+pct(x.return_12_1m_pct)+'</td><td>'+pct(x.return_6m_pct)+'</td><td>'+pct(x.volatility_1y_pct)+'</td><td>'+(x.momentum_score===null?'—':Number(x.momentum_score).toFixed(1))+'</td><td><span class="pill">'+(isPeaEligible(x)?'Éligible':'Exclu · à vérifier')+'</span></td></tr>').join('');
   const gate=document.getElementById('peaGateSummary');
   if(gate){
-   gate.innerHTML='<strong>Filtre PEA actif :</strong> '+eligibleInstruments.length+' titre(s) admis dans l\'univers de scoring ; '+excludedInstruments.length+' exclu(s) faute de statut vérifié. Les modules de scoring devront utiliser <code>stockPickingPeaUniverse</code>, jamais la liste brute.';
-   fetch('./data/pea_candidates.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(registry=>{
-    if(!registry)return;
-    window.stockPickingPeaCandidatesSummary={discovered:registry.discovered_candidate_count,verified:registry.verified_count,pending:registry.pending_verification_count};
-    gate.innerHTML+=' <span class="muted">Référentiel : '+registry.discovered_candidate_count+' candidats détectés ; '+(registry.meqiri_prequalified_count||0)+' extraits des '+(registry.meqiri_list_total_count||'—')+' listés par MEQIRI (500 premières lignes) ; '+(registry.provisional_ticker_mapped_count||0)+' tickers Yahoo provisoires. Tous restent exclus du scoring jusqu’à vérification.</span>';
-   }).catch(()=>{});
+   gate.innerHTML='<strong>Filtre PEA actif :</strong> '+eligibleInstruments.length+' titre(s) admis dans l\'univers de scoring ; '+excludedInstruments.length+' exclu(s) faute de statut vérifié. Aucun titre non vérifié n\'entre dans les moteurs ni dans les portefeuilles.';
   }
   stamp.textContent=data.data_ok_count+'/'+data.universe_count+' titres · données du '+new Date(data.generated_at_utc).toLocaleString('fr-FR');
  }catch(err){
