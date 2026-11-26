@@ -15,12 +15,17 @@ assert.equal(pilot.length, 3);
 assert.equal(Array.from(pilot, x => x.key).join(','), 'growth,quality,momentum');
 for (const strategy of pilot) {
   assert.equal(strategy.screened, 7, strategy.key + ' should screen the seven verified pilot securities internally');
-  assert.equal(strategy.finalists.length, 0, strategy.key + ' must not invent layer-2 scores');
-  assert.equal(strategy.third.valid, 0, strategy.key + ' must not invent final scores');
+  if (strategy.key === 'growth') {
+    assert.equal(strategy.finalists.length, 0, 'Growth PEG must remain N/D without 3-5 year EPS growth');
+    assert.equal(strategy.third.valid, 0, 'Growth final scores must remain N/D without PEG');
+  } else {
+    assert.equal(strategy.finalists.length, 7, strategy.key + ' should rank the pilot using at least 75% documented weight');
+    assert.equal(strategy.third.valid, 7, strategy.key + ' should calculate final scores at the 75% coverage threshold');
+  }
 }
 assert.equal(pilot[0].engine.available, 0, 'PEG needs positive 3-5 year EPS growth estimates');
-assert.equal(pilot[1].engine.available, 0, 'Quality needs all eight validated factors');
-assert.equal(pilot[2].engine.available, 0, 'Momentum needs all eight validated factors');
+assert.equal(pilot[1].engine.available, 7, 'Quality should use its 75% documented weight without imputing ROIC or Sharpe');
+assert.equal(pilot[2].engine.available, 7, 'Momentum should use its 80% documented weight without imputing Sharpe or relative return');
 
 context.window.StockPickingLayeredSelection.render(document.instruments);
 assert.ok(rendered.innerHTML.includes('Couche 2'));
