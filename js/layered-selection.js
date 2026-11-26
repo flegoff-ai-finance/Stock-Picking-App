@@ -96,10 +96,10 @@
     }).join('');
     return '<details><summary>Voir les indicateurs</summary><div class="table-wrap"><table class="table"><tbody>'+rows+'</tbody></table></div></details>';
   }
-  function render(universe){
+  function render(universe,peaRegistry){
     const root=document.getElementById('layeredSelection');
     if(!root)return;
-    const output=build(universe);
+    const output=build(universe,peaRegistry);
     if(!output.length){root.innerHTML='<div class="empty">Moteurs de sélection indisponibles.</div>';return;}
     root.innerHTML='<div class="notice"><strong>Pipeline interne :</strong> le premier filtre réduit l’univers à 150 candidats maximum par stratégie ; ses résultats détaillés restent masqués. Seuls les 25 dossiers les mieux classés et suffisamment documentés peuvent atteindre la couche finale. Les seuils 75/40 sont provisoires et non backtestés. Aucune donnée manquante n’est imputée.</div>'+
       output.map(o=>{
