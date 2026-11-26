@@ -45,7 +45,7 @@ class PeaRegistryAuditTests(unittest.TestCase):
                       validate_review(row, {"abc123"}, date(2026, 11, 26)))
 
     def test_unknown_candidate_is_rejected(self):
-        self.assertIn("candidate_id absent du référentiel de découverte",
+        self.assertIn("candidate_id absent ou dupliqué dans le fichier d'import",
                       validate_review(self.valid_review(), set(), date(2026, 11, 26)))
 
 
