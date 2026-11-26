@@ -33,7 +33,7 @@
   }
   function quality(items){
     const keys=['revenue_cagr_3y_pct','operating_income_cagr_3y_pct','operating_margin_pct','fcf_margin_pct','roic_pct','net_debt_ebitda','sharpe_3y','max_drawdown_3y_pct'];
-    const directions=[true,true,true,true,true,false,true,false];
+    const directions=[false,false,false,false,false,true,false,true];
     const scored=scoreCohort(items,x=>x,keys,directions).map(r=>({item:r.item,score:r.score,coverage:r.coverage,components:r.components,reason:r.score===null?'Au moins un indicateur fondamental ou de risque manque':null}));
     const ranked=scored.filter(r=>r.score!==null).sort((a,b)=>b.score-a.score);
     ranked.forEach((r,i)=>r.rank=i+1);
@@ -41,7 +41,7 @@
   }
   function momentum(items){
     const keys=['return_12_1m_pct','return_6m_pct','price_vs_sma200_pct','sma50_vs_sma200_pct','sharpe_3y','max_drawdown_1y_pct','volatility_1y_pct','relative_return_6m_pct'];
-    const directions=[true,true,true,true,true,false,false,true];
+    const directions=[false,false,false,false,false,false,true,false];
     const scored=scoreCohort(items,x=>x,keys,directions).map(r=>({item:r.item,score:r.score,coverage:r.coverage,components:r.components,reason:r.score===null?'Historique de cours, moyennes mobiles, benchmark ou risque incomplet':null}));
     const ranked=scored.filter(r=>r.score!==null).sort((a,b)=>b.score-a.score);
     ranked.forEach((r,i)=>r.rank=i+1);
