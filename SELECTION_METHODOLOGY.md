@@ -2,7 +2,8 @@
 
 ## Paramètres validés
 
-- Univers : titres dont l'éligibilité PEA est explicitement vérifiée et encore valide.
+- Univers de découverte : actions européennes candidates, sans filtre PEA préalable.
+- Contrôle PEA : appliqué en couche 2, après le premier classement ; seuls les ISIN présents dans le registre vérifié et dont la vérification date de moins de 90 jours sont admis.
 - Couche 1 : 150 candidats maximum par stratégie.
 - Couche 2 : 25 titres maximum par stratégie.
 - Couche 3 : score global sur 100 et signal indicatif.
@@ -22,9 +23,11 @@ Le premier écran utilise des facteurs simples et relativement accessibles. Un t
 
 La croissance BPA à un an n'est qu'un filtre initial de découverte. Elle ne remplace jamais la croissance BPA 3–5 ans utilisée dans le PEG classique.
 
-## Couche 2 — sélection stratégique approfondie
+## Couche 2 — vérification PEA et sélection stratégique approfondie
 
-Le moteur stratégique est appliqué uniquement aux candidats retenus en couche 1.
+Le moteur classe d'abord l'univers de découverte complet. Il prend ensuite les candidats dans l'ordre de classement et les rapproche du registre PEA vérifié par ISIN. Les candidats sans preuve PEA récente sont écartés ; le moteur poursuit dans la liste classée pour les remplacer, jusqu'à 150 titres vérifiés maximum par stratégie. La vérification exige un statut `eligible`, un ISIN valide, un ticker confirmé et une date de contrôle de moins de 90 jours. Les informations légales du registre priment sur les métadonnées de découverte.
+
+Le moteur stratégique est appliqué uniquement aux candidats retenus après ce contrôle PEA.
 
 - Growth : PEG classique = Forward P/E / croissance annuelle anticipée du BPA en pourcentage. Croissance BPA pluriannuelle positive requise ; classement par PEG croissant.
 - Growth Quality : score pondéré existant, fondé sur croissance CA et EBIT, marges opérationnelle et FCF, ROIC, dette nette/EBITDA, Sharpe 3 ans et drawdown 3 ans.
@@ -67,6 +70,6 @@ Les seuils sont des paramètres initiaux, pas des niveaux optimisés. Ils ne dé
 
 ## État actuel et limites
 
-Le registre de données contient encore sept titres pilotes. Il ne constitue pas un univers PEA exhaustif. Le premier filtre reste interne à l'application : ses noms et rangs ne sont pas affichés. Il calcule jusqu'à 150 candidats par stratégie uniquement parmi les titres vérifiés présents dans le registre ; il ne fabrique pas 150 lignes. L'étape suivante est d'élargir et de vérifier l'univers PEA, puis d'alimenter les champs par Yahoo Finance en priorité et de compléter / contrôler avec d'autres sources lorsque leurs conditions d'accès le permettent.
+Le registre technique contient encore sept titres pilotes et ne constitue pas un univers PEA exhaustif. Le code de sélection accepte désormais séparément un univers de découverte et le registre PEA : le premier screening est réalisé sans filtre PEA, puis la vérification PEA intervient en couche 2 avec remplacement par les candidats suivants. L'application est prête à charger `data/discovery_financials.json`, mais ce fichier n'est pas encore produit ; tant qu'il est absent, l'interface reste explicitement en mode pilote et utilise les sept titres existants. Aucun screening élargi ni classement sur 3 691 sociétés ne doit être considéré comme exécuté à ce stade. L'étape suivante est d'alimenter ce fichier avec des données financières et de marché documentées, sans scraper les sites dont les conditions interdisent l'extraction.
 
 Le score final affiché est une mesure de classement relative, pas une probabilité de hausse ni une garantie de performance. Les données de fournisseurs gratuits peuvent être retardées, incomplètes ou soumises à des restrictions d'usage et de redistribution.
