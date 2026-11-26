@@ -1,7 +1,19 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-11-26T13:54:11.778896+00:00",
+  "generated_at_utc": "2026-11-26T13:55:45.116331+00:00",
   "candidate_count": 3933,
+  "newly_verified_count": 0,
+  "legacy_verified_pilot_count": 7,
+  "total_verified_universe_count": 7,
+  "verified_pilot_names": [
+    "Euronext",
+    "Exosens",
+    "Planisware",
+    "GTT",
+    "Rexel",
+    "VIEL & Cie",
+    "SPIE"
+  ],
   "verified_count": 0,
   "pending_count": 3933,
   "verified_instruments": [],
