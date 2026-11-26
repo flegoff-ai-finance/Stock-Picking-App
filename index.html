@@ -117,6 +117,7 @@
 </section>
 <section id="settings"><div class="section-head"><h3>Paramètres de simulation</h3><span>Enregistrés sur cet appareil</span></div><div class="card"><div class="field"><label for="fee">Frais par opération (%)</label><input id="fee" type="number" min="0" max="5" step=".05" value="0.5"></div><div class="field"><label for="stop">Stop-loss de référence (%)</label><input id="stop" type="number" min="1" max="80" step="1" value="20"></div><div class="field"><label for="capital">Capital initial par portefeuille (€)</label><input id="capital" type="number" min="1000" step="500" value="1000"></div><button class="btn" id="save">Enregistrer les paramètres</button><p id="saved" class="small muted" aria-live="polite"></p></div><div class="notice">Hypothèses actuelles : rééquilibrage hebdomadaire, liquidités maximales 10 %, benchmark MSCI World, validation manuelle de chaque opération. Aucun ordre réel chez Boursobank.</div></section>
 </main><footer class="foot"><span><strong>PEA LAB</strong> · Prototype privé</span><span>Build 0.1 · données en intégration</span></footer>
+<script src="./js/scoring-engines.js"></script>
 <script>
 // Navigation native par ancres HTML : aucun JavaScript requis.
 const ids=['fee','stop','capital'];try{const s=JSON.parse(localStorage.getItem('sppea-settings')||'{}');if(s.capital===10000)s.capital=1000;ids.forEach(id=>{if(s[id]!==undefined)document.getElementById(id).value=s[id]})}catch(e){}
@@ -203,6 +204,7 @@ function renderScoringEngines(universe){
   // Single source of truth for future scoring and proposal modules: only this list may be scored.
   window.stockPickingPeaUniverse=eligibleInstruments;
   window.stockPickingPeaExcluded=excludedInstruments;
+  renderScoringEngines(eligibleInstruments);
   body.innerHTML=data.instruments.map(x=>'<tr><td>'+safe(x.name)+'</td><td>'+euro(x.last_close)+'</td><td>'+pct(x.return_12_1m_pct)+'</td><td>'+pct(x.return_6m_pct)+'</td><td>'+pct(x.volatility_1y_pct)+'</td><td>'+(x.momentum_score===null?'—':Number(x.momentum_score).toFixed(1))+'</td><td><span class="pill">'+(isPeaEligible(x)?'Éligible':'Exclu · à vérifier')+'</span></td></tr>').join('');
   const gate=document.getElementById('peaGateSummary');
   if(gate)gate.innerHTML='<strong>Filtre PEA actif :</strong> '+eligibleInstruments.length+' titre(s) admis dans l\'univers de scoring ; '+excludedInstruments.length+' exclu(s) faute de statut vérifié. Les modules de scoring devront utiliser <code>stockPickingPeaUniverse</code>, jamais la liste brute.';
