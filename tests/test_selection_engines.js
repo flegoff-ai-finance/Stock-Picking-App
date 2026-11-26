@@ -13,7 +13,7 @@ vm.runInContext(fs.readFileSync(root + '/js/layered-selection.js', 'utf8'), cont
 const pilot = context.window.StockPickingLayeredSelection.run(document.instruments);
 assert.equal(pilot.length, 3);
 assert.equal(Array.from(pilot, x => x.key).join(','), 'growth,quality,momentum');
-console.log('PILOT_DEBUG', Array.from(pilot, x => ({key:x.key,screened:x.screened,available:x.engine.available,finalists:x.finalists.length,rows:x.engine.rows?.map(r=>({name:r.item.name,score:r.score,coverage:r.coverage,weight:r.coverageWeightPct,reason:r.reason}))})));
+console.log('PILOT_DEBUG', JSON.stringify(Array.from(pilot, x => ({key:x.key,screened:x.screened,available:x.engine.available,finalists:x.finalists.length,rows:x.engine.rows?.map(r=>({name:r.item.name,score:r.score,coverage:r.coverage,weight:r.coverageWeightPct,reason:r.reason}))}))));
 for (const strategy of pilot) {
   assert.equal(strategy.screened, 7, strategy.key + ' should screen the seven verified pilot securities internally');
   if (strategy.key === 'growth') {
