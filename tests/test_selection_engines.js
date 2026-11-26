@@ -24,9 +24,9 @@ for (const strategy of pilot) {
   }
 }
 assert.equal(pilot[0].engine.available, 0, 'PEG needs positive 3-5 year EPS growth estimates');
-assert.equal(pilot[1].engine.available, 7, 'Quality should use its 75% documented weight without imputing ROIC or Sharpe');
-assert.equal(pilot[2].engine.available, 7, 'Momentum should use its 80% documented weight without imputing Sharpe or relative return');
-assert.equal(Array.from(pilot[1].finalists, x => x.item.name).slice(0,3).join(','), 'GTT,Exosens,Planisware');
+assert.equal(pilot[1].engine.available, 7, 'Quality should use its 75% documented weight without imputing ROIC');
+assert.equal(pilot[2].engine.available, 7, 'Momentum should use its 80% documented weight with relative return and Sharpe data');
+assert.equal(Array.from(pilot[1].finalists, x => x.item.name).slice(0,3).join(','), 'GTT,Exosens,Euronext');
 assert.equal(Array.from(pilot[2].finalists, x => x.item.name).slice(0,3).join(','), 'Euronext,Planisware,VIEL & Cie');
 assert.equal(Array.from(pilot[1].third.rows, x => x.item.name).slice(0,3).join(','), 'GTT,Euronext,Exosens');
 assert.equal(Array.from(pilot[2].third.rows, x => x.item.name).slice(0,3).join(','), 'Euronext,VIEL & Cie,GTT');
