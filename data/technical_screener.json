@@ -8,7 +8,7 @@
     "limitations": [
       "Price-only indicator; not a fundamental Growth score.",
       "Seven-stock pilot sample; not a market-wide Top 10.",
-      "PEA eligibility is unverified and is a hard gate before portfolio use.",
+      "PEA eligibility checked on 2026-11-26 against issuer and market reference pages; broker confirmation remains prudent before placing an order.",
       "Yahoo Finance data may be delayed, incomplete or revised."
     ]
   },
@@ -17,7 +17,7 @@
       "name": "Euronext",
       "ticker": "ENX.PA",
       "isin": "NL0006294274",
-      "pea_status": "to_verify",
+      "pea_status": "eligible",
       "data_status": "ok",
       "momentum_score": 100,
       "last_close": 167.5,
@@ -30,13 +30,14 @@
       "last_date": "2026-11-25",
       "growth_quant_score": null,
       "growth_quality_score": null,
-      "growth_momentum_score": null
+      "growth_momentum_score": null,
+      "pea_checked_at": "2026-11-26"
     },
     {
       "name": "Exosens",
       "ticker": "EXENS.PA",
       "isin": "FR001400Q9V2",
-      "pea_status": "to_verify",
+      "pea_status": "eligible",
       "data_status": "ok",
       "momentum_score": 85.7,
       "last_close": 48.7,
@@ -49,13 +50,14 @@
       "last_date": "2026-11-25",
       "growth_quant_score": null,
       "growth_quality_score": null,
-      "growth_momentum_score": null
+      "growth_momentum_score": null,
+      "pea_checked_at": "2026-11-26"
     },
     {
       "name": "Planisware",
       "ticker": "PLNW.PA",
       "isin": "FR001400PFU4",
-      "pea_status": "to_verify",
+      "pea_status": "eligible",
       "data_status": "ok",
       "momentum_score": 71.4,
       "last_close": 24.4,
@@ -68,13 +70,14 @@
       "last_date": "2026-11-25",
       "growth_quant_score": null,
       "growth_quality_score": null,
-      "growth_momentum_score": null
+      "growth_momentum_score": null,
+      "pea_checked_at": "2026-11-26"
     },
     {
       "name": "GTT",
       "ticker": "GTT.PA",
       "isin": "FR0011726835",
-      "pea_status": "to_verify",
+      "pea_status": "eligible",
       "data_status": "ok",
       "momentum_score": 57.1,
       "last_close": 180.4,
@@ -87,13 +90,14 @@
       "last_date": "2026-11-25",
       "growth_quant_score": null,
       "growth_quality_score": null,
-      "growth_momentum_score": null
+      "growth_momentum_score": null,
+      "pea_checked_at": "2026-11-26"
     },
     {
       "name": "Rexel",
       "ticker": "RXL.PA",
       "isin": "FR0010451203",
-      "pea_status": "to_verify",
+      "pea_status": "eligible",
       "data_status": "ok",
       "momentum_score": 42.9,
       "last_close": 31.69,
@@ -106,13 +110,14 @@
       "last_date": "2026-11-25",
       "growth_quant_score": null,
       "growth_quality_score": null,
-      "growth_momentum_score": null
+      "growth_momentum_score": null,
+      "pea_checked_at": "2026-11-26"
     },
     {
       "name": "VIEL & Cie",
       "ticker": "VIL.PA",
       "isin": "FR0000050049",
-      "pea_status": "to_verify",
+      "pea_status": "eligible",
       "data_status": "ok",
       "momentum_score": 28.6,
       "last_close": 19.12,
@@ -125,13 +130,14 @@
       "last_date": "2026-11-25",
       "growth_quant_score": null,
       "growth_quality_score": null,
-      "growth_momentum_score": null
+      "growth_momentum_score": null,
+      "pea_checked_at": "2026-11-26"
     },
     {
       "name": "SPIE",
       "ticker": "SPIE.PA",
       "isin": "FR0012757854",
-      "pea_status": "to_verify",
+      "pea_status": "eligible",
       "data_status": "ok",
       "momentum_score": 14.3,
       "last_close": 43.86,
@@ -144,7 +150,9 @@
       "last_date": "2026-11-25",
       "growth_quant_score": null,
       "growth_quality_score": null,
-      "growth_momentum_score": null
+      "growth_momentum_score": null,
+      "pea_checked_at": "2026-11-26"
     }
-  ]
+  ],
+  "pea_checked_at": "2026-11-26"
 }
