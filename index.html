@@ -65,7 +65,8 @@ document.getElementById('save').addEventListener('click',()=>{const s={};ids.for
 const portfolioNames={quant:'Growth Quantitative',quality:'Growth Quality',momentum:'Growth Momentum'};
 const tradeKey='sppea-trades-v1';
 const readTrades=()=>{try{return JSON.parse(localStorage.getItem(tradeKey)||'[]')}catch(e){return []}};
-const money=v=>new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR'}).format(v);\nconst initialCapital=()=>Math.max(1000,Number(document.getElementById('capital').value)||1000);
+const money=v=>new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR'}).format(v);
+const initialCapital=()=>Math.max(1000,Number(document.getElementById('capital').value)||1000);
 const safe=v=>String(v??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 function computePortfolios(){
  const trades=readTrades(), states={};
