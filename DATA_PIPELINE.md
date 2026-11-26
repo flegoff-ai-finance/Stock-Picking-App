@@ -56,3 +56,5 @@ The Yahoo ingestion also requests `get_growth_estimates(as_dict=True)`:
 For Sharpe, the pipeline downloads the ECB daily €STR series `EST.B.EU000A2X2A25.WT`, aligns the last known daily rate to each stock return date, converts the annualized percentage using ACT/360, and annualizes excess-return Sharpe with sqrt(252). If the ECB series is unavailable or coverage is insufficient, Sharpe remains null and the source error is recorded.
 
 Official series: https://data.ecb.europa.eu/data/datasets/EST/EST.B.EU000A2X2A25.WT
+
+For the current Paris-listed pilot securities, six-month relative performance is calculated as the adjusted-price return minus the CAC 40 return over the same date window. This is a national-market proxy, not a size-matched benchmark. Other listing markets remain N/D until an explicit, verified local-index mapping is configured.
