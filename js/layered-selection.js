@@ -31,11 +31,16 @@
         : key==='quality'
           ? available>=4 && n(item.revenue_cagr_3y_pct)!==null && (n(item.roic_pct)!==null || n(item.fcf_margin_pct)!==null)
           : available>=4 && n(item.return_12_1m_pct)!==null && n(item.return_6m_pct)!==null;
-      return {item,score:required?valid.reduce((a,b)=>a+b,0)/valid.length:null,coverage:available,coverageMax:cfg.screen.length,excludedReason:required?null:'Couverture stratégique minimale non atteinte'};
+      const excludedReason=required?null:key==='growth'
+        ? 'Growth : PER prévisionnel, croissance BPA 5 ans positive et croissance CA requis'
+        : key==='quality'
+          ? 'Growth Quality : 4/5 indicateurs requis, croissance CA et ROIC ou marge FCF obligatoires'
+          : 'Momentum : 4/5 indicateurs requis, performances 12-1 mois et 6 mois obligatoires';
+      return {item,score:required?valid.reduce((a,b)=>a+b,0)/valid.length:null,coverage:available,coverageMax:cfg.screen.length,excludedReason};
     });
     const ranked=raw.filter(x=>x.score!==null).sort((a,b)=>b.score-a.score||b.coverage-a.coverage);
     ranked.forEach((x,i)=>x.rank=i+1);
-    return {ranked,candidates:ranked.slice(0,150),eligible:universe.length,screened:ranked.length};
+    return {ranked,candidates:ranked.slice(0,150),excluded:raw.filter(x=>x.excludedReason).map(x=>({item:x.item,reason:x.excludedReason})),eligible:universe.length,screened:ranked.length};
   }
   function finalScore(finalists,key){
     const factors=specs[key].final;
@@ -94,6 +99,7 @@
       const finalists=engine.ranked.slice(0,25).map(r=>({item:r.item,peg:r.peg??null,layer2_score:r.score??null,layer2_rank:r.rank??null,layer2_coverage:r.coverage??null,layer2_coverage_weight_pct:r.coverageWeightPct??null}));
       const third=finalScore(finalists,key);
       const blockers={};
+      (first.excluded||[]).forEach(r=>{blockers[r.reason]=(blockers[r.reason]||0)+1;});
       (engine.rows||[]).filter(r=>r.reason).forEach(r=>{blockers[r.reason]=(blockers[r.reason]||0)+1;});
       return {key,label:specs[key].label,screened:first.candidates.length,peaVerified:candidates.length,peaRejected,engine,finalists,third,blockers};
     });
