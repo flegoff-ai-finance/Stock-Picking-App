@@ -134,6 +134,8 @@ def build(output: Path = DEFAULT_OUTPUT, markets=MARKETS) -> int:
             "refusing to overwrite the previous universe."
         )
     rows = build_candidates(rows_by_market, commit, retrieved_at)
+    if not rows:
+        raise RuntimeError("The downloaded exchange files produced zero valid candidates; refusing to overwrite the previous universe.")
     output.parent.mkdir(parents=True, exist_ok=True)
     with output.open("w", encoding="utf-8", newline="") as stream:
         writer = csv.DictWriter(stream, fieldnames=FIELDNAMES)
