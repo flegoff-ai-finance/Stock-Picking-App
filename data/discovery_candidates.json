@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "status": "pending_first_screening",
+  "generated_at": null,
+  "universe_note": "Exploratory European candidates; PEA eligibility is not required or implied.",
+  "strategies": {
+    "growth": [],
+    "quality": [],
+    "momentum": []
+  },
+  "candidate_schema": {
+    "required": [
+      "name"
+    ],
+    "recommended": [
+      "ticker",
+      "isin",
+      "rank",
+      "discovery_signal",
+      "sources",
+      "screened_at",
+      "pea_status"
+    ],
+    "pea_status_values": [
+      "eligible",
+      "ineligible",
+      "unknown",
+      "not_checked"
+    ]
+  }
+}
