@@ -4,7 +4,8 @@ Application de recherche et de simulation de trois portefeuilles PEA indépendan
 
 ## Architecture de sélection
 
-- Couche 1 : screening interne, jusqu'à 150 candidats par stratégie. Les noms et les rangs de cette couche ne sont pas affichés dans l'application.
+- Découverte : trois listes exploratoires indépendantes (Growth, Growth Quality, Growth Momentum), sans filtre PEA. Elles identifient des sociétés à analyser ; leur présence ne vaut pas validation d'investissement.
+- Couche 1 d'investissement : screening interne sur les seuls titres dont l'éligibilité PEA est vérifiée, jusqu'à 150 candidats par stratégie. Les noms et les rangs de cette couche ne sont pas affichés dans l'application.
 - Couche 2 : analyse stratégique, jusqu'à 25 valeurs par stratégie, avec indicateurs détaillés et couverture des données.
 - Couche 3 : score global /100 et signal indicatif. Seuils provisoires : achat à étudier ≥75, conserver/surveiller entre 40 et 75, vente/éviter <40.
 - Données manquantes : jamais imputées. Les scores partiels exigent au moins quatre facteurs et 75 % du poids documenté.
@@ -19,7 +20,7 @@ Application de recherche et de simulation de trois portefeuilles PEA indépendan
 ## Univers PEA — état du pilote
 
 - 7 titres pilotes actuellement admis dans l'univers de scoring.
-- Un vivier de découverte de 3 691 candidats européens est maintenant généré depuis FinanceDatabase (référentiel MIT), sur 19 places de cotation. Ce vivier n'est pas assimilé à l'univers PEA éligible : seuls les titres passés par le contrôle documentaire peuvent rejoindre le scoring.
+- Un vivier de découverte de 3 691 candidats européens est maintenant généré depuis FinanceDatabase (référentiel MIT), sur 19 places de cotation. Ce vivier exploratoire est distinct de l'univers PEA vérifié et des portefeuilles virtuels. Les listes de candidats par stratégie sont destinées à `data/discovery_candidates.json` ; elles ne sont pas encore alimentées par un screening validé.
 - Le vivier exploratoire est dans `data/discovery_universe.csv` (rafraîchi chaque semaine). Sa méthode et ses limites sont documentées dans `DISCOVERY_UNIVERSE.md`. Il reste distinct du modèle d'import et de contrôle PEA dans `data/pea_verification.csv`. Le contrôle documentaire est automatisé par `scripts/build_pea_registry.py`, puis `scripts/sync_pea_registry.py` ajoute uniquement les titres validés ; Yahoo les enrichit par lots de 50.
 - Chaque nouvelle ligne doit documenter l'ISIN, le ticker, le siège UE/EEE, l'assujettissement fiscal, la nature d'action ordinaire, une source d'éligibilité PEA et une source émetteur. La vérification expire après 90 jours.
 
