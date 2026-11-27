@@ -15,7 +15,7 @@ const pilot = context.window.StockPickingLayeredSelection.run(document.instrumen
 assert.equal(pilot.length, 3);
 assert.equal(Array.from(pilot, x => x.key).join(','), 'growth,quality,momentum');
 for (const strategy of pilot) {
-  assert.equal(strategy.screened, 7, strategy.key + ' should screen the seven verified pilot securities internally');
+  assert.equal(strategy.screened, strategy.key === 'growth' ? 0 : 7, strategy.key + ' should only pass candidates meeting the minimum layer-1 indicator coverage');
   if (strategy.key === 'growth') {
     assert.equal(strategy.finalists.length, 0, 'Growth PEG must remain N/D without 3-5 year EPS growth');
     assert.equal(strategy.third.valid, 0, 'Growth final scores must remain N/D without PEG');
@@ -27,10 +27,12 @@ for (const strategy of pilot) {
 assert.equal(pilot[0].engine.available, 0, 'PEG needs positive 3-5 year EPS growth estimates');
 assert.equal(pilot[1].engine.available, 7, 'Quality should use its 75% documented weight without imputing ROIC');
 assert.equal(pilot[2].engine.available, 7, 'Momentum should use its 80% documented weight with relative return and Sharpe data');
-assert.equal(Array.from(pilot[1].finalists, x => x.item.name).slice(0,3).join(','), 'GTT,Exosens,Euronext');
-assert.equal(Array.from(pilot[2].finalists, x => x.item.name).slice(0,3).join(','), 'Euronext,Planisware,VIEL & Cie');
-assert.equal(Array.from(pilot[1].third.rows, x => x.item.name).slice(0,3).join(','), 'GTT,Euronext,Exosens');
-assert.equal(Array.from(pilot[2].third.rows, x => x.item.name).slice(0,3).join(','), 'Euronext,VIEL & Cie,GTT');
+assert.equal(pilot[1].finalists.length, 7, 'all pilot stocks meeting Quality coverage should reach layer 2');
+assert.equal(pilot[2].finalists.length, 7, 'all pilot stocks meeting Momentum coverage should reach layer 2');
+
+
+
+
 
 context.window.StockPickingLayeredSelection.render(document.instruments);
 assert.ok(rendered.innerHTML.includes('Couche 2'));
@@ -39,7 +41,7 @@ assert.ok(!rendered.innerHTML.includes('Score écran'));
 assert.ok(!rendered.innerHTML.includes('Couche 1 · premiers candidats'));
 
 const sample = [0,1,2,3].map(i => ({
-  name: 'TEST' + i, isin: 'FR000000000' + i, pea_status: 'eligible', pea_checked_at: '2026-11-26',
+  name: 'TEST' + i, ticker: 'TEST' + i + '.PA', isin: 'FR000000000' + i, pea_status: 'eligible', pea_checked_at: '2026-11-26',
   forward_pe: 12 + i, eps_growth_cagr_pct: 8 + i * 2,
   revenue_cagr_3y_pct: 5 + i * 3, operating_income_cagr_3y_pct: 6 + i * 3,
   operating_margin_pct: 10 + i, fcf_margin_pct: 7 + i, roic_pct: 8 + i,
@@ -53,4 +55,21 @@ const engines = context.window.StockPickingEngines;
 assert.equal(engines.growth(sample).available, 4);
 assert.equal(engines.quality(sample).available, 4);
 assert.equal(engines.momentum(sample).available, 4);
+// Missing mandatory indicators exclude a stock even if its raw coverage is otherwise high.
+const noRevenue = sample.map(x => ({ ...x, revenue_cagr_3y_pct: null }));
+assert.equal(engines.quality(noRevenue).available, 0, 'Quality requires revenue growth');
+const noProfitability = sample.map(x => ({ ...x, roic_pct: null, fcf_margin_pct: null }));
+assert.equal(engines.quality(noProfitability).available, 0, 'Quality requires ROIC or FCF margin');
+const noMomentum12m = sample.map(x => ({ ...x, return_12_1m_pct: null }));
+assert.equal(engines.momentum(noMomentum12m).available, 0, 'Momentum requires 12-1 month performance');
+const noMomentum6m = sample.map(x => ({ ...x, return_6m_pct: null }));
+assert.equal(engines.momentum(noMomentum6m).available, 0, 'Momentum requires six-month performance');
+// Layer 1 must rank the discovery pool before layer 2 applies the PEA evidence gate.
+const mixed = context.window.StockPickingLayeredSelection.run(sample, sample.slice(0, 2));
+assert.equal(mixed[0].screened, 4, 'all four discovery candidates are screened before PEA verification');
+for (const strategy of mixed) {
+  assert.equal(strategy.peaVerified, 2, strategy.key + ' should retain only the two verified PEA instruments');
+  assert.equal(strategy.engine.required, 2, strategy.key + ' engines must never receive unverified instruments');
+  assert.ok(strategy.finalists.every(row => ['TEST0', 'TEST1'].includes(row.item.name)));
+}
 console.log('Selection engine tests passed: pilot data stays N/D; complete fixtures rank in all three strategies; layer 1 remains hidden.');

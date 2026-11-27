@@ -15,9 +15,9 @@
     return lowerIsBetter?100-p:p;
   };
   const specs={
-    growth:{label:'Growth',screen:[['revenue_cagr_3y_pct',false],['eps_growth_next_year_pct',false],['forward_pe',true]],final:[['peg',true,35],['revenue_cagr_3y_pct',false,20],['operating_margin_pct',false,15],['return_12_1m_pct',false,15],['max_drawdown_3y_pct',false,15]]},
-    quality:{label:'Growth Quality',screen:[['revenue_cagr_3y_pct',false],['operating_margin_pct',false],['roic_pct',false]],final:[['layer2_score',false,35],['forward_pe',true,10],['fcf_margin_pct',false,15],['roic_pct',false,15],['net_debt_ebitda',true,10],['max_drawdown_3y_pct',false,15]]},
-    momentum:{label:'Growth Momentum',screen:[['return_12_1m_pct',false],['return_6m_pct',false],['price_vs_sma200_pct',false]],final:[['layer2_score',false,35],['forward_pe',true,10],['eps_growth_next_year_pct',false,10],['sharpe_3y',false,15],['max_drawdown_1y_pct',false,15],['volatility_1y_pct',true,15]]}
+    growth:{label:'Growth',screen:[['revenue_cagr_3y_pct',false],['eps_growth_cagr_pct',false],['forward_pe',true]],final:[['peg',true,35],['revenue_cagr_3y_pct',false,20],['operating_margin_pct',false,15],['return_12_1m_pct',false,15],['max_drawdown_3y_pct',false,15]]},
+    quality:{label:'Growth Quality',screen:[['revenue_cagr_3y_pct',false],['operating_margin_pct',false],['roic_pct',false],['fcf_margin_pct',false],['net_debt_ebitda',true]],final:[['layer2_score',false,35],['forward_pe',true,10],['fcf_margin_pct',false,15],['roic_pct',false,15],['net_debt_ebitda',true,10],['max_drawdown_3y_pct',false,15]]},
+    momentum:{label:'Growth Momentum',screen:[['return_12_1m_pct',false],['return_6m_pct',false],['price_vs_sma200_pct',false],['volatility_1y_pct',true],['max_drawdown_1y_pct',false]],final:[['layer2_score',false,35],['forward_pe',true,10],['eps_growth_next_year_pct',false,10],['sharpe_3y',false,15],['max_drawdown_1y_pct',false,15],['volatility_1y_pct',true,15]]}
   };
   function screen(universe,key){
     const cfg=specs[key];
@@ -26,11 +26,21 @@
       const available=values.filter(v=>v!==null).length;
       const components=values.map((v,i)=>v===null?null:rank(universe.map(x=>n(x[cfg.screen[i][0]])),v,cfg.screen[i][1]));
       const valid=components.filter(v=>v!==null);
-      return {item,score:valid.length>=2?valid.reduce((a,b)=>a+b,0)/valid.length:null,coverage:available,coverageMax:cfg.screen.length};
+      const required=key==='growth'
+        ? values.every(v=>v!==null) && n(item.forward_pe)>0 && n(item.eps_growth_cagr_pct)>0
+        : key==='quality'
+          ? available>=4 && n(item.revenue_cagr_3y_pct)!==null && (n(item.roic_pct)!==null || n(item.fcf_margin_pct)!==null)
+          : available>=4 && n(item.return_12_1m_pct)!==null && n(item.return_6m_pct)!==null;
+      const excludedReason=required?null:key==='growth'
+        ? 'Growth : PER prévisionnel, croissance BPA 5 ans positive et croissance CA requis'
+        : key==='quality'
+          ? 'Growth Quality : 4/5 indicateurs requis, croissance CA et ROIC ou marge FCF obligatoires'
+          : 'Momentum : 4/5 indicateurs requis, performances 12-1 mois et 6 mois obligatoires';
+      return {item,score:required?valid.reduce((a,b)=>a+b,0)/valid.length:null,coverage:available,coverageMax:cfg.screen.length,excludedReason};
     });
     const ranked=raw.filter(x=>x.score!==null).sort((a,b)=>b.score-a.score||b.coverage-a.coverage);
     ranked.forEach((x,i)=>x.rank=i+1);
-    return {ranked,candidates:ranked.slice(0,150),eligible:universe.length,screened:ranked.length};
+    return {ranked,candidates:ranked.slice(0,150),excluded:raw.filter(x=>x.excludedReason).map(x=>({item:x.item,reason:x.excludedReason})),eligible:universe.length,screened:ranked.length};
   }
   function finalScore(finalists,key){
     const factors=specs[key].final;
@@ -52,19 +62,46 @@
     valid.forEach((x,i)=>x.finalRank=i+1);
     return {rows:valid.concat(scored.filter(x=>x.score===null)),valid:valid.length};
   }
-  function build(universe){
+  function isPeaVerified(item,today=new Date()){
+    if(!item||item.pea_status!=='eligible'||!/^([A-Z]{2}[A-Z0-9]{10})$/.test(String(item.isin||''))||!String(item.ticker||'').trim())return false;
+    const checked=Date.parse(String(item.pea_checked_at||item.verified_at||'')+'T00:00:00Z');
+    const age=(today.getTime()-checked)/86400000;
+    return Number.isFinite(checked)&&age>=0&&age<=90;
+  }
+  function build(universe,peaRegistry){
     const engines=window.StockPickingEngines;
     if(!engines)return [];
+    const registry=Array.isArray(peaRegistry)?peaRegistry:universe;
+    const verifiedByIsin=new Map(registry.filter(item=>isPeaVerified(item)).map(item=>[String(item.isin).toUpperCase(),item]));
     return Object.keys(specs).map(key=>{
       const first=screen(universe,key);
-      // Screening rows are wrappers; strategic engines must receive the underlying instruments.
-      const candidates=first.candidates.map(row=>row.item);
+      // Layer 1 ranks the full discovery pool. PEA evidence is applied only afterwards.
+      // Continue down the ranked list until 150 verified instruments are found, so
+      // unverified candidates are replaced by the next ranked candidate.
+      const candidates=[];
+      let peaRejected=0;
+      for(const row of first.ranked){
+        const verified=verifiedByIsin.get(String(row.item.isin||'').toUpperCase());
+        if(!verified){peaRejected++;continue;}
+        candidates.push({
+          ...verified,
+          ...row.item,
+          name:verified.name||row.item.name,
+          ticker:verified.ticker,
+          isin:verified.isin,
+          pea_status:'eligible',
+          pea_checked_at:verified.pea_checked_at||verified.verified_at,
+          verification_status:'verified'
+        });
+        if(candidates.length>=150)break;
+      }
       const engine=key==='growth'?engines.growth(candidates):key==='quality'?engines.quality(candidates):engines.momentum(candidates);
       const finalists=engine.ranked.slice(0,25).map(r=>({item:r.item,peg:r.peg??null,layer2_score:r.score??null,layer2_rank:r.rank??null,layer2_coverage:r.coverage??null,layer2_coverage_weight_pct:r.coverageWeightPct??null}));
       const third=finalScore(finalists,key);
       const blockers={};
+      (first.excluded||[]).forEach(r=>{blockers[r.reason]=(blockers[r.reason]||0)+1;});
       (engine.rows||[]).filter(r=>r.reason).forEach(r=>{blockers[r.reason]=(blockers[r.reason]||0)+1;});
-      return {key,label:specs[key].label,screened:first.candidates.length,engine,finalists,third,blockers};
+      return {key,label:specs[key].label,screened:first.candidates.length,peaVerified:candidates.length,peaRejected,engine,finalists,third,blockers};
     });
   }
   const fmt=v=>v===null||v===undefined?'—':Number(v).toFixed(1);
@@ -82,10 +119,10 @@
     }).join('');
     return '<details><summary>Voir les indicateurs</summary><div class="table-wrap"><table class="table"><tbody>'+rows+'</tbody></table></div></details>';
   }
-  function render(universe){
+  function render(universe,peaRegistry){
     const root=document.getElementById('layeredSelection');
     if(!root)return;
-    const output=build(universe);
+    const output=build(universe,peaRegistry);
     if(!output.length){root.innerHTML='<div class="empty">Moteurs de sélection indisponibles.</div>';return;}
     root.innerHTML='<div class="notice"><strong>Pipeline interne :</strong> le premier filtre réduit l’univers à 150 candidats maximum par stratégie ; ses résultats détaillés restent masqués. Seuls les 25 dossiers les mieux classés et suffisamment documentés peuvent atteindre la couche finale. Les seuils 75/40 sont provisoires et non backtestés. Aucune donnée manquante n’est imputée.</div>'+
       output.map(o=>{
@@ -97,7 +134,7 @@
           ?'<div class="empty"><b>Aucun titre ne satisfait encore les exigences de données de '+esc(o.label)+'.</b><br>'+o.screened+' candidat(s) transmis par le filtre interne ; indicateurs stratégiques incomplets. Aucun classement artificiel.</div>'
           :'<div class="empty">Aucun finaliste disponible.</div>';
         return '<div class="card wide" style="margin-top:14px"><div class="row"><h3>'+o.label+'</h3><span class="pill">'+o.finalists.length+' / 25 finalistes</span></div>'+
-          '<div class="grid"><div><div class="small muted">Univers PEA vérifié</div><div class="metric">'+(o.engine.required??o.screened)+'</div><div class="metric-sub">Titres transmis au moteur</div></div><div><div class="small muted">Couche 2 · analyse stratégique</div><div class="metric">'+o.engine.available+' / '+o.screened+'</div><div class="metric-sub">Dossiers classables avec les indicateurs requis</div></div><div><div class="small muted">Couche 3 · score final</div><div class="metric">'+o.third.valid+' / '+o.finalists.length+'</div><div class="metric-sub">Scores suffisamment documentés</div></div></div>'+
+          '<div class="grid"><div><div class="small muted">Titres vérifiés PEA après couche 2</div><div class="metric">'+(o.engine.required??o.screened)+'</div><div class="metric-sub">Titres transmis au moteur après vérification PEA</div></div><div><div class="small muted">Couche 2 · analyse stratégique</div><div class="metric">'+o.engine.available+' / '+o.screened+'</div><div class="metric-sub">Dossiers classables avec les indicateurs requis</div></div><div><div class="small muted">Couche 3 · score final</div><div class="metric">'+o.third.valid+' / '+o.finalists.length+'</div><div class="metric-sub">Scores suffisamment documentés</div></div></div>'+
           '<div class="section-head"><h3>Couche 2 · sélection stratégique</h3><span>Top 25 maximum</span></div>'+
           (secondRows?topTable('<th>Rang</th><th>Société</th><th>'+(o.key==='growth'?'PEG':'Score stratégique /100')+'</th><th>Couverture</th><th>Indicateurs</th>',secondRows,'Aucun titre classable.'):layer2Empty)+
           (blockerText?'<div class="notice"><strong>Indicateurs bloquants :</strong><ul>'+blockerText+'</ul></div>':'')+
