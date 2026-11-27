@@ -11,9 +11,9 @@
 <body><main class="shell">
 <header class="top"><div class="brand"><div class="logo">S</div><div><h1>Stock Picking <span style="color:var(--green)">PEA</span></h1><p>Quant research · portefeuille virtuel</p></div></div><div class="status">● Prototype actif</div></header>
 <div class="intro"><div class="eyebrow">Investment cockpit</div><h2>Décider mieux.<br>Mesurer chaque décision.</h2><p>Trois stratégies Growth quantitatives, trois portefeuilles virtuels et un suivi transparent des signaux.</p></div>
-<div class="notice"><strong>Mode prototype — filtre PEA actif.</strong> Les titres ne peuvent entrer dans l'univers exploitable par le moteur que si leur statut PEA est explicitement "eligible" et accompagné d'une date de vérification. Tout statut absent, inconnu ou non vérifié est exclu par défaut. Les trois couches de sélection sont intégrées. Les classements restent limités à l'univers PEA vérifié et aux données effectivement disponibles.</div>
+<div class="notice"><strong>Deux univers distincts.</strong> Le potentiel de découverte est ouvert aux sociétés européennes, sans filtre PEA. Les moteurs de scoring et les portefeuilles virtuels restent strictement limités aux titres dont l’éligibilité PEA est vérifiée et datée ; tout statut absent, inconnu ou expiré est exclu. Une société peut donc être intéressante à analyser sans pouvoir être investie dans les portefeuilles PEA.</div>
 <nav class="nav" aria-label="Navigation">
-<a href="#dashboard">Vue d'ensemble</a><a href="#strategies">Stratégies</a><a href="#quality-model">Growth Quality</a><a href="#engines">Moteurs & classements</a><a href="#backtest">Backtest</a><a href="#universe">Univers</a><a href="#portfolios">Portefeuilles</a><a href="#settings">Paramètres</a>
+<a href="#dashboard">Vue d'ensemble</a><a href="#strategies">Stratégies</a><a href="#quality-model">Growth Quality</a><a href="#discovery">Potentiel découvert</a><a href="#engines">Moteurs & classements</a><a href="#backtest">Backtest</a><a href="#universe">Univers</a><a href="#portfolios">Portefeuilles</a><a href="#settings">Paramètres</a>
 </nav>
 <section id="dashboard">
 <div class="grid">
@@ -70,6 +70,16 @@
 <div class="card"><div class="muted small">Score Growth Quality</div><div class="metric">Calculé · pilote</div><div class="metric-sub">Score renormalisé sur 75 % du poids documenté ; univers de 7 titres seulement</div></div>
 </div>
 <div class="notice">Important : le Sharpe d'une action ne préjuge pas du Sharpe du portefeuille. Le risque du portefeuille devra être calculé séparément à partir des rendements agrégés, des pondérations, des liquidités et des corrélations entre positions. Les frais simulés de 0,5 % à l'achat et à la vente seront intégrés aux backtests.</div>
+</section>
+<section id="discovery">
+<div class="section-head"><h3>Potentiel découvert · univers européen</h3><span id="discoveryStamp">Screening à alimenter</span></div>
+<div class="notice"><strong>Univers exploratoire, sans filtre PEA.</strong> Ces listes servent à repérer des sociétés à analyser. Leur présence ici ne signifie ni éligibilité PEA, ni validation pour un portefeuille. Chaque stratégie possède sa propre sélection ; les listes peuvent être différentes et se recouper librement.</div>
+<div class="grid" id="discoverySummary">
+<div class="card"><span class="tag">01 · GROWTH</span><h3>Growth</h3><div class="metric">—</div><div class="metric-sub">Candidats issus du screening croissance / valorisation</div></div>
+<div class="card"><span class="tag">02 · QUALITY</span><h3>Growth Quality</h3><div class="metric">—</div><div class="metric-sub">Candidats issus du screening croissance / qualité</div></div>
+<div class="card"><span class="tag">03 · MOMENTUM</span><h3>Growth Momentum</h3><div class="metric">—</div><div class="metric-sub">Candidats issus du screening de tendance boursière</div></div>
+</div>
+<div id="discoveryLists" class="grid" style="margin-top:12px"><div class="card wide empty"><b>Résultats non encore chargés</b>Les listes seront affichées après exécution et validation du premier screening. Aucun titre pilote n’est présenté artificiellement comme une découverte.</div></div>
 </section>
 <section id="engines">
 <div class="section-head"><h3>Moteur de sélection · entonnoir en 3 couches</h3><span>150 → 25 → décision</span></div>
@@ -178,6 +188,27 @@ function renderScoringEngines(universe){
   return '<div class="card wide"><h3>'+c.title+'</h3><p class="small muted">'+c.detail+'</p>'+table+'</div>';
  }).join('');
 }
+
+async function loadDiscoveryCandidates(){
+ const summary=document.getElementById('discoverySummary'),root=document.getElementById('discoveryLists'),stamp=document.getElementById('discoveryStamp');
+ if(!root)return;
+ try{
+  const response=await fetch('./data/discovery_candidates.json',{cache:'no-store'});
+  if(!response.ok)throw new Error('Screening non publié');
+  const data=await response.json(),keys=[['growth','Growth','PEG / croissance bénéficiaire'],['quality','Growth Quality','Croissance, rentabilité et solidité'],['momentum','Growth Momentum','Performance et tendance boursière']];
+  const lists=keys.map(([key,label,detail])=>({key,label,detail,rows:Array.isArray(data.strategies?.[key])?data.strategies[key]:[]}));
+  summary.innerHTML=lists.map(x=>'<div class="card"><span class="tag">'+x.label.toUpperCase()+'</span><h3>'+x.label+'</h3><div class="metric">'+x.rows.length+'</div><div class="metric-sub">candidat(s) · '+x.detail+'</div></div>').join('');
+  root.innerHTML=lists.map(x=>{
+   const rows=x.rows.length?'<div class="table-wrap"><table class="table"><thead><tr><th>Rang</th><th>Société</th><th>Ticker</th><th>ISIN</th><th>Signal de repérage</th><th>PEA</th></tr></thead><tbody>'+x.rows.map((v,i)=>'<tr><td>'+(v.rank??i+1)+'</td><td>'+safe(v.name)+'</td><td>'+safe(v.ticker||'—')+'</td><td>'+safe(v.isin||'—')+'</td><td>'+safe(v.discovery_signal||'À documenter')+'</td><td>'+safe(v.pea_status||'Non contrôlé')+'</td></tr>').join('')+'</tbody></table></div>':'<div class="empty"><b>Aucune candidate publiée</b>Le screening '+x.label+' n’a pas encore produit de liste validée. Cette rubrique est indépendante du filtre PEA des portefeuilles.</div>';
+   return '<div class="card wide"><h3>'+x.label+'</h3><p class="small muted">'+x.detail+'</p>'+rows+'</div>';
+  }).join('');
+  stamp.textContent=data.generated_at?('Screening du '+new Date(data.generated_at).toLocaleDateString('fr-FR')):'En attente du premier screening';
+ }catch(error){
+  root.innerHTML='<div class="card wide empty"><b>Screening non encore disponible</b>Les trois listes seront affichées ici après leur exécution. Le moteur PEA et les portefeuilles continuent de fonctionner séparément.</div>';
+  stamp.textContent='Screening à alimenter';
+ }
+}
+loadDiscoveryCandidates();
 
 async function loadTechnicalData(){
  const body=document.getElementById('marketDataBody'),stamp=document.getElementById('marketDataDate');
